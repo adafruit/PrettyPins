@@ -9,12 +9,38 @@ import sys
 import re
 import csv
 import svgwrite
+import shutil
+import zipfile
+import glob
 
-MM_TO_PX = 96 / 25.4
-PX_TO_MM = 25.4 / 96
+MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
+PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
 FONT_HEIGHT_PX = 10.5
 FONT_CHAR_W = 4
 
+BOX_HEIGHT = 10
+BOX_WIDTH_PER_CHAR = 5
+LABEL_FONT = "Courier New"
+LABEL_FONTSIZE = 8
+LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
+
+themes = [
+    {'type':'Name', 'fill':'white', 'outline':'black', 'opacity':0.3, 'font-weight':'bold'},
+    {'type':'Power', 'fill':'red', 'outline':'black', 'opacity':0.8, 'font-weight':'bold'},
+    {'type':'GND', 'fill':'black', 'outline':'black', 'opacity':0.9, 'font-weight':'bold'},
+    {'type':'Control', 'fill':'gray', 'outline':'black', 'opacity':0.7, 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'Port', 'fill':'yellow', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'orange', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
+    {'type':'PWM', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'UART', 'fill':'pink', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'SPI', 'fill':'blue', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'I2C', 'fill':'purple', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'ExtInt', 'fill':'purple', 'outline':'black', 'opacity':0.2, 'font-weight':'normal'},
+    {'type':'PCInt', 'fill':'orange', 'outline':'black', 'opacity':0.5, 'font-weight':'normal'},
+    {'type':'Misc', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
+    {'type':'Misc2', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
+    ]
 
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
@@ -87,29 +113,6 @@ def get_chip_pinout(connections, pinoutcsv):
     print("Mux options available: ", pinmuxes)
     return pinarray
 
-BOX_HEIGHT = 10
-BOX_WIDTH_PER_CHAR = 5
-LABEL_FONT = "Courier New"
-LABEL_FONTSIZE = 8
-LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
-
-themes = [
-    {'type':'Name', 'fill':'white', 'outline':'black', 'opacity':0.3, 'font-weight':'bold'},
-    {'type':'Power', 'fill':'red', 'outline':'black', 'opacity':0.8, 'font-weight':'bold'},
-    {'type':'GND', 'fill':'black', 'outline':'black', 'opacity':0.9, 'font-weight':'bold'},
-    {'type':'Control', 'fill':'gray', 'outline':'black', 'opacity':0.7, 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'Port', 'fill':'yellow', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'orange', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'UART', 'fill':'pink', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'blue', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'I2C', 'fill':'purple', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'ExtInt', 'fill':'purple', 'outline':'black', 'opacity':0.2, 'font-weight':'normal'},
-    {'type':'PCInt', 'fill':'orange', 'outline':'black', 'opacity':0.5, 'font-weight':'normal'},
-    {'type':'Misc', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
-    {'type':'Misc2', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
-    ]
 
 def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
     theme = next((theme for theme in themes if theme['type'] == label_type), None)
@@ -231,14 +234,23 @@ def draw_pinlabels_svg(connections):
 
 @click.argument('pinoutcsv')
 @click.argument('circuitpydef')
-@click.argument('SVG')
-@click.argument('FZP')
+@click.argument('FZPZ')
 @click.command()
-def parse(fzp, svg, circuitpydef, pinoutcsv):
+def parse(fzpz, circuitpydef, pinoutcsv):
     click.echo("HI! THIS IS A MISTAKE!")
 
+    # fzpz are actually zip files!
+    shutil.copyfile(fzpz, fzpz+".zip")
+    # delete any old workdir
+    shutil.rmtree('workdir')
+    # unzip into the work dir
+    with zipfile.ZipFile(fzpz+".zip", 'r') as zip_ref:
+        zip_ref.extractall('workdir')
+    fzpfilename = glob.glob(r'workdir/*.fzp')[0]
+    svgfilename = glob.glob(r'workdir/svg.breadboard*.svg')[0]
+
     # get the connections dictionary
-    connections = get_connections(fzp, svg)
+    connections = get_connections(fzpfilename, svgfilename)
 
     # find the 'true' GPIO pine via the circuitpython file
     connections = get_circuitpy_aliases(connections, circuitpydef)
@@ -248,7 +260,7 @@ def parse(fzp, svg, circuitpydef, pinoutcsv):
     #print(pinarray)
 
     # get SVG width and height
-    bb_sg = sg.fromfile(svg)
+    bb_sg = sg.fromfile(svgfilename)
     bb_root = bb_sg.getroot()
     svg_width = bb_sg.width
     svg_height = bb_sg.height
@@ -290,40 +302,6 @@ def parse(fzp, svg, circuitpydef, pinoutcsv):
             conn['mux'] = muxes
             
     draw_pinlabels_svg(connections)
-
-    # create text labels!
-    for c in connections:
-        #print(c)
-        is_top = c['cy'] < svg_height/4
-
-        pinname = c['name']
-
-        label = pinname
-        if 'aliases' in c:
-            for a in c['aliases']:
-                if is_top:
-                    label += "/" + a
-                else:
-                    label = a + "/" + label
-                # find muxes next
-                muxes = next((pin for pin in pinarray if pin['GPIO'] == a), None)
-                if not muxes:
-                    continue
-                for mux in muxes:
-                    if mux == 'GPIO' or not muxes[mux]:
-                        continue
-                    if is_top:
-                        label += "/" + muxes[mux]
-                    else:
-                        label = muxes[mux] + "/" + label
-        #print(label)
-        txt = sg.TextElement(0, 0, label, font="Courier New", weight="bold", color='red', size=6)
-        txt.rotate(270)
-        if is_top:
-            txt.moveto(c['cx'] + FONT_HEIGHT_PX/5, c['cy']-FONT_CHAR_W)
-        else:
-            txt.moveto(c['cx'] + FONT_HEIGHT_PX/5, c['cy']+(FONT_CHAR_W*len(label)))
-        newsvg.append(txt)
 
     newsvg.save("output.svg")
 
