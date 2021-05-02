@@ -160,13 +160,17 @@ def draw_pinlabels_svg(connections):
     # group connections by cx/cy
     tops = sorted([c for c in connections if c['location'] == 'top'], key=lambda k: k['cx'])
     bottoms = sorted([c for c in connections if c['location'] == 'bottom'], key=lambda k: k['cx'])
+    rights = sorted([c for c in connections if c['location'] == 'right'], key=lambda k: k['cy'])
+    lefts = sorted([c for c in connections if c['location'] == 'left'], key=lambda k: k['cy'])
     others = sorted([c for c in connections if c['location'] == None], key=lambda k: k['cx'])
 
     #print(connections)
     
     # pick out each connection
-    for i, conn in enumerate(tops+bottoms+others):
-        print(conn)
+    for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
+        if conn == None:
+            continue  # a space!
+        #print(conn)
 
         # start with the pad name
         box_x = 0
@@ -188,11 +192,11 @@ def draw_pinlabels_svg(connections):
             label_type = 'Power'
         if name_label in ("GND"):
             label_type = 'GND'
-        if name_label in ("EN", "RESET"):
+        if name_label in ("EN", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
             label_type = 'Control'
             
         draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
-        if conn['location'] == 'top':
+        if conn['location'] in ('top', 'right'):
             box_x += box_w
 
 
@@ -220,10 +224,10 @@ def draw_pinlabels_svg(connections):
 
             box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
 
-            if conn['location'] == 'top':
+            if conn['location'] in ('top', 'right'):
                 draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
                 box_x += box_w
-            if conn['location'] == 'bottom':
+            if conn['location'] in ('bottom', 'left'):
                 box_x -= box_w
                 draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
 
@@ -251,13 +255,12 @@ def parse(fzpz, circuitpydef, pinoutcsv):
 
     # get the connections dictionary
     connections = get_connections(fzpfilename, svgfilename)
-
+    
     # find the 'true' GPIO pine via the circuitpython file
     connections = get_circuitpy_aliases(connections, circuitpydef)
 
     # open and parse the pinout mapper CSV
     pinarray = get_chip_pinout(connections, pinoutcsv)
-    #print(pinarray)
 
     # get SVG width and height
     bb_sg = sg.fromfile(svgfilename)
@@ -265,34 +268,42 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     svg_width = bb_sg.width
     svg_height = bb_sg.height
     if "in" in svg_width:
-        svg_width = 25.4 * float(svg_width[:-2])
+        svg_width = 25.4 * float(svg_width[:-2]) * MM_TO_PX
     else:
         raise RuntimeError("Dont know units of width!", svg_width)
     if "in" in svg_height:
-        svg_height = 25.4 * float(svg_height[:-2])
+        svg_height = 25.4 * float(svg_height[:-2]) * MM_TO_PX
     else:
         raise RuntimeError("Dont know units of width!", svg_height)
-    #print("Width, Height in mm: ", svg_width, svg_height)
+    
+    print("Width, Height in px: ", svg_width, svg_height)
     
     # Create a new SVG as a copy!
     newsvg = sg.SVGFigure()
-    newsvg.set_size(("%dpx" % (svg_width * MM_TO_PX), "%dpx" % (svg_height * MM_TO_PX)))    
+    newsvg.set_size(("%dpx" % svg_width, "%dpx" % svg_height))    
     #print(newsvg.get_size())
     #bb_root.rotate(90)
     #bb_root.moveto(0, 0, 1.33)
     newsvg.append(bb_root)
     newsvg.save("output.svg")
 
-
-
     for conn in connections:
         # try to determine whether its top/bottom/left/right
-        if conn['cy'] < svg_height/2:
-            conn['location'] = "top"
-        elif conn['cy'] > svg_height/2:
-            conn['location'] = "bottom"
+        sh = svg_height * 0.75  # fritzing scales everything by .75 which is confusing!
+        sw = svg_width * 0.75  # so get back to the size we think we are
+
+        if conn['cy'] < 10:
+            conn['location'] = 'top'
+        elif conn['cy'] > sh-10:
+            conn['location'] = 'bottom'
+        elif conn['cx'] > sh-10:
+            conn['location'] = 'right'
+        elif conn['cx'] <  10:
+            conn['location'] = 'left'
         else:
-            conn['location'] = None
+            conn['location'] = 'unknown'
+        print(conn)
+                
         # add muxes to connections
         if not 'aliases' in conn:
             continue
@@ -300,7 +311,6 @@ def parse(fzpz, circuitpydef, pinoutcsv):
             # find muxes next
             muxes = next((pin for pin in pinarray if pin['GPIO'] == alias), None)
             conn['mux'] = muxes
-            
     draw_pinlabels_svg(connections)
 
     newsvg.save("output.svg")
