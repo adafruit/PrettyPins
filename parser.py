@@ -17,7 +17,9 @@ FONT_CHAR_W = 4
 
 
 
-
+# This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
+# frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
+# eaglecad, so we should use good names for eaglecad nets that will synch with circuitpython names
 def get_connections(fzp, svg):
     connections = []
 
@@ -86,7 +88,7 @@ def get_chip_pinout(connections, pinoutcsv):
     return pinarray
 
 BOX_HEIGHT = 10
-BOX_WIDTH = 25
+BOX_WIDTH_PER_CHAR = 5
 LABEL_FONT = "Courier New"
 LABEL_FONTSIZE = 8
 LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
@@ -95,12 +97,14 @@ themes = [
     {'type':'Name', 'fill':'white', 'outline':'black', 'opacity':0.3, 'font-weight':'bold'},
     {'type':'Power', 'fill':'red', 'outline':'black', 'opacity':0.8, 'font-weight':'bold'},
     {'type':'GND', 'fill':'black', 'outline':'black', 'opacity':0.9, 'font-weight':'bold'},
-    {'type':'Control', 'fill':'yellow', 'outline':'black', 'opacity':0.7, 'font-weight':'bold'},
+    {'type':'Control', 'fill':'gray', 'outline':'black', 'opacity':0.7, 'font-weight':'bold'},
     {'type':'Arduino', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'Port', 'fill':'blue', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'purple', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'yellow', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'Serial', 'fill':'grey', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'Port', 'fill':'yellow', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'orange', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
+    {'type':'PWM', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'UART', 'fill':'pink', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'SPI', 'fill':'blue', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'I2C', 'fill':'purple', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
     {'type':'ExtInt', 'fill':'purple', 'outline':'black', 'opacity':0.2, 'font-weight':'normal'},
     {'type':'PCInt', 'fill':'orange', 'outline':'black', 'opacity':0.5, 'font-weight':'normal'},
     {'type':'Misc', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
@@ -139,15 +143,26 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
 def draw_pinlabels_svg(connections):
     dwg = svgwrite.Drawing(filename=str("pinlabels.svg"), profile='tiny', size=(100,100))
 
-    print(connections)
+    # collect all muxstrings to calculatete label widths:
+    muxstringlen = {}
+    for i, conn in enumerate(connections):
+        if not 'mux' in conn:
+            continue
+        for mux in conn['mux']:
+            if not mux in muxstringlen:
+                muxstringlen[mux] = 0
+            muxstringlen[mux] = max(muxstringlen[mux], len(conn['mux'][mux]))
+    #print(muxstringlen)
+
+    #print(connections)
     # pick out each connection
     for i, conn in enumerate(connections):
-        print(conn)
+        #print(conn)
 
         # start with the pad name
         box_x = 0
         box_y = BOX_HEIGHT * i
-        box_w = BOX_WIDTH
+        box_w = BOX_WIDTH_PER_CHAR * 5
         box_h = BOX_HEIGHT
 
         name_label = conn['name']
@@ -166,28 +181,35 @@ def draw_pinlabels_svg(connections):
             label_type = 'GND'
         if name_label in ("EN", "RESET"):
             label_type = 'Control'
-
-
             
         draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
+        box_x += box_w
 
-        # power pins don't have aliases, its cool!
-        if not 'aliases' in conn:
+        # power pins don't have muxing, its cool!
+        if not 'mux' in conn:
             continue
-        """
-        for alias in c['aliases']:
-            # find muxes next
-            muxes = next((pin for pin in pinarray if pin['GPIO'] == a), None)
-            if not muxes:
+        for mux in conn['mux']:
+            label = conn['mux'][mux]
+            if not label:
                 continue
-            for mux in muxes:
-                if mux == 'GPIO' or not muxes[mux]:
-                    continue
-                if is_top:
-                    label += "/" + muxes[mux]
-                else:
-                    label = muxes[mux] + "/" + label
-        """
+            if mux == 'GPIO':  # the underlying pin GPIO name
+                label_type = 'Port'
+            elif mux == 'SPI':  # SPI ports
+                label_type = 'SPI'
+            elif mux == 'I2C':  # I2C ports
+                label_type = 'I2C'
+            elif mux == 'UART':  # UART ports
+                label_type = 'UART'
+            elif mux == 'PWM':  # PWM's
+                label_type = 'PWM'
+            elif mux == 'ADC':  # analog ins
+                label_type = 'Analog'
+            else:
+                continue
+            box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+            draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
+            box_x += box_w
+
 
     dwg.save()
 
@@ -236,7 +258,16 @@ def parse(fzp, svg, circuitpydef, pinoutcsv):
     newsvg.append(bb_root)
     newsvg.save("output.svg")
 
+    # add muxes to connections
+    for conn in connections:
+        if not 'aliases' in conn:
+            continue
 
+        for alias in conn['aliases']:
+            # find muxes next
+            muxes = next((pin for pin in pinarray if pin['GPIO'] == alias), None)
+            conn['mux'] = muxes
+            
     draw_pinlabels_svg(connections)
 
     # create text labels!
