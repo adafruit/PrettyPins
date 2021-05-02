@@ -143,7 +143,7 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
 def draw_pinlabels_svg(connections):
     dwg = svgwrite.Drawing(filename=str("pinlabels.svg"), profile='tiny', size=(100,100))
 
-    # collect all muxstrings to calculatete label widths:
+    # collect all muxstrings to calculate label widths:
     muxstringlen = {}
     for i, conn in enumerate(connections):
         if not 'mux' in conn:
@@ -154,10 +154,16 @@ def draw_pinlabels_svg(connections):
             muxstringlen[mux] = max(muxstringlen[mux], len(conn['mux'][mux]))
     #print(muxstringlen)
 
+    # group connections by cx/cy
+    tops = sorted([c for c in connections if c['location'] == 'top'], key=lambda k: k['cx'])
+    bottoms = sorted([c for c in connections if c['location'] == 'bottom'], key=lambda k: k['cx'])
+    others = sorted([c for c in connections if c['location'] == None], key=lambda k: k['cx'])
+
     #print(connections)
+    
     # pick out each connection
-    for i, conn in enumerate(connections):
-        #print(conn)
+    for i, conn in enumerate(tops+bottoms+others):
+        print(conn)
 
         # start with the pad name
         box_x = 0
@@ -183,7 +189,9 @@ def draw_pinlabels_svg(connections):
             label_type = 'Control'
             
         draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
-        box_x += box_w
+        if conn['location'] == 'top':
+            box_x += box_w
+
 
         # power pins don't have muxing, its cool!
         if not 'mux' in conn:
@@ -206,10 +214,15 @@ def draw_pinlabels_svg(connections):
                 label_type = 'Analog'
             else:
                 continue
-            box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-            draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
-            box_x += box_w
 
+            box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+
+            if conn['location'] == 'top':
+                draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
+                box_x += box_w
+            if conn['location'] == 'bottom':
+                box_x -= box_w
+                draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
 
     dwg.save()
 
@@ -258,11 +271,19 @@ def parse(fzp, svg, circuitpydef, pinoutcsv):
     newsvg.append(bb_root)
     newsvg.save("output.svg")
 
-    # add muxes to connections
+
+
     for conn in connections:
+        # try to determine whether its top/bottom/left/right
+        if conn['cy'] < svg_height/2:
+            conn['location'] = "top"
+        elif conn['cy'] > svg_height/2:
+            conn['location'] = "bottom"
+        else:
+            conn['location'] = None
+        # add muxes to connections
         if not 'aliases' in conn:
             continue
-
         for alias in conn['aliases']:
             # find muxes next
             muxes = next((pin for pin in pinarray if pin['GPIO'] == alias), None)
