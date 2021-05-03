@@ -12,6 +12,7 @@ import svgwrite
 import shutil
 import zipfile
 import glob
+import os
 
 MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
 PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
@@ -262,8 +263,6 @@ def draw_pinlabels_svg(connections):
 @click.argument('FZPZ')
 @click.command()
 def parse(fzpz, circuitpydef, pinoutcsv):
-    click.echo("HI! THIS IS A MISTAKE!")
-
     # fzpz are actually zip files!
     shutil.copyfile(fzpz, fzpz+".zip")
     # delete any old workdir
@@ -273,6 +272,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         zip_ref.extractall('workdir')
     fzpfilename = glob.glob(r'workdir/*.fzp')[0]
     svgfilename = glob.glob(r'workdir/svg.breadboard*.svg')[0]
+    os.remove(fzpz+".zip")
 
     # get the connections dictionary
     connections = get_connections(fzpfilename, svgfilename)
