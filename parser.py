@@ -36,11 +36,20 @@ themes = [
     {'type':'UART', 'fill':'pink', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
     {'type':'SPI', 'fill':'blue', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
     {'type':'I2C', 'fill':'purple', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'yellow', 'outline':'black', 'opacity':0.6, 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'blue', 'outline':'black', 'opacity':0.6, 'font-weight':'bold'},
     {'type':'ExtInt', 'fill':'purple', 'outline':'black', 'opacity':0.2, 'font-weight':'normal'},
     {'type':'PCInt', 'fill':'orange', 'outline':'black', 'opacity':0.5, 'font-weight':'normal'},
     {'type':'Misc', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
     {'type':'Misc2', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
     ]
+
+# some eagle cad names are not as pretty
+conn_renames = [('!RESET', 'RESET'),
+                ('D5_5V', 'D5'),
+                ('+3V3', '3.3V'),
+                ('+5V', '5V')
+                ]
 
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
@@ -64,9 +73,7 @@ def get_connections(fzp, svg):
 
     # Find all circle/pads
     circlelist = xmldoc.getElementsByTagName('circle')
-    # sometimes pads are ellipses, note they're often transformed!
-    ellipselist = xmldoc.getElementsByTagName('ellipse')
-    for c in circlelist+ellipselist:
+    for c in circlelist:
         try:
             idval = c.attributes['id'].value   # find the svg id
             cx = c.attributes['cx'].value      # x location
@@ -75,6 +82,20 @@ def get_connections(fzp, svg):
             if d:
                 d['cx'] = float(cx)
                 d['cy'] = float(cy)
+                d['svgtype'] = 'circle'  
+        except KeyError:
+            pass
+    # sometimes pads are ellipses, note they're often transformed so ignore the cx/cy
+    ellipselist = xmldoc.getElementsByTagName('ellipse')
+    for c in ellipselist:
+        try:
+            print(c)
+            idval = c.attributes['id'].value   # find the svg id
+            d = next((conn for conn in connections if conn['svgid'] == c.attributes['id'].value), None)
+            if d:
+                d['cx'] = None
+                d['cy'] = None
+                d['svgtype'] = 'ellipse'                
         except KeyError:
             pass
     return connections
@@ -162,8 +183,7 @@ def draw_pinlabels_svg(connections):
     bottoms = sorted([c for c in connections if c['location'] == 'bottom'], key=lambda k: k['cx'])
     rights = sorted([c for c in connections if c['location'] == 'right'], key=lambda k: k['cy'])
     lefts = sorted([c for c in connections if c['location'] == 'left'], key=lambda k: k['cy'])
-    others = sorted([c for c in connections if c['location'] == None], key=lambda k: k['cx'])
-
+    others = [c for c in connections if c['location'] == 'unknown']
     #print(connections)
     
     # pick out each connection
@@ -175,28 +195,29 @@ def draw_pinlabels_svg(connections):
         # start with the pad name
         box_x = 0
         box_y = BOX_HEIGHT * i
-        box_w = BOX_WIDTH_PER_CHAR * 5
+        box_w = (BOX_WIDTH_PER_CHAR+1) * 5
         box_h = BOX_HEIGHT
 
         name_label = conn['name']
 
         # clean up some names!
-        # remove ! starter chars
-        name_label = name_label.replace('!', '')
-        # some eagle cad names are not as pretty
-        if name_label == '+3V3':
-            name_label = "3.3V"
-            
+
         label_type = 'Name'
-        if name_label in ("3.3V", "VBAT", "VBUS"):
+        if name_label in ("3.3V", "5V", "VBAT", "VBUS", "VHI"):
             label_type = 'Power'
         if name_label in ("GND"):
             label_type = 'GND'
         if name_label in ("EN", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
             label_type = 'Control'
+        if name_label in ('SCL', 'SCL1', 'SCL0') and conn['svgtype'] == 'ellipse':
+            # special stemma QT!
+            label_type = 'QT_SCL'
+        if name_label in ('SDA', 'SDA1', 'SDA0') and conn['svgtype'] == 'ellipse':
+            # special stemma QT!
+            label_type = 'QT_SDA'
             
         draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
-        if conn['location'] in ('top', 'right'):
+        if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
 
 
@@ -224,7 +245,7 @@ def draw_pinlabels_svg(connections):
 
             box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
 
-            if conn['location'] in ('top', 'right'):
+            if conn['location'] in ('top', 'right', 'unknown'):
                 draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
                 box_x += box_w
             if conn['location'] in ('bottom', 'left'):
@@ -255,7 +276,13 @@ def parse(fzpz, circuitpydef, pinoutcsv):
 
     # get the connections dictionary
     connections = get_connections(fzpfilename, svgfilename)
-    
+
+    # rename any that need it
+    for conn in connections:
+        for rename in conn_renames:
+            if conn['name'] == rename[0]:
+                conn['name'] = rename[1]
+
     # find the 'true' GPIO pine via the circuitpython file
     connections = get_circuitpy_aliases(connections, circuitpydef)
 
@@ -287,18 +314,20 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     newsvg.append(bb_root)
     newsvg.save("output.svg")
 
+    # try to determine whether its top/bottom/left/right
+    sh = svg_height * 0.75  # fritzing scales everything by .75 which is confusing!
+    sw = svg_width * 0.75  # so get back to the size we think we are
+    #print("scaled w,h", sw, sh)
     for conn in connections:
-        # try to determine whether its top/bottom/left/right
-        sh = svg_height * 0.75  # fritzing scales everything by .75 which is confusing!
-        sw = svg_width * 0.75  # so get back to the size we think we are
-
-        if conn['cy'] < 10:
+        if not conn['cy']:
+            conn['location'] = 'unknown'
+        elif conn['cy'] < 10:
             conn['location'] = 'top'
         elif conn['cy'] > sh-10:
             conn['location'] = 'bottom'
-        elif conn['cx'] > sh-10:
+        elif conn['cx'] > sw-10:
             conn['location'] = 'right'
-        elif conn['cx'] <  10:
+        elif conn['cx'] < 10:
             conn['location'] = 'left'
         else:
             conn['location'] = 'unknown'
