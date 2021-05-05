@@ -195,15 +195,16 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
             BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
             fill = box_fill
             ))
-    dwg.add(dwg.text(
-        label_text,
-        insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
-        font_size = LABEL_FONTSIZE,
-        font_family = LABEL_FONT,
-        font_weight = weight,
-        fill = text_color,
-        text_anchor = "middle",
-        ))
+    if label_text:
+        dwg.add(dwg.text(
+            label_text,
+            insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+            font_size = LABEL_FONTSIZE,
+            font_family = LABEL_FONT,
+            font_weight = weight,
+            fill = text_color,
+            text_anchor = "middle",
+            ))
 
     
 def draw_pinlabels_svg(connections):
@@ -289,6 +290,7 @@ def draw_pinlabels_svg(connections):
 
         # power pins don't have muxing, its cool!
         if not 'mux' in conn:
+            mark_as_in_use(label_type) # Show label type on legend
             continue
         for mux in conn['mux']:
             label = conn['mux'][mux]
@@ -318,8 +320,35 @@ def draw_pinlabels_svg(connections):
                 box_x -= box_w
                 draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
 
+            mark_as_in_use(label_type) # Show label type on legend
+
+    # Add legend
+    box_y = BOX_HEIGHT * (i + 4)
+    for theme in themes:
+        if 'in_use' in theme: # Skip themes not in use
+            label_type = theme['type']
+            draw_label(dwg, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
+            label_text = label_type
+            dwg.add(dwg.text(
+                label_text,
+                insert = (BOX_HEIGHT * 1.2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+                font_size = LABEL_FONTSIZE,
+                font_family = LABEL_FONT,
+                font_weight = 'bold',
+                fill = 'black',
+                text_anchor = 'start'
+                ))
+            box_y += BOX_HEIGHT
+
     dwg.save()
 
+
+# Add an 'in_use' key to themes that get referenced.
+# Only these items are shown on the legend.
+def mark_as_in_use(label_type):
+    for theme in themes:
+        if theme['type'] == label_type and not 'in_use' in theme:
+            theme['in_use'] = '1'
 
 @click.argument('pinoutcsv')
 @click.argument('circuitpydef')
