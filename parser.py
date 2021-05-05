@@ -13,36 +13,53 @@ import shutil
 import zipfile
 import glob
 import os
+import math
 
+MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
+PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
 MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
 PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
 FONT_HEIGHT_PX = 10.5
 FONT_CHAR_W = 4
 
-BOX_HEIGHT = 10
-BOX_WIDTH_PER_CHAR = 5
+#BOX_HEIGHT = 10
+#BOX_WIDTH_PER_CHAR = 5
+#LABEL_FONTSIZE = 8
+#LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
+# SVG is canonically supposed to be 96 DPI, but something along the way
+# (maybe it's just Illustrator import) is thinking it's 72.
+MM_TO_PT = 72 / 25.4
+PT_TO_MM = 25.4 / 72
+BOX_HEIGHT = 2.54 * MM_TO_PT  # 0.1 inch to match pin spacing
+BOX_WIDTH_PER_CHAR = BOX_HEIGHT / 2
+LABEL_FONTSIZE = 6
+LABEL_HEIGHTADJUST = 1.75
 LABEL_FONT = "Courier New"
-LABEL_FONTSIZE = 8
-LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
+
+# TO DO: make these part of theme?
+BOX_STROKE_WIDTH = 0.5
+BOX_CORNER_RADIUS = 1.0
+ROW_STROKE_WIDTH = 1.0
+ROW_STROKE_COLOR = '#404040'
 
 themes = [
-    {'type':'Name', 'fill':'white', 'outline':'black', 'opacity':0.3, 'font-weight':'bold'},
-    {'type':'Power', 'fill':'red', 'outline':'black', 'opacity':0.8, 'font-weight':'bold'},
-    {'type':'GND', 'fill':'black', 'outline':'black', 'opacity':0.9, 'font-weight':'bold'},
-    {'type':'Control', 'fill':'gray', 'outline':'black', 'opacity':0.7, 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'Port', 'fill':'yellow', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'orange', 'outline':'black', 'opacity':0.4, 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'green', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'UART', 'fill':'pink', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'blue', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'I2C', 'fill':'purple', 'outline':'black', 'opacity':0.3, 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'yellow', 'outline':'black', 'opacity':0.6, 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'blue', 'outline':'black', 'opacity':0.6, 'font-weight':'bold'},
-    {'type':'ExtInt', 'fill':'purple', 'outline':'black', 'opacity':0.2, 'font-weight':'normal'},
-    {'type':'PCInt', 'fill':'orange', 'outline':'black', 'opacity':0.5, 'font-weight':'normal'},
-    {'type':'Misc', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
-    {'type':'Misc2', 'fill':'blue', 'outline':'black', 'opacity':0.1, 'font-weight':'normal'},
+    {'type':'Name', 'fill':'#E0E0E0', 'outline':'#808080', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'Power', 'fill':'#FF0000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'GND', 'fill':'#000000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'Control', 'fill':'#A0A0A0', 'outline':'#404040', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':'#A0FFA0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'Port', 'fill':'#FFFFCC', 'outline':'#C0C0A0', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'#FFA000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'PWM', 'fill':'#C0FFC0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'UART', 'fill':'#FFC0C0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'SPI', 'fill':'#C0C0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'I2C', 'fill':'#FFA0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
+    {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
     ]
 
 # some eagle cad names are not as pretty
@@ -141,16 +158,35 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
     box_outline = theme['outline']
     box_fill = theme['fill']
     text_color = 'black'
-    if (box_fill == 'black'):
+    if (box_fill[0] == '#'):
+        red = int(box_fill[1:3], 16)
+        green = int(box_fill[3:5], 16)
+        blue = int(box_fill[5:7], 16)
+        lightness = red * 0.299 + green * 0.587 + blue * 0.114
+        if lightness < 128:
+            text_color = 'white'
+    elif (box_fill == 'black'):
         text_color = 'white'
+
     box_opacity = theme['opacity']
     weight = theme['font-weight']
     # draw a box
+    if 'inset' in theme:
+        box_x += float(theme['inset'])
+        box_y += float(theme['inset'])
+        box_w -= float(theme['inset']) * 2
+        box_h -= float(theme['inset']) * 2
+    if box_outline != 'none':
+        box_x += BOX_STROKE_WIDTH * 0.5 # Inset further for stroke
+        box_y += BOX_STROKE_WIDTH * 0.5
+        box_w -= BOX_STROKE_WIDTH
+        box_h -= BOX_STROKE_WIDTH
     dwg.add(dwg.rect(
         (box_x, box_y),
         (box_w, box_h),
-        1, 1,
+        BOX_CORNER_RADIUS, BOX_CORNER_RADIUS,
         stroke = box_outline,
+        stroke_width = BOX_STROKE_WIDTH,
         opacity = box_opacity,
         fill = box_fill
         ))
@@ -186,7 +222,30 @@ def draw_pinlabels_svg(connections):
     lefts = sorted([c for c in connections if c['location'] == 'left'], key=lambda k: k['cy'])
     others = [c for c in connections if c['location'] == 'unknown']
     #print(connections)
-    
+
+    # A first pass through all the connectors draws the
+    # row lines behind the MUX boxes
+    for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
+        if conn == None: # Gap between groups
+            continue
+        box_x = 0
+        box_w = 6 * BOX_WIDTH_PER_CHAR # See note later, 1st column width
+        first_box_w = box_w
+        if 'mux' in conn:
+            for mux in conn['mux']:
+                if not conn['mux'][mux]:
+                    continue
+                box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                if conn['location'] in ('top', 'right', 'unknown'):
+                    box_x += box_w
+                if conn['location'] in ('bottom', 'left'):
+                    box_x -= box_w
+        line_y = (i + 0.5) * BOX_HEIGHT
+        if conn['location'] in ('top', 'right', 'unknown'):
+            dwg.add(dwg.line(start=(-4, line_y), end=(box_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+        if conn['location'] in ('bottom', 'left'):
+            dwg.add(dwg.line(start=(first_box_w + 4, line_y), end=(box_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+
     # pick out each connection
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
         if conn == None:
@@ -196,7 +255,8 @@ def draw_pinlabels_svg(connections):
         # start with the pad name
         box_x = 0
         box_y = BOX_HEIGHT * i
-        box_w = (BOX_WIDTH_PER_CHAR+1) * 5
+        # First-column boxes are all this rigged width for now
+        box_w = 6 * BOX_WIDTH_PER_CHAR
         box_h = BOX_HEIGHT
 
         name_label = conn['name']
@@ -216,11 +276,11 @@ def draw_pinlabels_svg(connections):
         if name_label in ('SDA', 'SDA1', 'SDA0') and conn['svgtype'] == 'ellipse':
             # special stemma QT!
             label_type = 'QT_SDA'
-            
+
+        # Draw the first-column box (could be power pin or Arduino pin #)
         draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
-
 
         # power pins don't have muxing, its cool!
         if not 'mux' in conn:
@@ -254,8 +314,6 @@ def draw_pinlabels_svg(connections):
                 draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
 
     dwg.save()
-
-
 
 
 @click.argument('pinoutcsv')
@@ -309,6 +367,8 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     newsvg = sg.SVGFigure()
     newsvg.set_size(("%dpx" % svg_width, "%dpx" % svg_height))    
     #print(newsvg.get_size())
+    # DO NOT SCALE THE BREADBOARD SVG. We know it's 1:1 size.
+    # If things don't align, issue is in the newly-generated pin table SVG.
     #bb_root.rotate(90)
     #bb_root.moveto(0, 0, 1.33)
     newsvg.append(bb_root)
