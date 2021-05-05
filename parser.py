@@ -15,51 +15,45 @@ import glob
 import os
 import math
 
-MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
-PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
-MM_TO_PX = 96 / 25.4       # SVGs measure in px but maybe we want mm!
-PX_TO_MM = 25.4 / 96       # SVGs measure in px but maybe we want mm!
+MM_TO_PX = 96 / 25.4 # SVGs measure in px but maybe we want mm!
+PX_TO_MM = 25.4 / 96 # SVGs measure in px but maybe we want mm!
 FONT_HEIGHT_PX = 10.5
 FONT_CHAR_W = 4
 
-#BOX_HEIGHT = 10
-#BOX_WIDTH_PER_CHAR = 5
-#LABEL_FONTSIZE = 8
-#LABEL_HEIGHTADJUST = 2     # move text down (negative for up)
 # SVG is canonically supposed to be 96 DPI, but something along the way
-# (maybe it's just Illustrator import) is thinking it's 72.
+# (maybe it's just Illustrator import) is thinking it's 72, or is using
+# points instead of pixels.
 MM_TO_PT = 72 / 25.4
 PT_TO_MM = 25.4 / 72
 BOX_HEIGHT = 2.54 * MM_TO_PT  # 0.1 inch to match pin spacing
 BOX_WIDTH_PER_CHAR = BOX_HEIGHT / 2
+BOX_STROKE_WIDTH = 0.125 * MM_TO_PT
+BOX_CORNER_RADIUS = (0.4 * MM_TO_PT, 0.4 * MM_TO_PT)
+ROW_STROKE_WIDTH = 0.25 * MM_TO_PT
+ROW_STROKE_COLOR = '#8C8C8C'
+BOX_INSET = (0.2 * MM_TO_PT, 0.2 * MM_TO_PT)
 LABEL_FONTSIZE = 6
 LABEL_HEIGHTADJUST = 1.75
 LABEL_FONT = "Courier New"
 
-# TO DO: make these part of theme?
-BOX_STROKE_WIDTH = 0.5
-BOX_CORNER_RADIUS = 1.0
-ROW_STROKE_WIDTH = 1.0
-ROW_STROKE_COLOR = '#404040'
-
 themes = [
-    {'type':'Name', 'fill':'#E0E0E0', 'outline':'#808080', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'Power', 'fill':'#FF0000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'GND', 'fill':'#000000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'Control', 'fill':'#A0A0A0', 'outline':'#404040', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'#A0FFA0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'Port', 'fill':'#FFFFCC', 'outline':'#C0C0A0', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'#FFA000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'#C0FFC0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'UART', 'fill':'#FFC0C0', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'#C0C0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'I2C', 'fill':'#FFA0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'bold'},
-    {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
-    {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'opacity':1.0, 'inset':0.3, 'font-weight':'normal'},
+    {'type':'Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
+    {'type':'Power', 'fill':'#E60000', 'outline':'none', 'font-weight':'bold'},
+    {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Control', 'fill':'#B0B0B0', 'outline':'auto', 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Port', 'fill':'#F0E65A', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'#FFB95A', 'outline':'none', 'font-weight':'normal'},
+    {'type':'PWM', 'fill':'#FAB4BE', 'outline':'none', 'font-weight':'normal'},
+    {'type':'UART', 'fill':'#96C8FA', 'outline':'none', 'font-weight':'normal'},
+    {'type':'SPI', 'fill':'#78F07D', 'outline':'none', 'font-weight':'normal'},
+    {'type':'I2C', 'fill':'#D7C8FF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
+    {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'font-weight':'normal'},
     ]
 
 # some eagle cad names are not as pretty
@@ -158,38 +152,49 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
     box_outline = theme['outline']
     box_fill = theme['fill']
     text_color = 'black'
+    # Some auto-color things only work if RGB (not named) fill is specified...
     if (box_fill[0] == '#'):
         red = int(box_fill[1:3], 16)
         green = int(box_fill[3:5], 16)
         blue = int(box_fill[5:7], 16)
         lightness = red * 0.299 + green * 0.587 + blue * 0.114
+        # Use white text on dark backgrounds
         if lightness < 128:
             text_color = 'white'
+        # If outline is 'auto', stroke w/50% brightness of fill color.
+        if box_outline == 'auto':
+            rgb = ((red // 2)) << 16 | ((green // 2) << 8) | (blue // 2)
+            box_outline = '#{0:0{1}X}'.format(rgb, 6)
     elif (box_fill == 'black'):
         text_color = 'white'
 
-    box_opacity = theme['opacity']
+    #box_opacity = theme['opacity'] # Not used, everything's gone opaque
     weight = theme['font-weight']
     # draw a box
-    if 'inset' in theme:
-        box_x += float(theme['inset'])
-        box_y += float(theme['inset'])
-        box_w -= float(theme['inset']) * 2
-        box_h -= float(theme['inset']) * 2
+    box_x += BOX_INSET[0]  # Inset a bit so boxes aren't touching
+    box_y += BOX_INSET[1]
+    box_w -= BOX_INSET[0] * 2
+    box_h -= BOX_INSET[1] * 2
     if box_outline != 'none':
         box_x += BOX_STROKE_WIDTH * 0.5 # Inset further for stroke
-        box_y += BOX_STROKE_WIDTH * 0.5
+        box_y += BOX_STROKE_WIDTH * 0.5 # (so box extents visually align)
         box_w -= BOX_STROKE_WIDTH
         box_h -= BOX_STROKE_WIDTH
-    dwg.add(dwg.rect(
-        (box_x, box_y),
-        (box_w, box_h),
-        BOX_CORNER_RADIUS, BOX_CORNER_RADIUS,
-        stroke = box_outline,
-        stroke_width = BOX_STROKE_WIDTH,
-        opacity = box_opacity,
-        fill = box_fill
-        ))
+        dwg.add(dwg.rect(
+            (box_x, box_y),
+            (box_w, box_h),
+            BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
+            stroke = box_outline,
+            stroke_width = BOX_STROKE_WIDTH,
+            fill = box_fill
+            ))
+    else:
+        dwg.add(dwg.rect(
+            (box_x, box_y),
+            (box_w, box_h),
+            BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
+            fill = box_fill
+            ))
     dwg.add(dwg.text(
         label_text,
         insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
