@@ -43,30 +43,30 @@ LABEL_FONT = "Courier New"
 # sighted, so I'm keeping a note here of the original values used if
 # you want to switch back (at the expense of some users' ability to
 # distinguish pin colors).
-# Type    Old      New     (biovis2012 table index)
-# Name    #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
-# Power   #E60000  #920000 (11)
-# GND     #000000  #000000 (1)
-# Control #B0B0B0  #B0B0B0 - med. gray, not in table, distinguished by outline
-# Arduino #00FF00  #00FF00 - not currently used?
-# Port    #F0E65A  #FFFF6D (15) - same as QT_SCL
-# Analog  #FFB95A  #DB6D00 (13) - avoid using (4) elsewhere
-# PWM     #FAB4BE  #FFB6DB (5)
-# UART    #96C8FA  #B6DBFF (10)
-# SPI     #78F07D  #24FF24 (14)
-# I2C     #D7C8FF  #B66DFF (8)
-# QT_SCL  #FFFF00  #FFFF6D (15) - same as Port, distinguished by placement
-# QT_SDA  #0000FF  #006DDB (7)
-# ExtInt  #FF00FF  #FF00FF - not currently used?
-# PCInt   #FFC000  #FFCC00 - not currently used?
-# Misc    #A0A0FF  #A0A0FF - not currently used?
-# Misc2   #C0C0FF  #C0C0FF - not currently used?
+# Type     Old      New     (biovis2012 table index)
+# CPy Name #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
+# Power    #E60000  #920000 (11)
+# GND      #000000  #000000 (1)
+# Control  #B0B0B0  #004949
+# Arduino  #00FF00  #00FF00 - not currently used?
+# Port     #F0E65A  #FFFF6D (15) - same as QT_SCL
+# Analog   #FFB95A  #DB6D00 (13) - avoid using (4) elsewhere
+# PWM      #FAB4BE  #FFB6DB (5)
+# UART     #96C8FA  #B6DBFF (10)
+# SPI      #78F07D  #24FF24 (14)
+# I2C      #D7C8FF  #B66DFF (8)
+# QT_SCL   #FFFF00  #FFFF6D (15) - same as Port, distinguished by placement
+# QT_SDA   #0000FF  #006DDB (7)
+# ExtInt   #FF00FF  #FF00FF - not currently used?
+# PCInt    #FFC000  #FFCC00 - not currently used?
+# Misc     #A0A0FF  #A0A0FF - not currently used?
+# Misc2    #C0C0FF  #C0C0FF - not currently used?
 
 themes = [
-    {'type':'Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
+    {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
     {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
     {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Control', 'fill':'#B0B0B0', 'outline':'auto', 'font-weight':'bold'},
+    {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
     {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
     {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
     {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
@@ -341,7 +341,7 @@ def draw_pinlabels_svg(connections):
 
         # clean up some names!
 
-        label_type = 'Name'
+        label_type = 'CircuitPython Name'
         if name_label in ("3.3V", "5V", "VBAT", "VBUS", "VHI"):
             label_type = 'Power'
         if name_label in ("GND"):
@@ -359,6 +359,7 @@ def draw_pinlabels_svg(connections):
         draw_label(dwg, group[group_index], name_label, label_type, box_x, box_y, box_w, box_h)
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
+        mark_as_in_use(label_type)
 
         if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
