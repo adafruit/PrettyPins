@@ -269,20 +269,29 @@ def draw_pinlabels_svg(connections):
         box_x = 0
         box_w = 6 * BOX_WIDTH_PER_CHAR # See note later, 1st column width
         first_box_w = max(box_w, len(conn['name']) * BOX_WIDTH_PER_CHAR)
+        last_used_x = box_x
         if 'mux' in conn:
             for mux in conn['mux']:
-                if not conn['mux'][mux]:
-                    continue
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                if not conn['mux'][mux]:
+                    # Increment box_x regardless to maintain mux columns.
+                    # last_used_x is NOT incremented here, to allow for
+                    # sparse tables.
+                    if conn['location'] in ('top', 'right', 'unknown'):
+                        box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                    if conn['location'] in ('bottom', 'left'):
+                        box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                    continue
                 if conn['location'] in ('top', 'right', 'unknown'):
                     box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
                     box_x -= box_w
+                last_used_x = box_x # For sparse table rendering
         line_y = (i + 0.5) * BOX_HEIGHT
         if conn['location'] in ('top', 'right', 'unknown'):
-            dwg.add(dwg.line(start=(-4, line_y), end=(box_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            dwg.add(dwg.line(start=(-4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
         if conn['location'] in ('bottom', 'left'):
-            dwg.add(dwg.line(start=(first_box_w + 4, line_y), end=(box_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            dwg.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
 
     # pick out each connection
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
@@ -327,6 +336,11 @@ def draw_pinlabels_svg(connections):
         for mux in conn['mux']:
             label = conn['mux'][mux]
             if not label:
+                # Increment box_x regardless for sparse tables
+                if conn['location'] in ('top', 'right', 'unknown'):
+                    box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                if conn['location'] in ('bottom', 'left'):
+                    box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
                 continue
             if mux == 'GPIO':  # the underlying pin GPIO name
                 label_type = 'Port'
