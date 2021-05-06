@@ -133,15 +133,13 @@ def get_circuitpy_aliases(connections, circuitpydef):
             continue
         # set the true pin name!
         conn['pinname'] = pypair[1]
-        pypairs.remove(pypair)
 
     # for any remaining un-matched qstr pairs, it could be aliases or internal pins
-    #print("remaining: ", pypairs)
     for pypair in pypairs:
         #print(pypair)
         connection = next((c for c in connections if c.get('pinname') == pypair[1]), None)
         if connection:
-            #print("Found an alias!")
+            print("Found an alias!")
             if not 'alias' in connection:
                 connection['alias'] = []
             connection['alias'].append(pypair[0])
