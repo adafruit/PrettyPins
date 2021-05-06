@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import xmltodict
 import svgutils.transform as sg
-import sys 
+import sys
 import re
 import csv
 import svgwrite
@@ -95,7 +95,7 @@ def get_connections(fzp, svg):
             if d:
                 d['cx'] = float(cx)
                 d['cy'] = float(cy)
-                d['svgtype'] = 'circle'  
+                d['svgtype'] = 'circle'
         except KeyError:
             pass
     # sometimes pads are ellipses, note they're often transformed so ignore the cx/cy
@@ -108,7 +108,7 @@ def get_connections(fzp, svg):
             if d:
                 d['cx'] = None
                 d['cy'] = None
-                d['svgtype'] = 'ellipse'                
+                d['svgtype'] = 'ellipse'
         except KeyError:
             pass
     return connections
@@ -159,7 +159,7 @@ def get_circuitpy_aliases(connections, circuitpydef):
         connection = next((c for c in connections if c.get('pinname') == gpioname), None)
         if not connection:
             print(qstrname, gpioname)
-            
+
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
@@ -179,7 +179,7 @@ def get_chip_pinout(connections, pinoutcsv):
     return pinarray
 
 
-def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
+def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
     theme = next((theme for theme in themes if theme['type'] == label_type), None)
     box_outline = theme['outline']
     box_fill = theme['fill']
@@ -212,7 +212,7 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
         box_y += BOX_STROKE_WIDTH * 0.5 # (so box extents visually align)
         box_w -= BOX_STROKE_WIDTH
         box_h -= BOX_STROKE_WIDTH
-        dwg.add(dwg.rect(
+        group.add(dwg.rect(
             (box_x, box_y),
             (box_w, box_h),
             BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
@@ -221,14 +221,14 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
             fill = box_fill
             ))
     else:
-        dwg.add(dwg.rect(
+        group.add(dwg.rect(
             (box_x, box_y),
             (box_w, box_h),
             BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
             fill = box_fill
             ))
     if label_text:
-        dwg.add(dwg.text(
+        group.add(dwg.text(
             label_text,
             insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
             font_size = LABEL_FONTSIZE,
@@ -238,7 +238,7 @@ def draw_label(dwg, label_text, label_type, box_x, box_y, box_w, box_h):
             text_anchor = "middle",
             ))
 
-    
+
 def draw_pinlabels_svg(connections):
     dwg = svgwrite.Drawing(filename=str("pinlabels.svg"), profile='tiny', size=(100,100))
 
@@ -263,6 +263,7 @@ def draw_pinlabels_svg(connections):
 
     # A first pass through all the connectors draws the
     # row lines behind the MUX boxes
+    group = []
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
         if conn == None: # Gap between groups
             continue
@@ -288,12 +289,15 @@ def draw_pinlabels_svg(connections):
                     box_x -= box_w
                 last_used_x = box_x # For sparse table rendering
         line_y = (i + 0.5) * BOX_HEIGHT
+        g = dwg.g()     # Create group for connection
+        group.append(g) # Add to list
         if conn['location'] in ('top', 'right', 'unknown'):
-            dwg.add(dwg.line(start=(-4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
         if conn['location'] in ('bottom', 'left'):
-            dwg.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
 
     # pick out each connection
+    group_index = 0 # Only increments on non-None connections, unlike enum
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
         if conn == None:
             continue  # a space!
@@ -325,57 +329,62 @@ def draw_pinlabels_svg(connections):
             label_type = 'QT_SDA'
 
         # Draw the first-column box (could be power pin or Arduino pin #)
-        draw_label(dwg, name_label, label_type, box_x, box_y, box_w, box_h)
+        draw_label(dwg, group[group_index], name_label, label_type, box_x, box_y, box_w, box_h)
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
 
-        # power pins don't have muxing, its cool!
-        if not 'mux' in conn:
-            mark_as_in_use(label_type) # Show label type on legend
-            continue
-        for mux in conn['mux']:
-            label = conn['mux'][mux]
-            if not label:
-                # Increment box_x regardless for sparse tables
+        if 'mux' in conn: # power pins don't have muxing, its cool!
+            for mux in conn['mux']:
+                label = conn['mux'][mux]
+                if not label:
+                    # Increment box_x regardless for sparse tables
+                    if conn['location'] in ('top', 'right', 'unknown'):
+                        box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                    if conn['location'] in ('bottom', 'left'):
+                        box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                    continue
+                if mux == 'GPIO':  # the underlying pin GPIO name
+                    label_type = 'Port'
+                elif mux == 'SPI':  # SPI ports
+                    label_type = 'SPI'
+                elif mux == 'I2C':  # I2C ports
+                    label_type = 'I2C'
+                elif mux == 'UART':  # UART ports
+                    label_type = 'UART'
+                elif mux == 'PWM':  # PWM's
+                    label_type = 'PWM'
+                elif mux == 'ADC':  # analog ins
+                    label_type = 'Analog'
+                else:
+                    continue
+
+                box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+
                 if conn['location'] in ('top', 'right', 'unknown'):
-                    box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                    draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
+                    box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
-                    box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-                continue
-            if mux == 'GPIO':  # the underlying pin GPIO name
-                label_type = 'Port'
-            elif mux == 'SPI':  # SPI ports
-                label_type = 'SPI'
-            elif mux == 'I2C':  # I2C ports
-                label_type = 'I2C'
-            elif mux == 'UART':  # UART ports
-                label_type = 'UART'
-            elif mux == 'PWM':  # PWM's
-                label_type = 'PWM'
-            elif mux == 'ADC':  # analog ins
-                label_type = 'Analog'
-            else:
-                continue
+                    box_x -= box_w
+                    draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
 
-            box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                mark_as_in_use(label_type) # Show label type on legend
+        else:
+            # For power pins with no mux, keep legend up to date
+            # and don't 'continue,' so group_index keeps in sync.
+            mark_as_in_use(label_type)
 
-            if conn['location'] in ('top', 'right', 'unknown'):
-                draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
-                box_x += box_w
-            if conn['location'] in ('bottom', 'left'):
-                box_x -= box_w
-                draw_label(dwg, label, label_type, box_x, box_y, box_w, box_h)
-
-            mark_as_in_use(label_type) # Show label type on legend
+        dwg.add(group[group_index])
+        group_index += 1 # Increment on non-None connections
 
     # Add legend
+    g = dwg.g()
     box_y = BOX_HEIGHT * (i + 4)
     for theme in themes:
         if 'in_use' in theme: # Skip themes not in use
             label_type = theme['type']
-            draw_label(dwg, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
+            draw_label(dwg, g, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
             label_text = label_type
-            dwg.add(dwg.text(
+            g.add(dwg.text(
                 label_text,
                 insert = (BOX_HEIGHT * 1.2, box_y+box_h/2+LABEL_HEIGHTADJUST),
                 font_size = LABEL_FONTSIZE,
@@ -385,6 +394,7 @@ def draw_pinlabels_svg(connections):
                 text_anchor = 'start'
                 ))
             box_y += BOX_HEIGHT
+    dwg.add(g)
 
     dwg.save()
 
@@ -395,6 +405,7 @@ def mark_as_in_use(label_type):
     for theme in themes:
         if theme['type'] == label_type and not 'in_use' in theme:
             theme['in_use'] = '1'
+
 
 @click.argument('pinoutcsv')
 @click.argument('circuitpydef')
@@ -441,12 +452,12 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         svg_height = 25.4 * float(svg_height[:-2]) * MM_TO_PX
     else:
         raise RuntimeError("Dont know units of width!", svg_height)
-    
+
     print("Width, Height in px: ", svg_width, svg_height)
-    
+
     # Create a new SVG as a copy!
     newsvg = sg.SVGFigure()
-    newsvg.set_size(("%dpx" % svg_width, "%dpx" % svg_height))    
+    newsvg.set_size(("%dpx" % svg_width, "%dpx" % svg_height))
     #print(newsvg.get_size())
     # DO NOT SCALE THE BREADBOARD SVG. We know it's 1:1 size.
     # If things don't align, issue is in the newly-generated pin table SVG.
@@ -473,7 +484,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         else:
             conn['location'] = 'unknown'
         print(conn)
-                
+
         # add muxes to connections
         if not 'pinname' in conn:
             continue
