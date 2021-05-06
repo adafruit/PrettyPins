@@ -270,7 +270,7 @@ def draw_pinlabels_svg(connections):
             continue
         box_x = 0
         box_w = 6 * BOX_WIDTH_PER_CHAR # See note later, 1st column width
-        first_box_w = box_w
+        first_box_w = max(box_w, len(conn['name']) * BOX_WIDTH_PER_CHAR)
         if 'mux' in conn:
             for mux in conn['mux']:
                 if not conn['mux'][mux]:
@@ -296,7 +296,7 @@ def draw_pinlabels_svg(connections):
         box_x = 0
         box_y = BOX_HEIGHT * i
         # First-column boxes are all this rigged width for now
-        box_w = 6 * BOX_WIDTH_PER_CHAR
+        box_w = max(6, len(conn['name'])+1) * BOX_WIDTH_PER_CHAR
         box_h = BOX_HEIGHT
 
         name_label = conn['name']
