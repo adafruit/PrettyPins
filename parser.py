@@ -294,27 +294,20 @@ def draw_pinlabels_svg(connections):
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
         if conn == None: # Gap between groups
             continue
-        box_x = 0
-        box_w = 6 * BOX_WIDTH_PER_CHAR # See note later, 1st column width
-        first_box_w = max(box_w, len(conn['name']) * BOX_WIDTH_PER_CHAR)
-        last_used_x = box_x
+        box_x = last_used_x = 0
+        # First-column box width is special
+        box_w = max(6, len(conn['name'])) * BOX_WIDTH_PER_CHAR
+        first_box_w = box_w
         if 'mux' in conn:
             for mux in conn['mux']:
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-                if not conn['mux'][mux]:
-                    # Increment box_x regardless to maintain mux columns.
-                    # last_used_x is NOT incremented here, to allow for
-                    # sparse tables.
-                    if conn['location'] in ('top', 'right', 'unknown'):
-                        box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-                    if conn['location'] in ('bottom', 'left'):
-                        box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-                    continue
+                # Increment box_x regardless to maintain mux columns.
                 if conn['location'] in ('top', 'right', 'unknown'):
                     box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
                     box_x -= box_w
-                last_used_x = box_x # For sparse table rendering
+                if conn['mux'][mux]:
+                    last_used_x = box_x # For sparse table rendering
         line_y = (i + 0.5) * BOX_HEIGHT
         g = dwg.g()     # Create group for connection
         group.append(g) # Add to list
@@ -333,7 +326,7 @@ def draw_pinlabels_svg(connections):
         # start with the pad name
         box_x = 0
         box_y = BOX_HEIGHT * i
-        # First-column boxes are all this rigged width for now
+        # First-column boxes are special
         box_w = max(6, len(conn['name'])+1) * BOX_WIDTH_PER_CHAR
         box_h = BOX_HEIGHT
 
