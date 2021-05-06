@@ -42,7 +42,12 @@ LABEL_FONT = "Courier New"
 # color blindness. Some of these might be a bit vivid to the normally-
 # sighted, so I'm keeping a note here of the original values used if
 # you want to switch back (at the expense of some users' ability to
-# distinguish pin colors).
+# distinguish pin colors). Use the colors from the table exactly,
+# DO NOT try to adjust a little lighter or darker, as the resulting
+# color may head off in a tangent direction for color blind users.
+# If something doesn't appeal, pick a different color from the table,
+# or repeat an existing one but distinguish it with/without an outline.
+#
 # Type     Old      New     (biovis2012 table index)
 # CPy Name #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
 # Power    #E60000  #920000 (11)
@@ -295,26 +300,34 @@ def draw_pinlabels_svg(connections):
         if conn == None: # Gap between groups
             continue
         box_x = last_used_x = 0
-        # First-column box width is special
-        box_w = max(6, len(conn['name'])) * BOX_WIDTH_PER_CHAR
+        box_w = max(6, len(conn['name'])+1) * BOX_WIDTH_PER_CHAR
         first_box_w = box_w
-        if 'mux' in conn:
+        last_used_w = box_w
+        if conn['location'] in ('top', 'right', 'unknown'):
+            box_x += box_w
+        if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
                 # Increment box_x regardless to maintain mux columns.
                 if conn['location'] in ('top', 'right', 'unknown'):
+                    # Save-and-increment (see notes in box-draw loop later)
+                    if conn['mux'][mux]:
+                        last_used_x = box_x # For sparse table rendering
+                        last_used_w = box_w
                     box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
+                    # Increment-and-save
                     box_x -= box_w
-                if conn['mux'][mux]:
-                    last_used_x = box_x # For sparse table rendering
+                    if conn['mux'][mux]:
+                        last_used_x = box_x # For sparse table rendering
+                        last_used_w = box_w
         line_y = (i + 0.5) * BOX_HEIGHT
         g = dwg.g()     # Create group for connection
         group.append(g) # Add to list
         if conn['location'] in ('top', 'right', 'unknown'):
-            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
         if conn['location'] in ('bottom', 'left'):
-            g.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + box_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
 
     # pick out each connection
     group_index = 0 # Only increments on non-None connections, unlike enum
@@ -350,6 +363,9 @@ def draw_pinlabels_svg(connections):
 
         # Draw the first-column box (could be power pin or Arduino pin #)
         draw_label(dwg, group[group_index], name_label, label_type, box_x, box_y, box_w, box_h)
+        # Increment box_x only on 'right' locations, because the behavior
+        # for subsequent right boxes is to draw-and-increment, whereas
+        # 'left' boxes increment-and-draw.
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
         mark_as_in_use(label_type)
@@ -357,12 +373,13 @@ def draw_pinlabels_svg(connections):
         if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 label = conn['mux'][mux]
+                box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
                 if not label:
                     # Increment box_x regardless for sparse tables
                     if conn['location'] in ('top', 'right', 'unknown'):
-                        box_x += (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                        box_x += box_w
                     if conn['location'] in ('bottom', 'left'):
-                        box_x -= (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                        box_x -= box_w
                     continue
                 if mux == 'GPIO':  # the underlying pin GPIO name
                     label_type = 'Port'
@@ -379,12 +396,12 @@ def draw_pinlabels_svg(connections):
                 else:
                     continue
 
-                box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
-
                 if conn['location'] in ('top', 'right', 'unknown'):
+                    # Draw-and-increment
                     draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
                     box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
+                    # Increment-and-draw
                     box_x -= box_w
                     draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
 
