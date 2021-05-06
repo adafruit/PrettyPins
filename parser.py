@@ -418,7 +418,8 @@ def draw_pinlabels_svg(connections):
     g = dwg.g()
     box_y = BOX_HEIGHT * (i + 4)
     for theme in themes:
-        if 'in_use' in theme: # Skip themes not in use
+        # Skip themes not in use, and the STEMMA QT connector
+        if 'in_use' in theme and not theme['type'].startswith('QT_'):
             label_type = theme['type']
             draw_label(dwg, g, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
             label_text = label_type
