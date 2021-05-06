@@ -14,6 +14,7 @@ import zipfile
 import glob
 import os
 import math
+import time
 
 MM_TO_PX = 96 / 25.4 # SVGs measure in px but maybe we want mm!
 PX_TO_MM = 25.4 / 96 # SVGs measure in px but maybe we want mm!
@@ -115,19 +116,52 @@ def get_connections(fzp, svg):
 def get_circuitpy_aliases(connections, circuitpydef):
     # now check the circuitpython definition file
     pyvar = open(circuitpydef).readlines()
+    pypairs = []
     for line in pyvar:
         #print(line)
         # find the QSTRs
         matches = re.match(r'.*MP_ROM_QSTR\(MP_QSTR_(.*)\),\s+MP_ROM_PTR\(&pin_(.*)\)', line)
         if not matches:
             continue
-        #print(matches.group(1), matches.group(2))
-        
-        for d in connections:
-            if d['name'] == matches.group(1):
-                if not 'aliases' in d:
-                    d['aliases'] = []
-                d['aliases'].append(matches.group(2))
+        pypairs.append((matches.group(1), matches.group(2)))
+
+    # for every known connection, lets set the 'true' pin name
+    for conn in connections:
+        pypair = next((p for p in pypairs if p[0] == conn['name']), None)
+        if not pypair:
+            #print("Couldnt find python name for ", conn['name'])
+            continue
+        # set the true pin name!
+        conn['pinname'] = pypair[1]
+        pypairs.remove(pypair)
+
+    # for any remaining un-matched qstr pairs, it could be aliases or internal pins
+    #print("remaining: ", pypairs)
+    for pypair in pypairs:
+        #print(pypair)
+        connection = next((c for c in connections if c.get('pinname') == pypair[1]), None)
+        if connection:
+            #print("Found an alias!")
+            if not 'alias' in connection:
+                connection['alias'] = []
+            connection['alias'].append(pypair[0])
+        else:
+            print("Found an internal pin!")
+            newconn = {'name': pypair[0], 'pinname': pypair[1]}
+            print(newconn)
+            connections.append(newconn)
+
+    # now look for pins that havent been accounted for!
+    for line in pyvar:
+        matches = re.match(r'.*MP_ROM_QSTR\(MP_QSTR_(.*)\),\s+MP_ROM_PTR\(&pin_(.*)\)', line)
+        if not matches:
+            continue
+        qstrname = matches.group(1)
+        gpioname = matches.group(2)
+        connection = next((c for c in connections if c.get('pinname') == gpioname), None)
+        if not connection:
+            print(qstrname, gpioname)
+            
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
@@ -364,6 +398,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         zip_ref.extractall('workdir')
     fzpfilename = glob.glob(r'workdir/*.fzp')[0]
     svgfilename = glob.glob(r'workdir/svg.breadboard*.svg')[0]
+    time.sleep(0.5)
     os.remove(fzpz+".zip")
 
     # get the connections dictionary
@@ -413,7 +448,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     sw = svg_width * 0.75  # so get back to the size we think we are
     #print("scaled w,h", sw, sh)
     for conn in connections:
-        if not conn['cy']:
+        if not conn.get('cy'):
             conn['location'] = 'unknown'
         elif conn['cy'] < 10:
             conn['location'] = 'top'
@@ -428,12 +463,11 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         print(conn)
                 
         # add muxes to connections
-        if not 'aliases' in conn:
+        if not 'pinname' in conn:
             continue
-        for alias in conn['aliases']:
-            # find muxes next
-            muxes = next((pin for pin in pinarray if pin['GPIO'] == alias), None)
-            conn['mux'] = muxes
+        # find muxes next
+        muxes = next((pin for pin in pinarray if pin['GPIO'] == conn['pinname']), None)
+        conn['mux'] = muxes
     draw_pinlabels_svg(connections)
 
     newsvg.save("output.svg")
