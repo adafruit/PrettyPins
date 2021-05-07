@@ -15,6 +15,7 @@ import glob
 import os
 import math
 import time
+import textwrap
 
 MM_TO_PX = 96 / 25.4 # SVGs measure in px but maybe we want mm!
 PX_TO_MM = 25.4 / 96 # SVGs measure in px but maybe we want mm!
@@ -472,15 +473,22 @@ def draw_pinlabels_svg(connections):
     dwg.add(g)
 
     print(chip_description)
-    dwg.add(dwg.text(
-        chip_description,
-        insert = (0, box_y+30),
-        font_size = LABEL_FONTSIZE,
-        font_family = LABEL_FONT,
-        font_weight = 'normal',
-        fill = 'black',
-        text_anchor = 'start'
-        ))
+    box_y += 30
+    g = dwg.g() # Create group for description
+    strings = textwrap.wrap(chip_description, width=40)
+    for s in strings:
+        g.add(dwg.text(
+            s,
+            insert = (0, box_y),
+            font_size = LABEL_FONTSIZE,
+            font_family = LABEL_FONT,
+            font_weight = 'normal',
+            fill = 'black',
+            text_anchor = 'start',
+            ))
+        box_y += LABEL_FONTSIZE
+    dwg.add(g)
+
     dwg.save()
 
 
