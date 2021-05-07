@@ -60,8 +60,8 @@ LABEL_FONT = "Courier New"
 # UART     #96C8FA  #B6DBFF (10)
 # SPI      #78F07D  #24FF24 (14)
 # I2C      #D7C8FF  #B66DFF (8)
-# QT_SCL   #FFFF00  #FFFF6D (15) - same as Port, distinguished by placement
-# QT_SDA   #0000FF  #006DDB (7)
+# QT_SCL   #FFFF00  #FFFF00 - not remapped, keep wire color so these match RL
+# QT_SDA   #0000FF  #0000FF - same
 # ExtInt   #FF00FF  #FF00FF - not currently used?
 # PCInt    #FFC000  #FFCC00 - not currently used?
 # Misc     #A0A0FF  #A0A0FF - not currently used?
@@ -79,8 +79,8 @@ themes = [
     {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
     {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
     {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'#006DDB', 'outline':'none', 'font-weight':'bold'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
     {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'font-weight':'normal'},
     {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'font-weight':'normal'},
     {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'font-weight':'normal'},
@@ -418,7 +418,8 @@ def draw_pinlabels_svg(connections):
     g = dwg.g()
     box_y = BOX_HEIGHT * (i + 4)
     for theme in themes:
-        if 'in_use' in theme: # Skip themes not in use
+        # Skip themes not in use, and the STEMMA QT connector
+        if 'in_use' in theme and not theme['type'].startswith('QT_'):
             label_type = theme['type']
             draw_label(dwg, g, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
             label_text = label_type
