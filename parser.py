@@ -36,6 +36,9 @@ BOX_INSET = (0.2 * MM_TO_PT, 0.2 * MM_TO_PT)
 LABEL_FONTSIZE = 6
 LABEL_HEIGHTADJUST = 1.75
 LABEL_FONT = "Courier New"
+TITLE_FONTSIZE = 16
+URL_FONTSIZE = 12
+
 
 # Color palette has been revised based on a recommended table from
 # http://mkweb.bcgsc.ca/biovis2012/ to accommodate multiple types of
@@ -93,13 +96,15 @@ conn_renames = [('!RESET', 'RESET'),
                 ('+3V3', '3.3V'),
                 ('+5V', '5V')
                 ]
-
+product_url = None
+product_title = None
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
 # eaglecad, so we should use good names for eaglecad nets that will synch with circuitpython names
 def get_connections(fzp, svg):
     connections = []
+    global product_url, product_title 
 
     # check the FPZ for every 'connector' type element
     f = open(fzp)
@@ -109,6 +114,10 @@ def get_connections(fzp, svg):
         c_svg = c['views']['breadboardView']['p']['@svgId']   # and the SVG ID for the pad
         d = {'name': c_name, 'svgid': c_svg}
         connections.append(d)
+
+    product_url = xmldict['module']['url']
+    product_title = xmldict['module']['title']
+    print(product_title, product_url)
     #print(connections)
 
     # ok now we can open said matching svg xml
@@ -435,6 +444,28 @@ def draw_pinlabels_svg(connections):
             box_y += BOX_HEIGHT
     dwg.add(g)
 
+    # add title and url
+    g = dwg.g()
+    g.add(dwg.text(
+        product_title,
+        insert = (0, -40),
+        font_size = TITLE_FONTSIZE,
+        font_family = LABEL_FONT,
+        font_weight = 'bold',
+        fill = 'black',
+        text_anchor = 'start'
+        ))
+    g.add(dwg.text(
+        product_url,
+        insert = (0, -27),
+        font_size = URL_FONTSIZE,
+        font_family = LABEL_FONT,
+        font_weight = 'bold',
+        fill = 'black',
+        text_anchor = 'start'
+        ))
+    dwg.add(g)
+            
     dwg.save()
 
 
@@ -531,7 +562,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
         muxes = next((pin for pin in pinarray if pin['GPIO'] == conn['pinname']), None)
         conn['mux'] = muxes
     draw_pinlabels_svg(connections)
-
+    
     newsvg.save("output.svg")
 
 
