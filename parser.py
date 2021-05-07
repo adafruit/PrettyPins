@@ -103,7 +103,7 @@ chip_description = None
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
 # eaglecad, so we should use good names for eaglecad nets that will synch with circuitpython names
-def get_connections(fzp, svg):
+def get_connections(fzp, svg, substitute):
     connections = []
     global product_url, product_title 
 
@@ -151,6 +151,10 @@ def get_connections(fzp, svg):
                 d['svgtype'] = 'ellipse'
         except KeyError:
             pass
+
+    if substitute:
+        for c in connections:
+           c['name'] =  re.sub(substitute[0], substitute[1], c['name'])
     return connections
 
 def get_circuitpy_aliases(connections, circuitpydef):
@@ -158,9 +162,8 @@ def get_circuitpy_aliases(connections, circuitpydef):
     pyvar = open(circuitpydef).readlines()
     pypairs = []
     for line in pyvar:
-        #print(line)
         # find the QSTRs
-        matches = re.match(r'.*MP_ROM_QSTR\(MP_QSTR_(.*)\),\s+MP_ROM_PTR\(&pin_(.*)\)', line)
+        matches = re.match(r'.*MP_QSTR_(.*)\)\s*,\s*MP_ROM_PTR\(&pin_(.*)\)', line)
         if not matches:
             continue
         pypairs.append((matches.group(1), matches.group(2)))
@@ -362,7 +365,7 @@ def draw_pinlabels_svg(connections):
         # clean up some names!
 
         label_type = 'CircuitPython Name'
-        if name_label in ("3.3V", "5V", "VBAT", "VBUS", "VHI"):
+        if name_label in ("3.3V", "VHIGH", "VIN", "5V", "VBAT", "VBUS", "VHI"):
             label_type = 'Power'
         if name_label in ("GND"):
             label_type = 'GND'
@@ -397,16 +400,22 @@ def draw_pinlabels_svg(connections):
                     continue
                 if mux == 'GPIO':  # the underlying pin GPIO name
                     label_type = 'Port'
-                elif mux == 'SPI':  # SPI ports
+                elif mux in ('SPI', 'HS/QSPI') :  # SPI ports
                     label_type = 'SPI'
                 elif mux == 'I2C':  # I2C ports
                     label_type = 'I2C'
-                elif mux == 'UART':  # UART ports
+                elif mux in ('UART', 'Debug'):  # UART ports
                     label_type = 'UART'
                 elif mux == 'PWM':  # PWM's
                     label_type = 'PWM'
+                elif mux == 'Touch':  # touch capable
+                    label_type = 'Analog'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
+                elif mux == 'Other':
+                    label_type = 'I2C'
+                elif mux == 'Power Domain':
+                    label_type = 'Power'
                 else:
                     continue
 
@@ -492,15 +501,19 @@ def mark_as_in_use(label_type):
             theme['in_use'] = '1'
 
 
-@click.argument('pinoutcsv')
-@click.argument('circuitpydef')
-@click.argument('FZPZ')
 @click.command()
-def parse(fzpz, circuitpydef, pinoutcsv):
+@click.argument('FZPZ')
+@click.argument('circuitpydef')
+@click.argument('pinoutcsv')
+@click.option('-s', '--substitute', 'substitute', nargs=2)
+def parse(fzpz, circuitpydef, pinoutcsv, substitute):
     # fzpz are actually zip files!
     shutil.copyfile(fzpz, fzpz+".zip")
     # delete any old workdir
-    shutil.rmtree('workdir')
+    try:
+        shutil.rmtree('workdir')
+    except FileNotFoundError:
+        pass
     # unzip into the work dir
     with zipfile.ZipFile(fzpz+".zip", 'r') as zip_ref:
         zip_ref.extractall('workdir')
@@ -510,7 +523,7 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     os.remove(fzpz+".zip")
 
     # get the connections dictionary
-    connections = get_connections(fzpfilename, svgfilename)
+    connections = get_connections(fzpfilename, svgfilename, substitute)
 
     # rename any that need it
     for conn in connections:
@@ -558,13 +571,13 @@ def parse(fzpz, circuitpydef, pinoutcsv):
     for conn in connections:
         if not conn.get('cy'):
             conn['location'] = 'unknown'
-        elif conn['cy'] < 10:
+        elif conn['cy'] < 12:
             conn['location'] = 'top'
-        elif conn['cy'] > sh-10:
+        elif conn['cy'] > sh-12:
             conn['location'] = 'bottom'
-        elif conn['cx'] > sw-10:
+        elif conn['cx'] > sw-12:
             conn['location'] = 'right'
-        elif conn['cx'] < 10:
+        elif conn['cx'] < 12:
             conn['location'] = 'left'
         else:
             conn['location'] = 'unknown'
