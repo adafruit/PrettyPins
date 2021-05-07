@@ -458,19 +458,20 @@ def draw_pinlabels_svg(connections):
         font_family = LABEL_FONT,
         font_weight = 'bold',
         fill = 'black',
-        text_anchor = 'start'
+        text_anchor = 'end'
         ))
     g.add(dwg.text(
         product_url,
-        insert = (0, -27),
+        insert = (0, -25),
         font_size = URL_FONTSIZE,
         font_family = LABEL_FONT,
         font_weight = 'bold',
         fill = 'black',
-        text_anchor = 'start'
+        text_anchor = 'end'
         ))
     dwg.add(g)
 
+    print(chip_description)
     dwg.add(dwg.text(
         chip_description,
         insert = (0, box_y+30),
