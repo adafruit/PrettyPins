@@ -72,17 +72,17 @@ URL_FONTSIZE = 12
 # Misc2    #C0C0FF  #C0C0FF - not currently used?
 
 themes = [
-    {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
     {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
     {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
     {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
     {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
     {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'#FFB6DB', 'outline':'none', 'font-weight':'normal'},
-    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
     {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
+    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
     {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'PWM', 'fill':'#FFB6DB', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
     {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
     {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
     {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'font-weight':'normal'},
