@@ -98,6 +98,7 @@ conn_renames = [('!RESET', 'RESET'),
                 ]
 product_url = None
 product_title = None
+chip_description = None
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
@@ -202,12 +203,16 @@ def get_circuitpy_aliases(connections, circuitpydef):
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
+    global chip_description
     with open(pinoutcsv, mode='r') as infile:
         pinarray = []
         reader = csv.reader(infile)
         csvlist = [row for row in reader]
         header = csvlist.pop(0)
         for pin in csvlist:
+            if pin[0] == "DESCRIPTION":
+                chip_description = pin[1]
+                continue
             gpioname = pin[0]
             d = {}
             for i,mux in enumerate(pin):
@@ -465,7 +470,16 @@ def draw_pinlabels_svg(connections):
         text_anchor = 'start'
         ))
     dwg.add(g)
-            
+
+    dwg.add(dwg.text(
+        chip_description,
+        insert = (0, box_y+30),
+        font_size = LABEL_FONTSIZE,
+        font_family = LABEL_FONT,
+        font_weight = 'normal',
+        fill = 'black',
+        text_anchor = 'start'
+        ))
     dwg.save()
 
 
