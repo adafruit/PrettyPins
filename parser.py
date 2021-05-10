@@ -41,38 +41,67 @@ TITLE_FONTSIZE = 16
 URL_FONTSIZE = 12
 
 
-# Color palette has been revised based on a recommended table from
-# http://mkweb.bcgsc.ca/biovis2012/ to accommodate multiple types of
-# color blindness. Some of these might be a bit vivid to the normally-
-# sighted, so I'm keeping a note here of the original values used if
-# you want to switch back (at the expense of some users' ability to
-# distinguish pin colors). Use the colors from the table exactly,
-# DO NOT try to adjust a little lighter or darker, as the resulting
-# color may head off in a tangent direction for color blind users.
-# If something doesn't appeal, pick a different color from the table,
-# or repeat an existing one but distinguish it with/without an outline.
+# The following table is derived from
+# http://mkweb.bcgsc.ca/biovis2012/color-blindness-palette.png
+# It provides 13 to 15 colors (plus white) that appear perceptually distinct
+# to most types of color blindness (they do NOT appear as the SAME colors,
+# merely DISTINGUISHABLE from one another).
+safe_colors = (
+    (255, 255, 255), # Keeps list index in sync w/numbers in ref image (1-15)
+    (0, 0, 0),       # #1
+    (0, 73, 73),     # #2
+    (0, 146, 146),   # #3  do not use w/#7
+    (255, 109, 182), # #4  do not use w/#13
+    (255, 182, 219), # #5
+    (73, 0, 146),    # #6
+    (0, 109, 219),   # #7  do not use w/#3
+    (182, 109, 255), # #8
+    (109, 182, 255), # #9
+    (182, 219, 255), # #10
+    (146, 0, 0),     # #11
+    (146, 73, 0),    # #12
+    (219, 109, 0),   # #13 do not use w/#4
+    (36, 255, 36),   # #14
+    (255, 255, 109)) # #15
+# It is generally not advised (but occasionally acceptable) to use colors
+# not in this table (as regular #RRGGBB), BUT they should be made distinct
+# some other way -- for example, CircuitPython pin name boxes are light gray
+# (not in table) but assigned an outline. Also, STEMMA QT SDA and SCL boxes
+# are assigned colors of the physical wiring, so the wires and labels match
+# (BOTH are then similarly 'off' to color blind users). Some of these entries
+# are a bit vivid to the normally-sighted, but they should be used exacly,
+# do NOT try to adjust a little lighter or darker, as the result might go in
+# a different direction for color blind users. Pick a different index, or
+# distinguish it with/without an outline.
+
+# Given a color index (0-15), return an item from the above safe_colors list
+# as a CSV-style hex RGB string ('#RRGGBB').
+def palette(idx):
+    rgb = ((safe_colors[idx][0] << 16) | (safe_colors[idx][1] << 8) |
+           safe_colors[idx][2])
+    return '#{0:0{1}X}'.format(rgb, 6)
+
+
 #
 # Type     Old      New     (biovis2012 table index)
 # CPy Name #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
 # Power    #E60000  #920000 (11)
 # GND      #000000  #000000 (1)
 # Control  #B0B0B0  #004949
-# Arduino  #00FF00  #00FF00 - not currently used?
 # Port     #F0E65A  #FFFF6D (15) - same as QT_SCL
 # Analog   #FFB95A  #DB6D00 (13) - avoid using (4) elsewhere
 # PWM      #FAB4BE  #FFB6DB (5)
 # UART     #96C8FA  #B6DBFF (10)
 # SPI      #78F07D  #24FF24 (14)
 # I2C      #D7C8FF  #B66DFF (8)
-# QT_SCL   #FFFF00  #FFFF00 - not remapped, keep wire color so these match RL
-# QT_SDA   #0000FF  #0000FF - same
-# ExtInt   #FF00FF  #FF00FF - not currently used?
-# PCInt    #FFC000  #FFCC00 - not currently used?
-# Misc     #A0A0FF  #A0A0FF - not currently used?
-# Misc2    #C0C0FF  #C0C0FF - not currently used?
+# Arduino color NOT currently set - pick an index for this!
 
-themes = [
-    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
+themes = None
+# START MAPPING THESE TO palette(n) CALLS
+# Also, make outline and font-weight optional, use defaults elsewhere
+rp2040_themes = [
+#    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Power', 'fill':palette(11), 'outline':'none', 'font-weight':'bold'},
     {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
     {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
     {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
@@ -89,6 +118,25 @@ themes = [
     {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'font-weight':'normal'},
     {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'font-weight':'normal'},
     {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'font-weight':'normal'},
+    ]
+esp32_themes = [
+    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
+    {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
+    {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
+
+    {'type':'Power Domain', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
+    {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Touch', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
+    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Other', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
+
+    {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
     ]
 
 # some eagle cad names are not as pretty
@@ -207,7 +255,17 @@ def get_circuitpy_aliases(connections, circuitpydef):
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
-    global chip_description
+    global chip_description, themes
+
+    # This is kinda gross and modifies the global 'themes' (initially empty)
+    # to reference one of the canned theme tables. Just wondering if it would
+    # be less gross to put the themes in their own .py files and import or
+    # something, I dunno, just getting the basics going right now.
+    if pinoutcsv.lower().startswith('rp2040'):
+        themes = rp2040_themes
+    elif pinoutcsv.lower().startswith('esp32'):
+        themes = esp32_themes
+
     with open(pinoutcsv, mode='r') as infile:
         pinarray = []
         reader = csv.reader(infile)
@@ -410,13 +468,14 @@ def draw_pinlabels_svg(connections):
                 elif mux == 'PWM':  # PWM's
                     label_type = 'PWM'
                 elif mux == 'Touch':  # touch capable
-                    label_type = 'Analog'
+                    label_type = 'Touch'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
                 elif mux == 'Other':
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
-                    label_type = 'Power'
+                    #label_type = 'Power'
+                    label_type = 'Power Domain'
                 else:
                     continue
 
