@@ -120,7 +120,8 @@ conn_renames = [('!RESET', 'RESET'),
 product_url = None
 product_title = None
 chip_description = None
-pinmuxes = None # Set by get_chip_pinout() on CSV load
+pinmuxes = None      # Set by get_chip_pinout() on CSV load
+pinmux_in_use = None # Ditto
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
@@ -228,7 +229,7 @@ def get_circuitpy_aliases(connections, circuitpydef):
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
-    global themes, chip_description, pinmuxes
+    global themes, chip_description, pinmuxes, pinmux_in_use
 
     with open(pinoutcsv, mode='r') as infile:
         pinarray = []
@@ -245,6 +246,7 @@ def get_chip_pinout(connections, pinoutcsv):
                 d[header[i]] = mux
             pinarray.append(d)
         pinmuxes = header
+        pinmux_in_use = [0] * len(pinmuxes)
     print("Mux options available: ", pinmuxes)
     return pinarray
 
@@ -480,7 +482,7 @@ def draw_pinlabels_svg(connections):
                     box_x -= box_w
                     draw_label(dwg, group[group_index], label, mux, box_x, box_y, box_w, box_h)
 
-                mark_as_in_use(label_type) # Show label type on legend
+                mark_as_in_use(mux) # Show label type on legend
         else:
             # For power pins with no mux, keep legend up to date
             # and don't 'continue,' so group_index keeps in sync.
@@ -492,23 +494,15 @@ def draw_pinlabels_svg(connections):
     # Add legend
     g = dwg.g()
     box_y = BOX_HEIGHT * (i + 4)
-    # TO DO: Loop through themes AND pinmuxes now
+    # Draw legend items for in-use themes
     for theme in themes:
         # Skip themes not in use, and the STEMMA QT connector
         if 'in_use' in theme and not theme['type'].startswith('QT_'):
-            label_type = theme['type']
-            draw_label(dwg, g, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
-            label_text = label_type
-            g.add(dwg.text(
-                label_text,
-                insert = (BOX_HEIGHT * 1.2, box_y+box_h/2+LABEL_HEIGHTADJUST),
-                font_size = LABEL_FONTSIZE,
-                font_family = LABEL_FONT,
-                font_weight = 'bold',
-                fill = 'black',
-                text_anchor = 'start'
-                ))
-            box_y += BOX_HEIGHT
+            box_y = draw_legend_box(dwg, g, theme['type'], box_y)
+    # And then add in-use pin mux items to legend
+    for i, mux in enumerate(pinmuxes):
+        if pinmux_in_use[i]:
+            box_y = draw_legend_box(dwg, g, mux, box_y)
     dwg.add(g)
 
     # add title and url
@@ -553,12 +547,31 @@ def draw_pinlabels_svg(connections):
     dwg.save()
 
 
+# Draws colored box and label, returns next avail Y position
+def draw_legend_box(dwg, g, label_text, box_y):
+    draw_label(dwg, g, None, label_text, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
+    g.add(dwg.text(
+        label_text,
+        insert = (BOX_HEIGHT * 1.2, box_y+BOX_HEIGHT/2+LABEL_HEIGHTADJUST),
+        font_size = LABEL_FONTSIZE,
+        font_family = LABEL_FONT,
+        font_weight = 'bold',
+        fill = 'black',
+        text_anchor = 'start'
+        ))
+    return box_y + BOX_HEIGHT
+
 # Add an 'in_use' key to themes that get referenced.
 # Only these items are shown on the legend.
 def mark_as_in_use(label_type):
+    # If label_type matches a theme, add/set 'in_use' element:
     for theme in themes:
-        if theme['type'] == label_type and not 'in_use' in theme:
+        if theme['type'] == label_type:
             theme['in_use'] = '1'
+            return
+    # If label_type didn't match any themes, it must be a pinmux,
+    # marked in a simple array.
+    pinmux_in_use[pinmuxes.index(label_type)] = 1
 
 
 @click.command()
