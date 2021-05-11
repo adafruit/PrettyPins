@@ -364,8 +364,13 @@ def draw_pinlabels_svg(connections):
     for i, conn in enumerate(tops+[None,]+bottoms+[None,]+rights+[None,]+lefts+[None,]+others):
         if conn == None: # Gap between groups
             continue
-        box_x = last_used_x = 0
+        box_x = 0
         box_w = max(6, len(conn['name'])+1) * BOX_WIDTH_PER_CHAR
+        # If it's a left/bottom box, and wider than the standard width,
+        # scoot left so the right edge is aligned with other boxes.
+        if conn['location'] in ('left', 'bottom'):
+            box_x -= box_w - 6 * BOX_WIDTH_PER_CHAR
+        last_used_x = box_x
         first_box_w = box_w
         last_used_w = box_w
         if conn['location'] in ('top', 'right', 'unknown'):
@@ -392,7 +397,7 @@ def draw_pinlabels_svg(connections):
         if conn['location'] in ('top', 'right', 'unknown'):
             g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
         if conn['location'] in ('bottom', 'left'):
-            g.add(dwg.line(start=(first_box_w + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(6 * BOX_WIDTH_PER_CHAR + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
 
     # pick out each connection
     group_index = 0 # Only increments on non-None connections, unlike enum
@@ -428,6 +433,10 @@ def draw_pinlabels_svg(connections):
 
         # Draw the first-column box (could be power pin or Arduino pin #)
         # (this box/label relates to the global 'themes' list).
+        # If it's in left/bottom groups, scoot left a little if box is
+        # wider than the 6-char default (so right edges align).
+        if conn['location'] in ('left', 'bottom'):
+            box_x -= box_w - 6 * BOX_WIDTH_PER_CHAR
         draw_label(dwg, group[group_index], name_label, label_type, box_x, box_y, box_w, box_h)
         # Increment box_x only on 'right' locations, because the behavior
         # for subsequent right boxes is to draw-and-increment, whereas
