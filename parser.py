@@ -59,7 +59,7 @@ URL_FONTSIZE = 12
 palette = (
     '#FFFFFF', # Keeps list index in sync w/numbers in ref image (1-15)
     '#000000', # #1
-    '#004949', # #1
+    '#004949', # #2
     '#009292', # #3  do not use w/#7
     '#FF6DB6', # #4  do not use w/#13
     '#FFB6DB', # #5
@@ -93,18 +93,17 @@ chroma = (
     5)  # Light Pink
 # NOT in this list, but still distinct and available for other uses, are
 # #1 (black, used for ground), #11 (dark red, used for power), #6 (dark
-# purple, used for control), #2 (dark teal, not currently used, is ugly),
-# #7 (medium blue, not currently used and should be avoided if possible as
-# it appears similar to #3 for some) and #4 (hot pink, not used and also
+# purple, used for control), #2 (dark teal, used for Arduino pin name), #7
+# (medium blue, not currently used and should be avoided if possible as it
+# appears similar to #3 for some) and #4 (hot pink, not used and also
 # should be avoided as it resembles #13 orange to some.)
 
 # This is a base set of pin themes that are common to ALL chips.
-# TO DO: decide on 'Arduino' position in list, and palette index.
 themes = [
     {'type':'Power', 'fill':palette[11], 'font-weight':'bold'},
     {'type':'GND', 'fill':palette[1], 'font-weight':'bold'},
     {'type':'Control', 'fill':palette[6], 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'#00FF00', 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':palette[2], 'font-weight':'bold'},
     {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
     {'type':'QT_SCL', 'fill':'#FFFF00', 'font-weight':'bold'},
     {'type':'QT_SDA', 'fill':'#0000FF', 'font-weight':'bold'},
