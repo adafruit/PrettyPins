@@ -46,23 +46,6 @@ URL_FONTSIZE = 12
 # It provides 13 to 15 colors (plus white) that appear perceptually distinct
 # to most types of color blindness (they do NOT appear as the SAME colors,
 # merely DISTINGUISHABLE from one another).
-safe_colors = (
-    (255, 255, 255), # Keeps list index in sync w/numbers in ref image (1-15)
-    (0, 0, 0),       # #1
-    (0, 73, 73),     # #2
-    (0, 146, 146),   # #3  do not use w/#7
-    (255, 109, 182), # #4  do not use w/#13
-    (255, 182, 219), # #5
-    (73, 0, 146),    # #6
-    (0, 109, 219),   # #7  do not use w/#3
-    (182, 109, 255), # #8
-    (109, 182, 255), # #9
-    (182, 219, 255), # #10
-    (146, 0, 0),     # #11
-    (146, 73, 0),    # #12
-    (219, 109, 0),   # #13 do not use w/#4
-    (36, 255, 36),   # #14
-    (255, 255, 109)) # #15
 # It is generally not advised (but occasionally acceptable) to use colors
 # not in this table (as regular #RRGGBB), BUT they should be made distinct
 # some other way -- for example, CircuitPython pin name boxes are light gray
@@ -72,71 +55,59 @@ safe_colors = (
 # are a bit vivid to the normally-sighted, but they should be used exacly,
 # do NOT try to adjust a little lighter or darker, as the result might go in
 # a different direction for color blind users. Pick a different index, or
-# distinguish it with/without an outline.
+# distinguish it with/without an outline, thanks.
+palette = (
+    '#FFFFFF', # Keeps list index in sync w/numbers in ref image (1-15)
+    '#000000', # #1
+    '#004949', # #1
+    '#009292', # #3  do not use w/#7
+    '#FF6DB6', # #4  do not use w/#13
+    '#FFB6DB', # #5
+    '#490092', # #6
+    '#006DDB', # #7  do not use w/#3
+    '#B66DFF', # #8
+    '#6DB6FF', # #9
+    '#B6DBFF', # #10
+    '#920000', # #11
+    '#924900', # #12
+    '#DB6D00', # #13 do not use w/#4
+    '#24FF24', # #14
+    '#FFFF6D') # #15
 
-# Given a color index (0-15), return an item from the above safe_colors list
-# as a CSV-style hex RGB string ('#RRGGBB').
-def palette(idx):
-    rgb = ((safe_colors[idx][0] << 16) | (safe_colors[idx][1] << 8) |
-           safe_colors[idx][2])
-    return '#{0:0{1}X}'.format(rgb, 6)
-
-
-#
-# Type     Old      New     (biovis2012 table index)
-# CPy Name #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
-# Power    #E60000  #920000 (11)
-# GND      #000000  #000000 (1)
-# Control  #B0B0B0  #004949
-# Port     #F0E65A  #FFFF6D (15) - same as QT_SCL
-# Analog   #FFB95A  #DB6D00 (13) - avoid using (4) elsewhere
-# PWM      #FAB4BE  #FFB6DB (5)
-# UART     #96C8FA  #B6DBFF (10)
-# SPI      #78F07D  #24FF24 (14)
-# I2C      #D7C8FF  #B66DFF (8)
-# Arduino color NOT currently set - pick an index for this!
-
-themes = None
-# START MAPPING THESE TO palette(n) CALLS
-# Also, make outline and font-weight optional, use defaults elsewhere
-rp2040_themes = [
-#    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Power', 'fill':palette(11), 'outline':'none', 'font-weight':'bold'},
-    {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
+# This is a base set of pin themes that are common to ALL chips
+# TO DO: decide on 'Arduino' position in list, and palette index
+themes = [
+    {'type':'Power', 'fill':palette[11], 'font-weight':'bold'},
+    {'type':'GND', 'fill':palette[1], 'font-weight':'bold'},
+    {'type':'Control', 'fill':palette[2], 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':'#00FF00', 'font-weight':'bold'},
     {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
-    {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
-    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'#FFB6DB', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
-    {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'font-weight':'bold'},
     ]
+# Additional themes unique to RP2040 devices
+rp2040_themes = [
+    {'type':'Port', 'fill':palette[15]},
+    {'type':'SPI', 'fill':palette[14]},
+    {'type':'UART', 'fill':palette[10]},
+    {'type':'I2C', 'fill':palette[8]},
+    {'type':'PWM', 'fill':palette[5]},
+    {'type':'Analog', 'fill':palette[13]},
+    {'type':'ExtInt', 'fill':'#FF00FF'},
+    {'type':'PCInt', 'fill':'#FFC000'},
+    {'type':'Misc', 'fill':'#A0A0FF'},
+    {'type':'Misc2', 'fill':'#C0C0FF'},
+    ]
+# Additional themes unique to ESP32 devices
 esp32_themes = [
-    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
-    {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
-    {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
-
-    {'type':'Power Domain', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Touch', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
-    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Other', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
-
-    {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'Port', 'fill':palette[15]},
+    {'type':'Power Domain', 'fill':palette[14]},
+    {'type':'Analog', 'fill':palette[3]},
+    {'type':'SPI', 'fill':palette[10]},
+    {'type':'Touch', 'fill':palette[8]},
+    {'type':'UART', 'fill':palette[5]},
+    {'type':'I2C', 'fill':palette[13]},
+#    {'type':'Other', 'fill':palette[12], 'outline':'auto'},
     ]
 
 # some eagle cad names are not as pretty
@@ -255,16 +226,16 @@ def get_circuitpy_aliases(connections, circuitpydef):
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
-    global chip_description, themes
+    global themes, chip_description
 
-    # This is kinda gross and modifies the global 'themes' (initially empty)
-    # to reference one of the canned theme tables. Just wondering if it would
-    # be less gross to put the themes in their own .py files and import or
-    # something, I dunno, just getting the basics going right now.
+    # This is kinda gross and modifies the global 'themes' to append one of
+    # the canned theme tables. Just wondering if it would be less gross to
+    # put the themes in their own .py files and import or something, I
+    # dunno, just getting the basics going right now.
     if pinoutcsv.lower().startswith('rp2040'):
-        themes = rp2040_themes
+        themes += rp2040_themes
     elif pinoutcsv.lower().startswith('esp32'):
-        themes = esp32_themes
+        themes += esp32_themes
 
     with open(pinoutcsv, mode='r') as infile:
         pinarray = []
@@ -287,7 +258,10 @@ def get_chip_pinout(connections, pinoutcsv):
 
 def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
     theme = next((theme for theme in themes if theme['type'] == label_type), None)
-    box_outline = theme['outline']
+    if 'outline' in theme:
+        box_outline = theme['outline']
+    else:
+        box_outline = 'none'
     box_fill = theme['fill']
     text_color = 'black'
     # Some auto-color things only work if RGB (not named) fill is specified...
@@ -309,7 +283,10 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
         text_color = 'white'
 
     #box_opacity = theme['opacity'] # Not used, everything's gone opaque
-    weight = theme['font-weight']
+    if 'font-weight' in theme:
+        weight = theme['font-weight']
+    else:
+        weight = 'normal'
     # draw a box
     box_x += BOX_INSET[0]  # Inset a bit so boxes aren't touching
     box_y += BOX_INSET[1]
@@ -336,15 +313,25 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
             fill = box_fill
             ))
     if label_text:
-        group.add(dwg.text(
-            label_text,
-            insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
-            font_size = LABEL_FONTSIZE,
-            font_family = LABEL_FONT,
-            font_weight = weight,
-            fill = text_color,
-            text_anchor = "middle",
-            ))
+        if weight != 'normal':
+            group.add(dwg.text(
+                label_text,
+                insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+                font_size = LABEL_FONTSIZE,
+                font_family = LABEL_FONT,
+                font_weight = weight,
+                fill = text_color,
+                text_anchor = "middle",
+                ))
+        else:
+            group.add(dwg.text(
+                label_text,
+                insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+                font_size = LABEL_FONTSIZE,
+                font_family = LABEL_FONT,
+                fill = text_color,
+                text_anchor = "middle",
+                ))
 
 
 def draw_pinlabels_svg(connections):
