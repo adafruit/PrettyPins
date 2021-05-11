@@ -139,7 +139,10 @@ def get_connections(fzp, svg, substitute):
         d = {'name': c_name, 'svgid': c_svg}
         connections.append(d)
 
-    product_url = xmldict['module']['url']
+    if 'url' in xmldict['module']:
+        product_url = xmldict['module']['url']
+    else:
+        product_url = 'Missing product URL'
     product_title = xmldict['module']['title']
     print(product_title, product_url)
     #print(connections)
