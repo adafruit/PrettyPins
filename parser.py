@@ -617,10 +617,14 @@ def parse(fzpz, circuitpydef, pinoutcsv, substitute):
     svg_height = bb_sg.height
     if "in" in svg_width:
         svg_width = 25.4 * float(svg_width[:-2]) * MM_TO_PX
+    elif "mm" in svg_width:
+        svg_width = float(svg_width[:-2]) * MM_TO_PX
     else:
         raise RuntimeError("Dont know units of width!", svg_width)
     if "in" in svg_height:
         svg_height = 25.4 * float(svg_height[:-2]) * MM_TO_PX
+    elif "mm" in svg_height:
+        svg_height = float(svg_height[:-2]) * MM_TO_PX
     else:
         raise RuntimeError("Dont know units of width!", svg_height)
 
