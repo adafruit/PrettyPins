@@ -41,54 +41,74 @@ TITLE_FONTSIZE = 16
 URL_FONTSIZE = 12
 
 
-# Color palette has been revised based on a recommended table from
-# http://mkweb.bcgsc.ca/biovis2012/ to accommodate multiple types of
-# color blindness. Some of these might be a bit vivid to the normally-
-# sighted, so I'm keeping a note here of the original values used if
-# you want to switch back (at the expense of some users' ability to
-# distinguish pin colors). Use the colors from the table exactly,
-# DO NOT try to adjust a little lighter or darker, as the resulting
-# color may head off in a tangent direction for color blind users.
-# If something doesn't appeal, pick a different color from the table,
-# or repeat an existing one but distinguish it with/without an outline.
-#
-# Type     Old      New     (biovis2012 table index)
-# CPy Name #E6E6E6  #E6E6E6 - light gray, not in table, distinguished by outline
-# Power    #E60000  #920000 (11)
-# GND      #000000  #000000 (1)
-# Control  #B0B0B0  #004949
-# Arduino  #00FF00  #00FF00 - not currently used?
-# Port     #F0E65A  #FFFF6D (15) - same as QT_SCL
-# Analog   #FFB95A  #DB6D00 (13) - avoid using (4) elsewhere
-# PWM      #FAB4BE  #FFB6DB (5)
-# UART     #96C8FA  #B6DBFF (10)
-# SPI      #78F07D  #24FF24 (14)
-# I2C      #D7C8FF  #B66DFF (8)
-# QT_SCL   #FFFF00  #FFFF00 - not remapped, keep wire color so these match RL
-# QT_SDA   #0000FF  #0000FF - same
-# ExtInt   #FF00FF  #FF00FF - not currently used?
-# PCInt    #FFC000  #FFCC00 - not currently used?
-# Misc     #A0A0FF  #A0A0FF - not currently used?
-# Misc2    #C0C0FF  #C0C0FF - not currently used?
+# The following table is derived from
+# http://mkweb.bcgsc.ca/biovis2012/color-blindness-palette.png
+# It provides 13 to 15 colors (plus white) that appear perceptually distinct
+# to most types of color blindness (they do NOT appear as the SAME colors,
+# merely DISTINGUISHABLE from one another).
+# It is generally not advised (but occasionally acceptable) to use colors
+# not in this table (as regular #RRGGBB), BUT they should be made distinct
+# some other way -- for example, CircuitPython pin name boxes are light gray
+# (not in table) but assigned an outline. Also, STEMMA QT SDA and SCL boxes
+# are assigned colors of the physical wiring, so the wires and labels match
+# (BOTH are then similarly 'off' to color blind users). Some of these entries
+# are a bit vivid to the normally-sighted, but they should be used exacly,
+# do NOT try to adjust a little lighter or darker, as the result might go in
+# a different direction for color blind users. Pick a different index, or
+# distinguish it with/without an outline, thanks.
+palette = (
+    '#FFFFFF', # Keeps list index in sync w/numbers in ref image (1-15)
+    '#000000', # #1
+    '#004949', # #2
+    '#009292', # #3  do not use w/#7
+    '#FF6DB6', # #4  do not use w/#13
+    '#FFB6DB', # #5
+    '#490092', # #6
+    '#006DDB', # #7  do not use w/#3
+    '#B66DFF', # #8
+    '#6DB6FF', # #9
+    '#B6DBFF', # #10
+    '#920000', # #11
+    '#924900', # #12
+    '#DB6D00', # #13 do not use w/#4
+    '#24FF24', # #14
+    '#FFFF6D') # #15
 
+# This is a sequence of 9 palette indices that appear in a chromatic-ish
+# sequence for normal-sighted viewers, and are distinct and non-repeating
+# for anyone else. MUX boxes, when drawn from center-to-outskirts in this
+# order, are nicely appealing. If a chip type has fewer than 9 muxes,
+# colors in the sequence can be skipped by adding an empty column in the
+# CSV (e.g. brown isn't very appealing). For future ref, if more than 9
+# muxes become necessary, maybe repeat the sequence but add a box outline?
+chroma = (
+    12, # Brown
+    13, # Orange
+    15, # Yellow
+    14, # Green
+    3,  # Teal
+    10, # Cyan
+    9,  # Light blue
+    8,  # Purple
+    5)  # Light Pink
+# NOT in this list, but still distinct and available for other uses, are
+# #1 (black, used for ground), #11 (dark red, used for power), #6 (dark
+# purple, used for control), #2 (dark teal, used for Arduino pin name), #7
+# (medium blue, not currently used and should be avoided if possible as it
+# appears similar to #3 for some) and #4 (hot pink, not used and also
+# should be avoided as it resembles #13 orange to some.)
+
+# This is a base set of pin themes that are common to ALL chips.
+# Any additional 'muxed' functions get drawn in chroma sequence
+# following left-to-right column order in CSV file.
 themes = [
-    {'type':'Power', 'fill':'#920000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'GND', 'fill':'#000000', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Control', 'fill':'#004949', 'outline':'none', 'font-weight':'bold'},
-    {'type':'Arduino', 'fill':'#00FF00', 'outline':'none', 'font-weight':'bold'},
+    {'type':'Power', 'fill':palette[11], 'font-weight':'bold'},
+    {'type':'GND', 'fill':palette[1], 'font-weight':'bold'},
+    {'type':'Control', 'fill':palette[6], 'font-weight':'bold'},
+    {'type':'Arduino', 'fill':palette[2], 'font-weight':'bold'},
     {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
-    {'type':'Port', 'fill':'#FFFF6D', 'outline':'none', 'font-weight':'normal'},
-    {'type':'SPI', 'fill':'#24FF24', 'outline':'none', 'font-weight':'normal'},
-    {'type':'UART', 'fill':'#B6DBFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'I2C', 'fill':'#B66DFF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'PWM', 'fill':'#FFB6DB', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Analog', 'fill':'#DB6D00', 'outline':'none', 'font-weight':'normal'},
-    {'type':'QT_SCL', 'fill':'#FFFF00', 'outline':'none', 'font-weight':'bold'},
-    {'type':'QT_SDA', 'fill':'#0000FF', 'outline':'none', 'font-weight':'bold'},
-    {'type':'ExtInt', 'fill':'#FF00FF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'PCInt', 'fill':'#FFC000', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Misc', 'fill':'#A0A0FF', 'outline':'none', 'font-weight':'normal'},
-    {'type':'Misc2', 'fill':'#C0C0FF', 'outline':'none', 'font-weight':'normal'},
+    {'type':'QT_SCL', 'fill':'#FFFF00', 'font-weight':'bold'},
+    {'type':'QT_SDA', 'fill':'#0000FF', 'font-weight':'bold'},
     ]
 
 # some eagle cad names are not as pretty
@@ -100,6 +120,8 @@ conn_renames = [('!RESET', 'RESET'),
 product_url = None
 product_title = None
 chip_description = None
+pinmuxes = None      # Set by get_chip_pinout() on CSV load
+pinmux_in_use = None # Ditto
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
@@ -207,7 +229,8 @@ def get_circuitpy_aliases(connections, circuitpydef):
     return connections
 
 def get_chip_pinout(connections, pinoutcsv):
-    global chip_description
+    global themes, chip_description, pinmuxes, pinmux_in_use
+
     with open(pinoutcsv, mode='r') as infile:
         pinarray = []
         reader = csv.reader(infile)
@@ -223,17 +246,35 @@ def get_chip_pinout(connections, pinoutcsv):
                 d[header[i]] = mux
             pinarray.append(d)
         pinmuxes = header
+        pinmux_in_use = [0] * len(pinmuxes)
     print("Mux options available: ", pinmuxes)
     return pinarray
 
 
 def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
-    theme = next((theme for theme in themes if theme['type'] == label_type), None)
-    box_outline = theme['outline']
-    box_fill = theme['fill']
+
+    # Some initial assumptions on label style, might override later below
+    box_outline = None # No box outline
+    text_weight = None # Normal text weight
     text_color = 'black'
-    # Some auto-color things only work if RGB (not named) fill is specified...
-    if (box_fill[0] == '#'):
+
+    # Check if label_type is in the theme set...
+    theme = next((theme for theme in themes if theme['type'] == label_type), None)
+
+    if theme: # label_type IS one of the global theme settings
+        box_fill = theme['fill']
+        if 'outline' in theme:
+            box_outline = theme['outline']
+        if 'font-weight' in theme:
+            text_weight = theme['font-weight']
+    else: # label_type IS NOT in themes, must be a muxed pin.
+        # Switch to chromatic color scheme based on index of label_type
+        # in the CSV pinmuxes header.
+        box_fill = palette[chroma[pinmuxes.index(label_type)]]
+
+    if (box_fill == 'black'):
+        text_color = 'white'
+    elif (box_fill[0] == '#'):
         red = int(box_fill[1:3], 16)
         green = int(box_fill[3:5], 16)
         blue = int(box_fill[5:7], 16)
@@ -247,17 +288,13 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
         if box_outline == 'auto':
             rgb = ((red // 2)) << 16 | ((green // 2) << 8) | (blue // 2)
             box_outline = '#{0:0{1}X}'.format(rgb, 6)
-    elif (box_fill == 'black'):
-        text_color = 'white'
 
-    #box_opacity = theme['opacity'] # Not used, everything's gone opaque
-    weight = theme['font-weight']
     # draw a box
     box_x += BOX_INSET[0]  # Inset a bit so boxes aren't touching
     box_y += BOX_INSET[1]
     box_w -= BOX_INSET[0] * 2
     box_h -= BOX_INSET[1] * 2
-    if box_outline != 'none':
+    if box_outline:
         box_x += BOX_STROKE_WIDTH * 0.5 # Inset further for stroke
         box_y += BOX_STROKE_WIDTH * 0.5 # (so box extents visually align)
         box_w -= BOX_STROKE_WIDTH
@@ -278,15 +315,25 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
             fill = box_fill
             ))
     if label_text:
-        group.add(dwg.text(
-            label_text,
-            insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
-            font_size = LABEL_FONTSIZE,
-            font_family = LABEL_FONT,
-            font_weight = weight,
-            fill = text_color,
-            text_anchor = "middle",
-            ))
+        if text_weight:
+            group.add(dwg.text(
+                label_text,
+                insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+                font_size = LABEL_FONTSIZE,
+                font_family = LABEL_FONT,
+                font_weight = text_weight,
+                fill = text_color,
+                text_anchor = "middle",
+                ))
+        else:
+            group.add(dwg.text(
+                label_text,
+                insert = (box_x+box_w/2, box_y+box_h/2+LABEL_HEIGHTADJUST),
+                font_size = LABEL_FONTSIZE,
+                font_family = LABEL_FONT,
+                fill = text_color,
+                text_anchor = "middle",
+                ))
 
 
 def draw_pinlabels_svg(connections):
@@ -380,6 +427,7 @@ def draw_pinlabels_svg(connections):
             label_type = 'QT_SDA'
 
         # Draw the first-column box (could be power pin or Arduino pin #)
+        # (this box/label relates to the global 'themes' list).
         draw_label(dwg, group[group_index], name_label, label_type, box_x, box_y, box_w, box_h)
         # Increment box_x only on 'right' locations, because the behavior
         # for subsequent right boxes is to draw-and-increment, whereas
@@ -390,8 +438,11 @@ def draw_pinlabels_svg(connections):
 
         if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
-                label = conn['mux'][mux]
-                box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                label = conn['mux'][mux] # Label (if any) for this pin/mux
+                if muxstringlen[mux]:    # Typical label length for this mux
+                    box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
+                else:
+                    box_w = 0
                 if not label:
                     # Increment box_x regardless for sparse tables
                     if conn['location'] in ('top', 'right', 'unknown'):
@@ -410,26 +461,28 @@ def draw_pinlabels_svg(connections):
                 elif mux == 'PWM':  # PWM's
                     label_type = 'PWM'
                 elif mux == 'Touch':  # touch capable
-                    label_type = 'Analog'
+                    label_type = 'Touch'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
                 elif mux == 'Other':
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
-                    label_type = 'Power'
+                    #label_type = 'Power'
+                    label_type = 'Power Domain'
                 else:
                     continue
 
+                # Here, labels are chromatic mux items, not in themes
                 if conn['location'] in ('top', 'right', 'unknown'):
                     # Draw-and-increment
-                    draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
+                    draw_label(dwg, group[group_index], label, mux, box_x, box_y, box_w, box_h)
                     box_x += box_w
                 if conn['location'] in ('bottom', 'left'):
                     # Increment-and-draw
                     box_x -= box_w
-                    draw_label(dwg, group[group_index], label, label_type, box_x, box_y, box_w, box_h)
+                    draw_label(dwg, group[group_index], label, mux, box_x, box_y, box_w, box_h)
 
-                mark_as_in_use(label_type) # Show label type on legend
+                mark_as_in_use(mux) # Show label type on legend
         else:
             # For power pins with no mux, keep legend up to date
             # and don't 'continue,' so group_index keeps in sync.
@@ -441,22 +494,15 @@ def draw_pinlabels_svg(connections):
     # Add legend
     g = dwg.g()
     box_y = BOX_HEIGHT * (i + 4)
+    # Draw legend items for in-use themes
     for theme in themes:
         # Skip themes not in use, and the STEMMA QT connector
         if 'in_use' in theme and not theme['type'].startswith('QT_'):
-            label_type = theme['type']
-            draw_label(dwg, g, None, label_type, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
-            label_text = label_type
-            g.add(dwg.text(
-                label_text,
-                insert = (BOX_HEIGHT * 1.2, box_y+box_h/2+LABEL_HEIGHTADJUST),
-                font_size = LABEL_FONTSIZE,
-                font_family = LABEL_FONT,
-                font_weight = 'bold',
-                fill = 'black',
-                text_anchor = 'start'
-                ))
-            box_y += BOX_HEIGHT
+            box_y = draw_legend_box(dwg, g, theme['type'], box_y)
+    # And then add in-use pin mux items to legend
+    for i, mux in enumerate(pinmuxes):
+        if pinmux_in_use[i]:
+            box_y = draw_legend_box(dwg, g, mux, box_y)
     dwg.add(g)
 
     # add title and url
@@ -501,12 +547,31 @@ def draw_pinlabels_svg(connections):
     dwg.save()
 
 
+# Draws colored box and label, returns next avail Y position
+def draw_legend_box(dwg, g, label_text, box_y):
+    draw_label(dwg, g, None, label_text, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
+    g.add(dwg.text(
+        label_text,
+        insert = (BOX_HEIGHT * 1.2, box_y+BOX_HEIGHT/2+LABEL_HEIGHTADJUST),
+        font_size = LABEL_FONTSIZE,
+        font_family = LABEL_FONT,
+        font_weight = 'bold',
+        fill = 'black',
+        text_anchor = 'start'
+        ))
+    return box_y + BOX_HEIGHT
+
 # Add an 'in_use' key to themes that get referenced.
 # Only these items are shown on the legend.
 def mark_as_in_use(label_type):
+    # If label_type matches a theme, add/set 'in_use' element:
     for theme in themes:
-        if theme['type'] == label_type and not 'in_use' in theme:
+        if theme['type'] == label_type:
             theme['in_use'] = '1'
+            return
+    # If label_type didn't match any themes, it must be a pinmux,
+    # marked in a simple array.
+    pinmux_in_use[pinmuxes.index(label_type)] = 1
 
 
 @click.command()
