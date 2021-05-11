@@ -74,17 +74,42 @@ palette = (
     '#24FF24', # #14
     '#FFFF6D') # #15
 
-# This is a base set of pin themes that are common to ALL chips
-# TO DO: decide on 'Arduino' position in list, and palette index
+# This is a sequence of 9 palette indices that appear in a chromatic-ish
+# sequence for normal-sighted viewers, and are distinct and non-repeating
+# for anyone else. MUX boxes, when drawn from center-to-outskirts in this
+# order, are nicely appealing. If a chip type has fewer than 9 muxes,
+# colors in the sequence can be skipped by adding an empty column in the
+# CSV (e.g. brown isn't very appealing). For future ref, if more than 9
+# muxes become necessary, maybe repeat the sequence but add a box outline?
+chroma = (
+    12, # Brown
+    13, # Orange
+    15, # Yellow
+    14, # Green
+    3,  # Teal
+    10, # Cyan
+    9,  # Light blue
+    8,  # Purple
+    5)  # Light Pink
+# NOT in this list, but still distinct and available for other uses, are
+# #1 (black, used for ground), #11 (dark red, used for power), #6 (dark
+# purple, used for control), #2 (dark teal, not currently used, is ugly),
+# #7 (medium blue, not currently used and should be avoided if possible as
+# it appears similar to #3 for some) and #4 (hot pink, not used and also
+# should be avoided as it resembles #13 orange to some.)
+
+# This is a base set of pin themes that are common to ALL chips.
+# TO DO: decide on 'Arduino' position in list, and palette index.
 themes = [
     {'type':'Power', 'fill':palette[11], 'font-weight':'bold'},
     {'type':'GND', 'fill':palette[1], 'font-weight':'bold'},
-    {'type':'Control', 'fill':palette[2], 'font-weight':'bold'},
+    {'type':'Control', 'fill':palette[6], 'font-weight':'bold'},
     {'type':'Arduino', 'fill':'#00FF00', 'font-weight':'bold'},
     {'type':'CircuitPython Name', 'fill':'#E6E6E6', 'outline':'auto', 'font-weight':'bold'},
     {'type':'QT_SCL', 'fill':'#FFFF00', 'font-weight':'bold'},
     {'type':'QT_SDA', 'fill':'#0000FF', 'font-weight':'bold'},
     ]
+# TO-DO: These will go away, mux boxes will simply proceed in chroma order!
 # Additional themes unique to RP2040 devices
 rp2040_themes = [
     {'type':'Port', 'fill':palette[15]},
