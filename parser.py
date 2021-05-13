@@ -187,7 +187,7 @@ def get_connections(fzp, svg, substitute):
 def get_arduino_mapping(connections, variantfolder):
 
     # only supporting nRF52 at this moment
-    if "nRF52" in variantfolder:
+    if "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
         variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
@@ -232,7 +232,7 @@ def get_arduino_mapping(connections, variantfolder):
         outfilecpp.close()
         outfileh.close()
         # now compile it!
-        compileit = subprocess.Popen("g++ variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+        compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
         #print(compileit.stdout.read())
         runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
         arduinopins = runit.stdout.read().decode("utf-8")
