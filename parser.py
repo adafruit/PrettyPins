@@ -305,7 +305,8 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
         group.add(dwg.rect(
             (box_x, box_y),
             (box_w, box_h),
-            BOX_CORNER_RADIUS[0], BOX_CORNER_RADIUS[1],
+            BOX_CORNER_RADIUS[0] - BOX_STROKE_WIDTH * 0.5,
+            BOX_CORNER_RADIUS[1] - BOX_STROKE_WIDTH * 0.5,
             stroke = box_outline,
             stroke_width = BOX_STROKE_WIDTH,
             fill = box_fill
