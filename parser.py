@@ -16,6 +16,7 @@ import os
 import math
 import time
 import textwrap
+import subprocess
 
 MM_TO_PX = 96 / 25.4 # SVGs measure in px but maybe we want mm!
 PX_TO_MM = 25.4 / 96 # SVGs measure in px but maybe we want mm!
@@ -183,6 +184,69 @@ def get_connections(fzp, svg, substitute):
            c['name'] =  re.sub(substitute[0], substitute[1], c['name'])
     return connections
 
+def get_arduino_mapping(connections, variantfolder):
+
+    # only supporting nRF52 at this moment
+    if "nRF52" in variantfolder:
+        # copy over the variant.cpp minus any includes
+
+        variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
+        outfilecpp = open("variant.cpp", "w")
+        # Add some new header text so we can compile the raw variant cpp/h without arduino BSP
+        outfilecpp.write("""
+        #include <stdint.h>
+        #include <stdio.h>
+        #include "variant.h"
+        #define OUTPUT 1
+        #define INPUT 0
+        #define ledOff(x) (x)
+        #define pinMode(x, y) (x)
+
+        """)
+        for line in variantcpp:
+            # cut out the arduino deps
+            if "#include" in line:
+                continue
+            outfilecpp.write(line)
+
+        # here's the code that will actually print out the pin mapping as a CSV:
+        outfilecpp.write("""
+        int main(void) {
+           for (uint32_t pin=0; pin<sizeof(g_ADigitalPinMap)/4; pin++) {
+             uint8_t portnum = g_ADigitalPinMap[pin] / 32;
+             uint8_t portpin = g_ADigitalPinMap[pin] % 32;
+             printf("%d, P%d.%02d\\n", pin, portnum, portpin);
+           }
+        }
+        """)
+
+        # ditto for the header file, copy it over, except remove all arduino headers
+        varianth = open(variantfolder+"/"+"variant.h").readlines()
+        outfileh = open("variant.h", "w")
+        outfileh.write("#include <stdint.h>\n")
+        for line in varianth:
+            if "#include" in line:
+                continue
+            outfileh.write(line)
+
+        outfilecpp.close()
+        outfileh.close()
+        # now compile it!
+        compileit = subprocess.Popen("g++ variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+        #print(compileit.stdout.read())
+        runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
+        arduinopins = runit.stdout.read().decode("utf-8")
+        for pinpair in arduinopins.split("\n"):
+            if not pinpair:
+                continue
+            arduinopin, pinname = pinpair.split(", ")
+            connection = next((c for c in connections if c.get('pinname') == pinname), None)
+            if not connection:
+                continue
+            connection['arduinopin'] = arduinopin
+            #print(arduinopin, pinname, connection)
+    return connections
+
 def get_circuitpy_aliases(connections, circuitpydef):
     # now check the circuitpython definition file
     pyvar = open(circuitpydef).readlines()
@@ -193,7 +257,8 @@ def get_circuitpy_aliases(connections, circuitpydef):
         if not matches:
             continue
 
-        # Special case deal with P0_0 -> P0.0
+        # Special case for nRF52840, we cant use . in the pin name so rename P0_0 -> P0.0
+        # so it matches the 'true' name of the pin
         pinname = matches.group(2)
         if re.match(r"P[0-1]_[0-9]+", pinname):
             pinname = pinname.replace("_", ".")
@@ -600,8 +665,9 @@ def mark_as_in_use(label_type):
 @click.argument('FZPZ')
 @click.argument('circuitpydef')
 @click.argument('pinoutcsv')
+@click.option('-a', '--arduino', 'arduinovariantfolder')
 @click.option('-s', '--substitute', 'substitute', nargs=2)
-def parse(fzpz, circuitpydef, pinoutcsv, substitute):
+def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
     # fzpz are actually zip files!
     shutil.copyfile(fzpz, fzpz+".zip")
     # delete any old workdir
@@ -626,8 +692,12 @@ def parse(fzpz, circuitpydef, pinoutcsv, substitute):
             if conn['name'] == rename[0]:
                 conn['name'] = rename[1]
 
-    # find the 'true' GPIO pine via the circuitpython file
+    # find the 'true' GPIO pin names via the circuitpython file
+    # e.g. "MISO" and "D2" map to "GPIO03" or "P0.04"
     connections = get_circuitpy_aliases(connections, circuitpydef)
+
+    # find the mapping between gpio pins and arduino pins
+    connections = get_arduino_mapping(connections, arduinovariantfolder)
 
     # open and parse the pinout mapper CSV
     pinarray = get_chip_pinout(connections, pinoutcsv)
