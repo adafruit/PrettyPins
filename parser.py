@@ -192,7 +192,12 @@ def get_circuitpy_aliases(connections, circuitpydef):
         matches = re.match(r'.*MP_QSTR_(.*)\)\s*,\s*MP_ROM_PTR\(&pin_(.*)\)', line)
         if not matches:
             continue
-        pypairs.append((matches.group(1), matches.group(2)))
+
+        # Special case deal with P0_0 -> P0.0
+        pinname = matches.group(2)
+        if re.match(r"P[0-1]_[0-9]+", pinname):
+            pinname = pinname.replace("_", ".")
+        pypairs.append([matches.group(1), pinname])
 
     # for every known connection, lets set the 'true' pin name
     for conn in connections:
@@ -622,7 +627,8 @@ def parse(fzpz, circuitpydef, pinoutcsv, substitute):
 
     # open and parse the pinout mapper CSV
     pinarray = get_chip_pinout(connections, pinoutcsv)
-
+    #print(pinarray)
+    
     # get SVG width and height
     bb_sg = sg.fromfile(svgfilename)
     bb_root = bb_sg.getroot()
