@@ -487,6 +487,10 @@ def draw_pinlabels_svg(connections):
                 elif mux == 'Power Domain':
                     #label_type = 'Power'
                     label_type = 'Power Domain'
+                elif mux == 'Speed':
+                    label_type = 'Speed'
+                elif mux == 'Special':
+                    label_type = 'Special'
                 else:
                     continue
 
