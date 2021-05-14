@@ -121,15 +121,17 @@ conn_renames = [('!RESET', 'RESET'),
 product_url = None
 product_title = None
 chip_description = None
-pinmuxes = None      # Set by get_chip_pinout() on CSV load
-pinmux_in_use = None # Ditto
+pinmuxes = None        # Set by get_chip_pinout() on CSV load
+pinmux_in_use = None   # Ditto
+arduino_in_use = False # Is set true if Arduino pin names found
+longest_arduinopin = 0 # Longest label for Arduino pins (for box sizing)
 
 # This function digs through the FZP (XML) file and the SVG (also, ironically, XML) to find what
 # frtizing calls a connection - these are pads that folks can connect to! they are 'named' by
 # eaglecad, so we should use good names for eaglecad nets that will synch with circuitpython names
 def get_connections(fzp, svg, substitute):
     connections = []
-    global product_url, product_title 
+    global product_url, product_title
 
     # check the FPZ for every 'connector' type element
     f = open(fzp)
@@ -185,9 +187,10 @@ def get_connections(fzp, svg, substitute):
     return connections
 
 def get_arduino_mapping(connections, variantfolder):
+    global longest_arduinopin
 
     # only supporting nRF52 at this moment
-    if "nRF52" in variantfolder:
+    if "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
         variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
@@ -232,7 +235,7 @@ def get_arduino_mapping(connections, variantfolder):
         outfilecpp.close()
         outfileh.close()
         # now compile it!
-        compileit = subprocess.Popen("g++ variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+        compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
         #print(compileit.stdout.read())
         runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
         arduinopins = runit.stdout.read().decode("utf-8")
@@ -244,6 +247,7 @@ def get_arduino_mapping(connections, variantfolder):
             if not connection:
                 continue
             connection['arduinopin'] = arduinopin
+            longest_arduinopin = max(longest_arduinopin, len(arduinopin))
             #print(arduinopin, pinname, connection)
     return connections
 
@@ -340,6 +344,8 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
             box_outline = theme['outline']
         if 'font-weight' in theme:
             text_weight = theme['font-weight']
+    elif label_type == 'Arduino':
+        box_fill = palette[2]
     else: # label_type IS NOT in themes, must be a muxed pin.
         # Switch to chromatic color scheme based on index of label_type
         # in the CSV pinmuxes header.
@@ -449,6 +455,20 @@ def draw_pinlabels_svg(connections):
         last_used_w = box_w
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
+
+        # Adjust endpoint if there's an Arduino pin defined.
+        # Neither a theme nor a mux, just a weird one-off...
+        if 'arduinopin' in conn:
+            #box_w = (longest_arduinopin + 1) * BOX_WIDTH_PER_CHAR
+            box_w = longest_arduinopin * BOX_WIDTH_PER_CHAR
+            if conn['location'] in ('top', 'right', 'unknown'):
+                last_used_x = box_x # Save-and-increment
+                box_x += box_w
+            elif conn['location'] in ('left', 'bottom'):
+                box_x -= box_w # Increment-and-save
+                last_used_x = box_x
+            last_used_w = box_w
+
         if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
@@ -518,6 +538,18 @@ def draw_pinlabels_svg(connections):
         if conn['location'] in ('top', 'right', 'unknown'):
             box_x += box_w
         mark_as_in_use(label_type)
+
+        # Arduino pins are sort of brute-force wedged in here, neither a
+        # theme nor a muxed pin...the position and label-drawing from
+        # above are duplicated (except box_x decrement is different).
+        if 'arduinopin' in conn:
+            box_w = (longest_arduinopin + 1) * BOX_WIDTH_PER_CHAR
+            if conn['location'] in ('left', 'bottom'):
+                box_x -= box_w
+            draw_label(dwg, group[group_index], conn['arduinopin'], 'Arduino', box_x, box_y, box_w, box_h)
+            if conn['location'] in ('top', 'right', 'unknown'):
+                box_x += box_w
+            arduino_in_use = True
 
         if 'mux' in conn: # power pins don't have muxing, its cool!
             for mux in conn['mux']:
@@ -590,6 +622,9 @@ def draw_pinlabels_svg(connections):
         # Skip themes not in use, and the STEMMA QT connector
         if 'in_use' in theme and not theme['type'].startswith('QT_'):
             box_y = draw_legend_box(dwg, g, theme['type'], box_y)
+    # Wedge the Arduino pin in there if needed
+    if arduino_in_use:
+        box_y = draw_legend_box(dwg, g, 'Arduino', box_y)
     # And then add in-use pin mux items to legend
     for i, mux in enumerate(pinmuxes):
         if pinmux_in_use[i]:
@@ -641,6 +676,8 @@ def draw_pinlabels_svg(connections):
 # Draws colored box and label, returns next avail Y position
 def draw_legend_box(dwg, g, label_text, box_y):
     draw_label(dwg, g, None, label_text, 0, box_y, BOX_HEIGHT, BOX_HEIGHT)
+    if label_text == 'Arduino':
+        label_text = 'Arduino Name'
     g.add(dwg.text(
         label_text,
         insert = (BOX_HEIGHT * 1.2, box_y+BOX_HEIGHT/2+LABEL_HEIGHTADJUST),
