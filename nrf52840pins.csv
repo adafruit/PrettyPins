@@ -52,4 +52,4 @@
 ,,,,,,
 ,,,,,,
 ,,,,,,
-DESCRIPTION,"The Nordic nRF52840 is a ARM Cortex-M4 running at 64MHz with 256kB on-chip SRAM, 1MB of Flash memory and built in Bluetooth Low Energy and native USB. Any pin can be used for I2C/SPI/UART/I2S/PDM/etc peripheral usage. LS pins can interfere with radio reception when over 10 Khz, however they are not restricted from going faster. All GPIO is 3.3V in/out max unless otherwise stated. ",,,,,
+DESCRIPTION,"The Nordic nRF52840 is an ARM Cortex-M4 running at 64MHz with 256kB on-chip SRAM, 1MB of Flash memory and built-in Bluetooth Low Energy and native USB. Any pin can be used for I2C/SPI/UART/I2S/PDM/etc peripheral usage. LS pins can interfere with radio reception when over 10 Khz, however they are not restricted from going faster. All GPIO is 3.3V in/out max unless otherwise stated. ",,,,,
