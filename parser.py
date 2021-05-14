@@ -188,8 +188,10 @@ def get_connections(fzp, svg, substitute):
 
 def get_arduino_mapping(connections, variantfolder):
     global longest_arduinopin
+    if not variantfolder:
+        return connections
 
-    # only supporting nRF52 at this moment
+    # NRF52 board variant handler
     if "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
@@ -232,6 +234,7 @@ int main(void) {
    }
 }
 """)
+        outfilecpp.close()
 
         # ditto for the header file, copy it over, except remove all arduino headers
         varianth = open(variantfolder+"/"+"variant.h").readlines()
@@ -241,26 +244,134 @@ int main(void) {
             if "#include" in line:
                 continue
             outfileh.write(line)
-
-        outfilecpp.close()
         outfileh.close()
-        # now compile it!
-        compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
-        #print(compileit.stdout.read())
-        runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
-        arduinopins = runit.stdout.read().decode("utf-8")
-        print(arduinopins)
-        #exit()
-        for pinpair in arduinopins.split("\n"):
-            if not pinpair:
+
+    # SAMDxx board variant handler
+    if "samd" in variantfolder.lower():
+        # copy over the variant.cpp minus any includes
+
+        variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
+        outfilecpp = open("variant.cpp", "w")
+        # Add some new header text so we can compile the raw variant cpp/h without arduino BSP
+        outfilecpp.write("""
+#include <stdint.h>
+#include <stdio.h>
+#include "variant.h"
+#define OUTPUT 1
+#define INPUT 0
+#define HIGH 1
+#define LOW 0
+#define ledOff(x) (x)
+#define pinMode(x, y) (x)
+#define digitalWrite(x, y) (x)
+
+
+#define EXTERNAL_INT_NMI 32
+#define PIN_ATTR_PWM 0
+#define PIN_ATTR_ANALOG 0
+#define PIN_ATTR_DIGITAL 0
+#define PIO_SERCOM 0
+#define PIO_DIGITAL 0
+#define PIO_ANALOG 0
+#define PIO_SERCOM_ALT 0
+#define PIO_OUTPUT 0
+#define PIN_ATTR_TIMER 0        
+#define PIN_ATTR_TIMER_ALT 0        
+#define PIO_COM 0
+#define PORTA 0
+#define PORTB 1
+""")
+        for define in ("NOT_ON_TIMER", "NOT_ON_PWM", "No_ADC_Channel",
+                       "EXTERNAL_INT_NONE", "PIN_ATTR_NONE"):
+            outfilecpp.write("#define %s -1\n" % define)
+        for adc in range(0, 32):
+            outfilecpp.write("#define ADC_Channel%d %d\n" % (adc, adc))
+        for irq in range(0, 32):
+            outfilecpp.write("#define EXTERNAL_INT_%d %d\n" % (irq, irq))
+        for tcc0 in range(0, 8):
+            outfilecpp.write("#define PWM0_CH%d %d\n" % (tcc0, tcc0))
+            outfilecpp.write("#define TCC0_CH%d %d\n" % (tcc0, tcc0))
+        for tcc1 in range(0, 8):
+            outfilecpp.write("#define PWM1_CH%d %d\n" % (tcc1, tcc1))
+            outfilecpp.write("#define TCC1_CH%d %d\n" % (tcc1, tcc1))
+        for tcc2 in range(0, 2):
+            outfilecpp.write("#define PWM2_CH%d %d\n" % (tcc2, tcc2))
+            outfilecpp.write("#define TCC2_CH%d %d\n" % (tcc2, tcc2))
+        for tc3 in range(0, 2):
+            outfilecpp.write("#define PWM3_CH%d %d\n" % (tc3, tc3))
+            outfilecpp.write("#define TC3_CH%d %d\n" % (tc3, tc3))
+
+        outfilecpp.write("""
+typedef struct _PinDescription
+{
+  uint32_t       ulPort ;
+  uint32_t        ulPin ;
+  uint32_t        ulPinType ;
+  uint32_t        ulPinAttribute ;
+  uint32_t  ulADCChannelNumber ;
+  uint32_t     ulPWMChannel ;
+  uint32_t      ulTCChannel ;
+  uint32_t ulExtInt ;
+} PinDescription ;
+
+        """)
+        blocklist = ("#include", "extern", "apTCInstances", "IrqHandler", "Uart", "SERCOM ")
+        for line in variantcpp:
+            # cut out the arduino deps
+            if any([block in line for block in blocklist]):
                 continue
-            arduinopin, pinname = pinpair.split(", ")
-            for conn in (c for c in connections if c.get('pinname') == pinname):
-                if 'arduinopin' in conn:
-                    continue
-                conn['arduinopin'] = arduinopin
-            longest_arduinopin = max(longest_arduinopin, len(arduinopin))
-            #print(arduinopin, pinname, connection)
+            outfilecpp.write(line)
+
+        # here's the code that will actually print out the pin mapping as a CSV:
+        outfilecpp.write("""
+int main(void) {
+   for (uint32_t pin=0; pin<sizeof(g_APinDescription)/sizeof(PinDescription); pin++) {
+     uint8_t portnum = g_APinDescription[pin].ulPort;
+     uint8_t portpin = g_APinDescription[pin].ulPin;
+     printf("%d", pin);
+""")
+        for analog in range(0, 32):
+            outfilecpp.write("#ifdef PIN_A%d\n" % analog)
+            outfilecpp.write("     if (PIN_A%d == pin) printf(\"/A%d\");\n" % (analog, analog))
+            outfilecpp.write("#endif\n")
+        outfilecpp.write("""
+     printf(", P%c%02d\\n", 'A'+portnum, portpin);
+   }
+}
+""")
+        outfilecpp.close()
+
+        # ditto for the header file, copy it over, except remove all arduino headers
+        varianth = open(variantfolder+"/"+"variant.h").readlines()
+        outfileh = open("variant.h", "w")
+        outfileh.write("#include <stdint.h>\n")
+        blocklist = ("#include", "extern SERCOM", "extern Uart")
+        for line in varianth:
+            if any([block in line for block in blocklist]):
+                continue
+            outfileh.write(line)
+
+        outfileh.close()
+
+    time.sleep(1)
+    # now compile it!
+    compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+    #print(compileit.stdout.read())
+    runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
+    arduinopins = runit.stdout.read().decode("utf-8")
+    print(arduinopins)
+    #exit()
+    for pinpair in arduinopins.split("\n"):
+        if not pinpair:
+            continue
+        arduinopin, pinname = pinpair.split(", ")
+        for conn in (c for c in connections if c.get('pinname') == pinname):
+            if 'arduinopin' in conn:
+                continue
+            conn['arduinopin'] = arduinopin
+        longest_arduinopin = max(longest_arduinopin, len(arduinopin))
+        #print(arduinopin, pinname, connection)
+
     return connections
 
 def get_circuitpy_aliases(connections, circuitpydef):
@@ -429,6 +540,8 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
 
 
 def draw_pinlabels_svg(connections):
+    global arduino_in_use
+    
     dwg = svgwrite.Drawing(filename=str("pinlabels.svg"), profile='tiny', size=(100,100))
 
     # collect all muxstrings to calculate label widths:
