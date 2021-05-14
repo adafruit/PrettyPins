@@ -246,8 +246,6 @@ int main(void) {
         #print(compileit.stdout.read())
         runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
         arduinopins = runit.stdout.read().decode("utf-8")
-        print(arduinopins)
-        exit()
         for pinpair in arduinopins.split("\n"):
             if not pinpair:
                 continue
