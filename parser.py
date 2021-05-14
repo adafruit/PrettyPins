@@ -358,6 +358,7 @@ int main(void) {
     compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
     #print(compileit.stdout.read())
     runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
+    time.sleep(1)
     arduinopins = runit.stdout.read().decode("utf-8")
     print(arduinopins)
     #exit()
