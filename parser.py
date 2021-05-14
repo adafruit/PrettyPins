@@ -253,10 +253,8 @@ int main(void) {
             if not pinpair:
                 continue
             arduinopin, pinname = pinpair.split(", ")
-            connection = next((c for c in connections if c.get('pinname') == pinname), None)
-            if not connection:
-                continue
-            connection['arduinopin'] = arduinopin
+            for conn in (c for c in connections if c.get('pinname') == pinname):
+                conn['arduinopin'] = arduinopin
             longest_arduinopin = max(longest_arduinopin, len(arduinopin))
             #print(arduinopin, pinname, connection)
     return connections
@@ -528,10 +526,10 @@ def draw_pinlabels_svg(connections):
             label_type = 'GND'
         if name_label in ("EN", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
             label_type = 'Control'
-        if name_label in ('SCL', 'SCL1', 'SCL0') and conn['svgtype'] == 'ellipse':
+        if name_label in ('SCL', 'SCL1', 'SCL0') and conn.get('svgtype') == 'ellipse':
             # special stemma QT!
             label_type = 'QT_SCL'
-        if name_label in ('SDA', 'SDA1', 'SDA0') and conn['svgtype'] == 'ellipse':
+        if name_label in ('SDA', 'SDA1', 'SDA0') and conn.get('svgtype') == 'ellipse':
             # special stemma QT!
             label_type = 'QT_SDA'
 
