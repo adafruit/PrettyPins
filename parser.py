@@ -197,13 +197,16 @@ def get_arduino_mapping(connections, variantfolder):
         outfilecpp = open("variant.cpp", "w")
         # Add some new header text so we can compile the raw variant cpp/h without arduino BSP
         outfilecpp.write("""
-        #include <stdint.h>
-        #include <stdio.h>
-        #include "variant.h"
-        #define OUTPUT 1
-        #define INPUT 0
-        #define ledOff(x) (x)
-        #define pinMode(x, y) (x)
+#include <stdint.h>
+#include <stdio.h>
+#include "variant.h"
+#define OUTPUT 1
+#define INPUT 0
+#define HIGH 1
+#define LOW 0
+#define ledOff(x) (x)
+#define pinMode(x, y) (x)
+#define digitalWrite(x, y) (x)
 
         """)
         for line in variantcpp:
