@@ -249,11 +249,15 @@ int main(void) {
         #print(compileit.stdout.read())
         runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
         arduinopins = runit.stdout.read().decode("utf-8")
+        print(arduinopins)
+        #exit()
         for pinpair in arduinopins.split("\n"):
             if not pinpair:
                 continue
             arduinopin, pinname = pinpair.split(", ")
             for conn in (c for c in connections if c.get('pinname') == pinname):
+                if 'arduinopin' in conn:
+                    continue
                 conn['arduinopin'] = arduinopin
             longest_arduinopin = max(longest_arduinopin, len(arduinopin))
             #print(arduinopin, pinname, connection)
