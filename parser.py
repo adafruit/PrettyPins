@@ -214,14 +214,21 @@ def get_arduino_mapping(connections, variantfolder):
 
         # here's the code that will actually print out the pin mapping as a CSV:
         outfilecpp.write("""
-        int main(void) {
-           for (uint32_t pin=0; pin<sizeof(g_ADigitalPinMap)/4; pin++) {
-             uint8_t portnum = g_ADigitalPinMap[pin] / 32;
-             uint8_t portpin = g_ADigitalPinMap[pin] % 32;
-             printf("%d, P%d.%02d\\n", pin, portnum, portpin);
-           }
-        }
-        """)
+int main(void) {
+   for (uint32_t pin=0; pin<sizeof(g_ADigitalPinMap)/4; pin++) {
+     uint8_t portnum = g_ADigitalPinMap[pin] / 32;
+     uint8_t portpin = g_ADigitalPinMap[pin] % 32;
+     printf("%d", pin);
+""")
+        for analog in range(0, 32):
+            outfilecpp.write("#ifdef PIN_A%d\n" % analog)
+            outfilecpp.write("     if (PIN_A%d == pin) printf(\"/A%d\");\n" % (analog, analog))
+            outfilecpp.write("#endif\n")
+        outfilecpp.write("""
+     printf(", P%d.%02d\\n", portnum, portpin);
+   }
+}
+""")
 
         # ditto for the header file, copy it over, except remove all arduino headers
         varianth = open(variantfolder+"/"+"variant.h").readlines()
@@ -239,6 +246,8 @@ def get_arduino_mapping(connections, variantfolder):
         #print(compileit.stdout.read())
         runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
         arduinopins = runit.stdout.read().decode("utf-8")
+        print(arduinopins)
+        exit()
         for pinpair in arduinopins.split("\n"):
             if not pinpair:
                 continue
