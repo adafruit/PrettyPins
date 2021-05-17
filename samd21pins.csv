@@ -2,7 +2,7 @@ GPIO,INT,DAC/AREF,ADC,Touch,SERCOM,SERCOM Alt,Timer,Timer Alt,Special
 PA00,0,,,,,S1.0,TCC2[0],,
 PA01,1,,,,,S1.1,TCC2[1],,
 PA02,2,VOUT,AIN0,Y0,,,,,
-PA03,3,VREFA,,,,,,,
+PA03,3,VREFA,AIN1,Y1,,,,,
 PA04,4,VREFB,AIN4,Y2,,S0.0,TCC0[0],,
 PA05,5,,AIN5,Y3,,S0.1,TCC0[1],,
 PA06,6,,AIN6,Y4,,S0.2,TCC1[0],,
@@ -30,4 +30,4 @@ PA28,8,,,,,,,,
 PA30,10,,,,,S1.2,TCC1[0],,SWCLK
 ,,,,,,S1.3,TCC1[1],,SWDIO
 ,,,,,,,,,
-DESCRIPTION,The Raspberry Pi RP2040 is a dual ARM Cortex-M0+ running at up to 133MHz with 264kB on-chip SRAM and built in USB. Flash memory is provided by external QSPI chip. All GPIO is 3.3V in/out max unless otherwise stated. ,,,,,,,,,,
+DESCRIPTION,The Raspberry Pi RP2040 is a dual ARM Cortex-M0+ running at up to 133MHz with 264kB on-chip SRAM and built in USB. Flash memory is provided by external QSPI chip. All GPIO is 3.3V in/out max unless otherwise stated. ,,,,,,,,
