@@ -83,15 +83,15 @@ palette = (
 # CSV (e.g. brown isn't very appealing). For future ref, if more than 9
 # muxes become necessary, maybe repeat the sequence but add a box outline?
 chroma = (
-    12, # Brown
-    13, # Orange
     15, # Yellow
     14, # Green
     3,  # Teal
     10, # Cyan
     9,  # Light blue
     8,  # Purple
-    5)  # Light Pink
+    5,  # Light Pink
+    12, # Brown
+    13) # Orange (after this, list repeats but adds box outline)
 # NOT in this list, but still distinct and available for other uses, are
 # #1 (black, used for ground), #11 (dark red, used for power), #6 (dark
 # purple, used for control), #2 (dark teal, used for Arduino pin name), #7
@@ -473,7 +473,9 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
     else: # label_type IS NOT in themes, must be a muxed pin.
         # Switch to chromatic color scheme based on index of label_type
         # in the CSV pinmuxes header.
-        box_fill = palette[chroma[pinmuxes.index(label_type)]]
+        box_fill = palette[chroma[pinmuxes.index(label_type) % len(chroma)]]
+        if pinmuxes.index(label_type) >= len(chroma):
+            box_outline = 'auto' # Repeating color sequence, add outline
 
     if (box_fill == 'black'):
         text_color = 'white'
@@ -615,9 +617,9 @@ def draw_pinlabels_svg(connections):
         g = dwg.g()     # Create group for connection
         group.append(g) # Add to list
         if conn['location'] in ('top', 'right', 'unknown'):
-            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'))
         if conn['location'] in ('bottom', 'left'):
-            g.add(dwg.line(start=(6 * BOX_WIDTH_PER_CHAR + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(6 * BOX_WIDTH_PER_CHAR + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'))
 
     # pick out each connection
     group_index = 0 # Only increments on non-None connections, unlike enum
@@ -701,14 +703,13 @@ def draw_pinlabels_svg(connections):
                     label_type = 'UART'
                 elif mux == 'PWM':  # PWM's
                     label_type = 'PWM'
-                elif mux == 'Touch':  # touch capable
+                elif mux in('Touch', 'TOUCH'):  # touch capable
                     label_type = 'Touch'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
                 elif mux == 'Other':
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
-                    #label_type = 'Power'
                     label_type = 'Power Domain'
                 elif mux == 'High Speed':
                     label_type = 'High Speed'
@@ -716,8 +717,20 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Low Speed'
                 elif mux == 'Speed':
                     label_type = 'Speed'
-                elif mux == 'Special':
+                elif mux in('Special', 'SPECIAL'):
                     label_type = 'Special'
+                elif mux == 'INT':
+                    label_type = 'Interrupt'
+                elif mux == 'DAC/AREF':
+                    label_type = 'DAC/AREF'
+                elif mux == 'SERCOM':
+                    label_type = 'SERCOM'
+                elif mux == 'SERCOM Alt':
+                    label_type = 'SERCOM Alt'
+                elif mux == 'Timer':
+                    label_type = 'Timer'
+                elif mux == 'Timer Alt':
+                    label_type = 'Timer Alt'
                 else:
                     continue
 
