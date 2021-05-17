@@ -30,4 +30,4 @@ PA28,8,,,,,,,,
 PA30,10,,,,,S1.2,TCC1[0],,SWCLK
 ,,,,,,S1.3,TCC1[1],,SWDIO
 ,,,,,,,,,
-DESCRIPTION,The Raspberry Pi RP2040 is a dual ARM Cortex-M0+ running at up to 133MHz with 264kB on-chip SRAM and built in USB. Flash memory is provided by external QSPI chip. All GPIO is 3.3V in/out max unless otherwise stated. ,,,,,,,,
+DESCRIPTION,"The Microchip (nee Atmel) SAMD21 is an ARM Cortex-M0+ running at 48 MHz with 32kB on-chip SRAM, 256KB Flash memory and built in USB. All GPIO is 3.3V in/out max unless otherwise stated. SERCOMs can be used as UART (TX on SERCOM pad 0 or 2, RX on any pad), I2C (SDA on pad 0, SCL on pad 1), or SPI (SCK on pad 1 or 3, MOSI on pad 0 or 3 (SCK on pad 1) or pad 0 or 2 (SCK on pad 3), MISO on any pad remaining) ",,,,,,,,
