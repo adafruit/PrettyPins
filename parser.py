@@ -336,7 +336,7 @@ int main(void) {
 """)
         for analog in range(0, 32):
             outfilecpp.write("#ifdef PIN_A%d\n" % analog)
-            outfilecpp.write("     if (PIN_A%d == pin) printf(\"/A%d\");\n" % (analog, analog))
+            outfilecpp.write("      if ((PIN_A%d == pin) || ((g_APinDescription[PIN_A%d].ulPort == portnum) && (g_APinDescription[PIN_A%d].ulPin == portpin))) printf(\"/A%d\");\n" % (analog, analog, analog, analog))
             outfilecpp.write("#endif\n")
         outfilecpp.write("""
      printf(", P%c%02d\\n", 'A'+portnum, portpin);
