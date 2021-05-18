@@ -275,11 +275,15 @@ int main(void) {
 #define PIO_ANALOG 0
 #define PIO_SERCOM_ALT 0
 #define PIO_OUTPUT 0
+#define PIO_TIMER 0
+#define PIO_TIMER_ALT 0
+#define PIO_PWM 0
 #define PIN_ATTR_TIMER 0        
 #define PIN_ATTR_TIMER_ALT 0        
 #define PIO_COM 0
 #define PORTA 0
 #define PORTB 1
+#define DAC_Channel0 0
 """)
         for define in ("NOT_ON_TIMER", "NOT_ON_PWM", "No_ADC_Channel",
                        "EXTERNAL_INT_NONE", "PIN_ATTR_NONE"):
@@ -288,18 +292,18 @@ int main(void) {
             outfilecpp.write("#define ADC_Channel%d %d\n" % (adc, adc))
         for irq in range(0, 32):
             outfilecpp.write("#define EXTERNAL_INT_%d %d\n" % (irq, irq))
-        for tcc0 in range(0, 8):
-            outfilecpp.write("#define PWM0_CH%d %d\n" % (tcc0, tcc0))
-            outfilecpp.write("#define TCC0_CH%d %d\n" % (tcc0, tcc0))
-        for tcc1 in range(0, 8):
-            outfilecpp.write("#define PWM1_CH%d %d\n" % (tcc1, tcc1))
-            outfilecpp.write("#define TCC1_CH%d %d\n" % (tcc1, tcc1))
-        for tcc2 in range(0, 2):
-            outfilecpp.write("#define PWM2_CH%d %d\n" % (tcc2, tcc2))
-            outfilecpp.write("#define TCC2_CH%d %d\n" % (tcc2, tcc2))
-        for tc3 in range(0, 2):
-            outfilecpp.write("#define PWM3_CH%d %d\n" % (tc3, tc3))
-            outfilecpp.write("#define TC3_CH%d %d\n" % (tc3, tc3))
+        for tcc in range(0, 8):
+            outfilecpp.write("#define PWM0_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define TCC0_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define PWM1_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define TCC1_CH%d %d\n" % (tcc, tcc))
+        for tc in range(0, 2):
+            outfilecpp.write("#define PWM2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TCC2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define PWM3_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC3_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define PWM4_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC4_CH%d %d\n" % (tc, tc))
 
         outfilecpp.write("""
 typedef struct _PinDescription
@@ -550,7 +554,7 @@ def draw_pinlabels_svg(connections):
     # collect all muxstrings to calculate label widths:
     muxstringlen = {}
     for i, conn in enumerate(connections):
-        if not 'mux' in conn:
+        if not conn.get('mux'):
             continue
         for mux in conn['mux']:
             if not mux in muxstringlen:
@@ -597,7 +601,7 @@ def draw_pinlabels_svg(connections):
                 last_used_x = box_x
             last_used_w = box_w
 
-        if 'mux' in conn: # power pins don't have muxing, its cool!
+        if conn.get('mux'): # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
                 # Increment box_x regardless to maintain mux columns.
@@ -679,7 +683,7 @@ def draw_pinlabels_svg(connections):
                 box_x += box_w
             arduino_in_use = True
 
-        if 'mux' in conn: # power pins don't have muxing, its cool!
+        if conn.get('mux'): # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 label = conn['mux'][mux] # Label (if any) for this pin/mux
                 if muxstringlen[mux]:    # Typical label length for this mux
