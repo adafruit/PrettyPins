@@ -83,15 +83,15 @@ palette = (
 # CSV (e.g. brown isn't very appealing). For future ref, if more than 9
 # muxes become necessary, maybe repeat the sequence but add a box outline?
 chroma = (
-    12, # Brown
-    13, # Orange
     15, # Yellow
     14, # Green
     3,  # Teal
     10, # Cyan
     9,  # Light blue
     8,  # Purple
-    5)  # Light Pink
+    5,  # Light Pink
+    12, # Brown
+    13) # Orange (after this, list repeats but adds box outline)
 # NOT in this list, but still distinct and available for other uses, are
 # #1 (black, used for ground), #11 (dark red, used for power), #6 (dark
 # purple, used for control), #2 (dark teal, used for Arduino pin name), #7
@@ -188,8 +188,10 @@ def get_connections(fzp, svg, substitute):
 
 def get_arduino_mapping(connections, variantfolder):
     global longest_arduinopin
+    if not variantfolder:
+        return connections
 
-    # only supporting nRF52 at this moment
+    # NRF52 board variant handler
     if "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
@@ -197,13 +199,16 @@ def get_arduino_mapping(connections, variantfolder):
         outfilecpp = open("variant.cpp", "w")
         # Add some new header text so we can compile the raw variant cpp/h without arduino BSP
         outfilecpp.write("""
-        #include <stdint.h>
-        #include <stdio.h>
-        #include "variant.h"
-        #define OUTPUT 1
-        #define INPUT 0
-        #define ledOff(x) (x)
-        #define pinMode(x, y) (x)
+#include <stdint.h>
+#include <stdio.h>
+#include "variant.h"
+#define OUTPUT 1
+#define INPUT 0
+#define HIGH 1
+#define LOW 0
+#define ledOff(x) (x)
+#define pinMode(x, y) (x)
+#define digitalWrite(x, y) (x)
 
         """)
         for line in variantcpp:
@@ -214,14 +219,22 @@ def get_arduino_mapping(connections, variantfolder):
 
         # here's the code that will actually print out the pin mapping as a CSV:
         outfilecpp.write("""
-        int main(void) {
-           for (uint32_t pin=0; pin<sizeof(g_ADigitalPinMap)/4; pin++) {
-             uint8_t portnum = g_ADigitalPinMap[pin] / 32;
-             uint8_t portpin = g_ADigitalPinMap[pin] % 32;
-             printf("%d, P%d.%02d\\n", pin, portnum, portpin);
-           }
-        }
-        """)
+int main(void) {
+   for (uint32_t pin=0; pin<sizeof(g_ADigitalPinMap)/4; pin++) {
+     uint8_t portnum = g_ADigitalPinMap[pin] / 32;
+     uint8_t portpin = g_ADigitalPinMap[pin] % 32;
+     printf("%d", pin);
+""")
+        for analog in range(0, 32):
+            outfilecpp.write("#ifdef PIN_A%d\n" % analog)
+            outfilecpp.write("     if (PIN_A%d == pin) printf(\"/A%d\");\n" % (analog, analog))
+            outfilecpp.write("#endif\n")
+        outfilecpp.write("""
+     printf(", P%d.%02d\\n", portnum, portpin);
+   }
+}
+""")
+        outfilecpp.close()
 
         # ditto for the header file, copy it over, except remove all arduino headers
         varianth = open(variantfolder+"/"+"variant.h").readlines()
@@ -231,24 +244,139 @@ def get_arduino_mapping(connections, variantfolder):
             if "#include" in line:
                 continue
             outfileh.write(line)
-
-        outfilecpp.close()
         outfileh.close()
-        # now compile it!
-        compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
-        #print(compileit.stdout.read())
-        runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
-        arduinopins = runit.stdout.read().decode("utf-8")
-        for pinpair in arduinopins.split("\n"):
-            if not pinpair:
+
+    # SAMDxx board variant handler
+    if "samd" in variantfolder.lower():
+        # copy over the variant.cpp minus any includes
+
+        variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
+        outfilecpp = open("variant.cpp", "w")
+        # Add some new header text so we can compile the raw variant cpp/h without arduino BSP
+        outfilecpp.write("""
+#include <stdint.h>
+#include <stdio.h>
+#include "variant.h"
+#define OUTPUT 1
+#define INPUT 0
+#define HIGH 1
+#define LOW 0
+#define ledOff(x) (x)
+#define pinMode(x, y) (x)
+#define digitalWrite(x, y) (x)
+
+
+#define EXTERNAL_INT_NMI 32
+#define PIN_ATTR_PWM 0
+#define PIN_ATTR_ANALOG 0
+#define PIN_ATTR_DIGITAL 0
+#define PIO_SERCOM 0
+#define PIO_DIGITAL 0
+#define PIO_ANALOG 0
+#define PIO_SERCOM_ALT 0
+#define PIO_OUTPUT 0
+#define PIO_TIMER 0
+#define PIO_TIMER_ALT 0
+#define PIO_PWM 0
+#define PIN_ATTR_TIMER 0        
+#define PIN_ATTR_TIMER_ALT 0        
+#define PIO_COM 0
+#define PORTA 0
+#define PORTB 1
+#define DAC_Channel0 0
+""")
+        for define in ("NOT_ON_TIMER", "NOT_ON_PWM", "No_ADC_Channel",
+                       "EXTERNAL_INT_NONE", "PIN_ATTR_NONE"):
+            outfilecpp.write("#define %s -1\n" % define)
+        for adc in range(0, 32):
+            outfilecpp.write("#define ADC_Channel%d %d\n" % (adc, adc))
+        for irq in range(0, 32):
+            outfilecpp.write("#define EXTERNAL_INT_%d %d\n" % (irq, irq))
+        for tcc in range(0, 8):
+            outfilecpp.write("#define PWM0_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define TCC0_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define PWM1_CH%d %d\n" % (tcc, tcc))
+            outfilecpp.write("#define TCC1_CH%d %d\n" % (tcc, tcc))
+        for tc in range(0, 2):
+            outfilecpp.write("#define PWM2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TCC2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define PWM3_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC3_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define PWM4_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC4_CH%d %d\n" % (tc, tc))
+
+        outfilecpp.write("""
+typedef struct _PinDescription
+{
+  uint32_t       ulPort ;
+  uint32_t        ulPin ;
+  uint32_t        ulPinType ;
+  uint32_t        ulPinAttribute ;
+  uint32_t  ulADCChannelNumber ;
+  uint32_t     ulPWMChannel ;
+  uint32_t      ulTCChannel ;
+  uint32_t ulExtInt ;
+} PinDescription ;
+
+        """)
+        blocklist = ("#include", "extern", "apTCInstances", "IrqHandler", "Uart", "SERCOM ")
+        for line in variantcpp:
+            # cut out the arduino deps
+            if any([block in line for block in blocklist]):
                 continue
-            arduinopin, pinname = pinpair.split(", ")
-            connection = next((c for c in connections if c.get('pinname') == pinname), None)
-            if not connection:
+            outfilecpp.write(line)
+
+        # here's the code that will actually print out the pin mapping as a CSV:
+        outfilecpp.write("""
+int main(void) {
+   for (uint32_t pin=0; pin<sizeof(g_APinDescription)/sizeof(PinDescription); pin++) {
+     uint8_t portnum = g_APinDescription[pin].ulPort;
+     uint8_t portpin = g_APinDescription[pin].ulPin;
+     printf("%d", pin);
+""")
+        for analog in range(0, 32):
+            outfilecpp.write("#ifdef PIN_A%d\n" % analog)
+            outfilecpp.write("      if ((PIN_A%d == pin) || ((g_APinDescription[PIN_A%d].ulPort == portnum) && (g_APinDescription[PIN_A%d].ulPin == portpin))) printf(\"/A%d\");\n" % (analog, analog, analog, analog))
+            outfilecpp.write("#endif\n")
+        outfilecpp.write("""
+     printf(", P%c%02d\\n", 'A'+portnum, portpin);
+   }
+}
+""")
+        outfilecpp.close()
+
+        # ditto for the header file, copy it over, except remove all arduino headers
+        varianth = open(variantfolder+"/"+"variant.h").readlines()
+        outfileh = open("variant.h", "w")
+        outfileh.write("#include <stdint.h>\n")
+        blocklist = ("#include", "extern SERCOM", "extern Uart")
+        for line in varianth:
+            if any([block in line for block in blocklist]):
                 continue
-            connection['arduinopin'] = arduinopin
-            longest_arduinopin = max(longest_arduinopin, len(arduinopin))
-            #print(arduinopin, pinname, connection)
+            outfileh.write(line)
+
+        outfileh.close()
+
+    time.sleep(1)
+    # now compile it!
+    compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+    #print(compileit.stdout.read())
+    runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
+    time.sleep(1)
+    arduinopins = runit.stdout.read().decode("utf-8")
+    print(arduinopins)
+    #exit()
+    for pinpair in arduinopins.split("\n"):
+        if not pinpair:
+            continue
+        arduinopin, pinname = pinpair.split(", ")
+        for conn in (c for c in connections if c.get('pinname') == pinname):
+            if 'arduinopin' in conn:
+                continue
+            conn['arduinopin'] = arduinopin
+        longest_arduinopin = max(longest_arduinopin, len(arduinopin))
+        #print(arduinopin, pinname, connection)
+
     return connections
 
 def get_circuitpy_aliases(connections, circuitpydef):
@@ -349,7 +477,9 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
     else: # label_type IS NOT in themes, must be a muxed pin.
         # Switch to chromatic color scheme based on index of label_type
         # in the CSV pinmuxes header.
-        box_fill = palette[chroma[pinmuxes.index(label_type)]]
+        box_fill = palette[chroma[pinmuxes.index(label_type) % len(chroma)]]
+        if pinmuxes.index(label_type) >= len(chroma):
+            box_outline = 'auto' # Repeating color sequence, add outline
 
     if (box_fill == 'black'):
         text_color = 'white'
@@ -417,12 +547,14 @@ def draw_label(dwg, group, label_text, label_type, box_x, box_y, box_w, box_h):
 
 
 def draw_pinlabels_svg(connections):
+    global arduino_in_use
+    
     dwg = svgwrite.Drawing(filename=str("pinlabels.svg"), profile='tiny', size=(100,100))
 
     # collect all muxstrings to calculate label widths:
     muxstringlen = {}
     for i, conn in enumerate(connections):
-        if not 'mux' in conn:
+        if not conn.get('mux'):
             continue
         for mux in conn['mux']:
             if not mux in muxstringlen:
@@ -469,7 +601,7 @@ def draw_pinlabels_svg(connections):
                 last_used_x = box_x
             last_used_w = box_w
 
-        if 'mux' in conn: # power pins don't have muxing, its cool!
+        if conn.get('mux'): # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 box_w = (muxstringlen[mux]+1) * BOX_WIDTH_PER_CHAR
                 # Increment box_x regardless to maintain mux columns.
@@ -489,9 +621,9 @@ def draw_pinlabels_svg(connections):
         g = dwg.g()     # Create group for connection
         group.append(g) # Add to list
         if conn['location'] in ('top', 'right', 'unknown'):
-            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(-4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'))
         if conn['location'] in ('bottom', 'left'):
-            g.add(dwg.line(start=(6 * BOX_WIDTH_PER_CHAR + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'));
+            g.add(dwg.line(start=(6 * BOX_WIDTH_PER_CHAR + 4, line_y), end=(last_used_x + last_used_w * 0.5, line_y), stroke=ROW_STROKE_COLOR, stroke_width = ROW_STROKE_WIDTH, stroke_linecap='round'))
 
     # pick out each connection
     group_index = 0 # Only increments on non-None connections, unlike enum
@@ -518,10 +650,10 @@ def draw_pinlabels_svg(connections):
             label_type = 'GND'
         if name_label in ("EN", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
             label_type = 'Control'
-        if name_label in ('SCL', 'SCL1', 'SCL0') and conn['svgtype'] == 'ellipse':
+        if name_label in ('SCL', 'SCL1', 'SCL0') and conn.get('svgtype') == 'ellipse':
             # special stemma QT!
             label_type = 'QT_SCL'
-        if name_label in ('SDA', 'SDA1', 'SDA0') and conn['svgtype'] == 'ellipse':
+        if name_label in ('SDA', 'SDA1', 'SDA0') and conn.get('svgtype') == 'ellipse':
             # special stemma QT!
             label_type = 'QT_SDA'
 
@@ -551,7 +683,7 @@ def draw_pinlabels_svg(connections):
                 box_x += box_w
             arduino_in_use = True
 
-        if 'mux' in conn: # power pins don't have muxing, its cool!
+        if conn.get('mux'): # power pins don't have muxing, its cool!
             for mux in conn['mux']:
                 label = conn['mux'][mux] # Label (if any) for this pin/mux
                 if muxstringlen[mux]:    # Typical label length for this mux
@@ -575,14 +707,13 @@ def draw_pinlabels_svg(connections):
                     label_type = 'UART'
                 elif mux == 'PWM':  # PWM's
                     label_type = 'PWM'
-                elif mux == 'Touch':  # touch capable
+                elif mux in('Touch', 'TOUCH'):  # touch capable
                     label_type = 'Touch'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
                 elif mux == 'Other':
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
-                    #label_type = 'Power'
                     label_type = 'Power Domain'
                 elif mux == 'High Speed':
                     label_type = 'High Speed'
@@ -590,8 +721,20 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Low Speed'
                 elif mux == 'Speed':
                     label_type = 'Speed'
-                elif mux == 'Special':
+                elif mux in('Special', 'SPECIAL'):
                     label_type = 'Special'
+                elif mux == 'INT':
+                    label_type = 'Interrupt'
+                elif mux == 'DAC/AREF':
+                    label_type = 'DAC/AREF'
+                elif mux == 'SERCOM':
+                    label_type = 'SERCOM'
+                elif mux == 'SERCOM Alt':
+                    label_type = 'SERCOM Alt'
+                elif mux == 'Timer':
+                    label_type = 'Timer'
+                elif mux == 'Timer Alt':
+                    label_type = 'Timer Alt'
                 else:
                     continue
 
