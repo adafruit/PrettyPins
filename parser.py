@@ -116,6 +116,7 @@ themes = [
 conn_renames = [('!RESET', 'RESET'),
                 ('D5_5V', 'D5'),
                 ('+3V3', '3.3V'),
+                ('3V3', '3.3V'),
                 ('+5V', '5V')
                 ]
 product_url = None
