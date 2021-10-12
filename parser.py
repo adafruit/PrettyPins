@@ -192,6 +192,33 @@ def get_arduino_mapping(connections, variantfolder):
     if not variantfolder:
         return connections
 
+    # special case of very early chips
+    if "atmega328" in variantfolder:
+        pinmap = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
+                  "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
+                  "PC0", "PC1", "PC2", "PC3", "PC4", "PC5"]
+
+        for conn in connections:
+            print(conn['name'])
+            # digital pins
+            matches = re.match(r'(IO|D)([0-9]+)', conn['name'])
+            if matches:
+                digitalname = matches.group(2)
+                conn['pinname'] = pinmap[int(digitalname)]
+                conn['arduinopin'] = digitalname
+                longest_arduinopin = max(longest_arduinopin, len(digitalname))
+            # analog pins
+            matches = re.match(r'(AD)([0-9]+)', conn['name'])
+            if matches:
+                analogname = matches.group(2)
+                digitalname = str(14 + int(analogname))
+                conn['pinname'] = pinmap[int(digitalname)]
+                conn['arduinopin'] = digitalname
+                longest_arduinopin = max(longest_arduinopin, len(digitalname))
+
+        #print(connections)
+        return connections
+        
     # NRF52 board variant handler
     if "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
@@ -365,7 +392,7 @@ int main(void) {
     runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
     time.sleep(1)
     arduinopins = runit.stdout.read().decode("utf-8")
-    print(arduinopins)
+    #print(arduinopins)
     #exit()
     for pinpair in arduinopins.split("\n"):
         if not pinpair:
@@ -879,11 +906,16 @@ def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
 
     # find the 'true' GPIO pin names via the circuitpython file
     # e.g. "MISO" and "D2" map to "GPIO03" or "P0.04"
-    connections = get_circuitpy_aliases(connections, circuitpydef)
+    if circuitpydef != "None":
+        connections = get_circuitpy_aliases(connections, circuitpydef)
 
     # find the mapping between gpio pins and arduino pins
+    # atmega 328's dont have a mapping
+    if not arduinovariantfolder and pinoutcsv == "atmega328pins.csv":
+        arduinovariantfolder = "atmega328"
     connections = get_arduino_mapping(connections, arduinovariantfolder)
-
+    #print(connections)
+    
     # open and parse the pinout mapper CSV
     pinarray = get_chip_pinout(connections, pinoutcsv)
     #print(pinarray)
@@ -942,7 +974,9 @@ def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
         if not 'pinname' in conn:
             continue
         # find muxes next
+
         muxes = next((pin for pin in pinarray if pin['GPIO'] == conn['pinname']), None)
+        #print("***", muxes)
         conn['mux'] = muxes
     draw_pinlabels_svg(connections)
     
