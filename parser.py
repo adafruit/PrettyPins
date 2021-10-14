@@ -193,7 +193,8 @@ def get_arduino_mapping(connections, variantfolder):
         return connections
 
     # special case of very early chips
-    if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder):
+    if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder) or ("attiny8x" in variantfolder):
+        pinmap8x = ["PB0", "PB1", "PB2", "PB3", "PB4"]
         pinmap328 = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
                      "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
                      "PC0", "PC1", "PC2", "PC3", "PC4", "PC5"]
@@ -208,6 +209,9 @@ def get_arduino_mapping(connections, variantfolder):
                             "A0" : "PF7", "A1" : "PF6", "A2" : "PF5",
                             "A3" : "PF4", "A4" : "PF1", "A5" : "PF0" }
         
+        if "attiny8x" in variantfolder:
+            pinmap = pinmap8x
+            specialnames = None
         if "atmega328" in variantfolder:
             pinmap = pinmap328
             specialnames = specialnames328
@@ -929,6 +933,8 @@ def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
         arduinovariantfolder = "atmega328"
     if not arduinovariantfolder and pinoutcsv == "atmega32u4pins.csv":
         arduinovariantfolder = "atmega32u4"
+    if not arduinovariantfolder and pinoutcsv == "attiny8xpins.csv":
+        arduinovariantfolder = "attiny8x"
     connections = get_arduino_mapping(connections, arduinovariantfolder)
     #print(connections)
     
