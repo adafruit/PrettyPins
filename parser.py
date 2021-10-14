@@ -193,29 +193,43 @@ def get_arduino_mapping(connections, variantfolder):
         return connections
 
     # special case of very early chips
-    if "atmega328" in variantfolder:
-        pinmap = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
-                  "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
-                  "PC0", "PC1", "PC2", "PC3", "PC4", "PC5"]
-
+    if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder):
+        pinmap328 = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
+                     "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
+                     "PC0", "PC1", "PC2", "PC3", "PC4", "PC5"]
+        specialnames328 = {"A0" : "PC0", "A1" : "PC1", "A2" : "PC2",
+                           "A3" : "PC3", "A4" : "PC4", "A5" : "PC5" }
+        pinmap32u4 = ["PD2", "PD3", "PD1", "PD0", "PD4", "PC6", "PD7", "PE6",
+                      "PB4", "PB5", "PB6", "PB7", "PD6", "PC7",
+                      "PB3", "PB1", "PB2", "PB0",
+                      "PF7", "PF6", "PF5", "PF4", "PF1", "PF0"]
+        specialnames32u4 = {"SDA" : "PD1", "SCL" : "PD0",
+                            "MISO" : "PB3", "SCK" : "PB1", "MOSI" : "PB2",
+                            "A0" : "PF7", "A1" : "PF6", "A2" : "PF5",
+                            "A3" : "PF4", "A4" : "PF1", "A5" : "PF0" }
+        
+        if "atmega328" in variantfolder:
+            pinmap = pinmap328
+            specialnames = specialnames328
+        if "atmega32u4" in variantfolder:
+            pinmap = pinmap32u4
+            specialnames = specialnames32u4
+            
         for conn in connections:
             print(conn['name'])
             # digital pins
             matches = re.match(r'(IO|D)([0-9]+)', conn['name'])
             if matches:
+                #print(matches)
                 digitalname = matches.group(2)
                 conn['pinname'] = pinmap[int(digitalname)]
                 conn['arduinopin'] = digitalname
                 longest_arduinopin = max(longest_arduinopin, len(digitalname))
-            # analog pins
-            matches = re.match(r'(AD)([0-9]+)', conn['name'])
-            if matches:
-                analogname = matches.group(2)
-                digitalname = str(14 + int(analogname))
-                conn['pinname'] = pinmap[int(digitalname)]
-                conn['arduinopin'] = digitalname
-                longest_arduinopin = max(longest_arduinopin, len(digitalname))
-
+            # other pins :/
+            if specialnames:
+                if conn['name'] in specialnames:
+                    conn['pinname'] = specialnames[conn['name']]
+                    conn['arduinopin'] = pinmap.index(conn['pinname'])
         #print(connections)
         return connections
         
@@ -672,11 +686,11 @@ def draw_pinlabels_svg(connections):
         # clean up some names!
 
         label_type = 'CircuitPython Name'
-        if name_label in ("3.3V", "VHIGH", "VIN", "5V", "VBAT", "VBUS", "VHI"):
+        if name_label in ("3.3V", "VMAX", "VHIGH", "VIN", "5V", "VBAT", "VBUS", "VHI"):
             label_type = 'Power'
         if name_label in ("GND"):
             label_type = 'GND'
-        if name_label in ("EN", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
+        if name_label in ("EN", "RST", "RESET", "SWCLK", "SWC", "SWDIO", "SWD"):
             label_type = 'Control'
         if name_label in ('SCL', 'SCL1', 'SCL0') and conn.get('svgtype') == 'ellipse':
             # special stemma QT!
@@ -765,7 +779,7 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Timer Alt'
                 else:
                     continue
-
+                
                 # Here, labels are chromatic mux items, not in themes
                 if conn['location'] in ('top', 'right', 'unknown'):
                     # Draw-and-increment
@@ -910,9 +924,11 @@ def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
         connections = get_circuitpy_aliases(connections, circuitpydef)
 
     # find the mapping between gpio pins and arduino pins
-    # atmega 328's dont have a mapping
+    # atmega 328's/32u4 dont have a mapping
     if not arduinovariantfolder and pinoutcsv == "atmega328pins.csv":
         arduinovariantfolder = "atmega328"
+    if not arduinovariantfolder and pinoutcsv == "atmega32u4pins.csv":
+        arduinovariantfolder = "atmega32u4"
     connections = get_arduino_mapping(connections, arduinovariantfolder)
     #print(connections)
     
