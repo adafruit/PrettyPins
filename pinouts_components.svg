@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="1280px" height="1024px" viewBox="0 0 1280 1024" enable-background="new 0 0 1280 1024" xml:space="preserve">
+	 width="1280px" height="1024px" viewBox="0 0 1280 1024" style="enable-background:new 0 0 1280 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#8C8C8C;stroke-width:0.7087;stroke-linecap:round;}
+	.st1{fill:#920000;}
+	.st2{fill:#FFFFFF;}
+	.st3{font-family:'CourierNewPS-BoldMT';}
+	.st4{font-size:6px;}
+	.st5{fill:#FFFF6D;}
+	.st6{fill:#006DDB;}
+	.st7{fill:#DCDCDC;}
+	.st8{fill:#1E1E1E;}
+	.st9{fill:#B4B4B4;}
+	.st10{fill:none;stroke:#0000FF;stroke-width:0.7087;stroke-linecap:round;}
+	.st11{fill:none;stroke:#FFFF00;stroke-width:0.7087;stroke-linecap:round;}
+	.st12{fill:none;stroke:#000000;stroke-width:0.7087;stroke-linecap:round;}
+	.st13{fill:none;stroke:#FF0000;stroke-width:0.7087;stroke-linecap:round;}
+	.st14{fill:#FFFF00;}
+	.st15{fill:#0000FF;}
+	.st16{fill:#333333;stroke:#333333;stroke-width:0.2877;stroke-miterlimit:3.8362;}
+	.st17{fill:#666666;}
+	.st18{fill:none;stroke:#FF0000;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st19{fill:none;stroke:#000000;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st20{fill:none;stroke:#FFFF00;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st21{fill:none;stroke:#0000FF;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+</style>
 <g>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="35" y1="46.9" x2="59" y2="46.9"/>
-	<path fill="#920000" d="M49.9,43.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1V45
+	<line class="st0" x1="35" y1="46.9" x2="59" y2="46.9"/>
+	<path class="st1" d="M49.9,43.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1V45
 		C48.8,44.3,49.3,43.8,49.9,43.8z"/>
-	<text transform="matrix(1 0 0 1 51.8051 48.6211)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="44.2" y1="32.5" x2="59" y2="32.5"/>
-	<path fill="#FFFF6D" d="M49.9,29.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 51.8051 48.6211)" class="st2 st3 st4">3.3V</text>
+	<line class="st0" x1="44.2" y1="32.5" x2="59" y2="32.5"/>
+	<path class="st5" d="M49.9,29.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.7,30,49.2,29.5,49.9,29.5z"/>
-	<text transform="matrix(1 0 0 1 53.5721 34.2982)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="39.6" y1="39.7" x2="59" y2="39.7"/>
-	<path fill="#006DDB" d="M49.9,36.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 53.5721 34.2982)" class="st3 st4">SCL</text>
+	<line class="st0" x1="39.6" y1="39.7" x2="59" y2="39.7"/>
+	<path class="st6" d="M49.9,36.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.7,37.2,49.2,36.7,49.9,36.7z"/>
-	<text transform="matrix(1 0 0 1 53.5721 41.4981)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="30.5" y1="54" x2="59" y2="54"/>
+	<text transform="matrix(1 0 0 1 53.5721 41.4981)" class="st2 st3 st4">SDA</text>
+	<line class="st0" x1="30.5" y1="54" x2="59" y2="54"/>
 	<path d="M49.9,51h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.8,51.5,49.3,51,49.9,51z"/>
-	<text transform="matrix(1 0 0 1 53.6053 55.744)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="35" y1="46.9" x2="35.1" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="30.5" y1="53.8" x2="30.5" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="39.6" y1="39.7" x2="39.6" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="44.1" y1="32.5" x2="44.1" y2="26.4"/>
+	<text transform="matrix(1 0 0 1 53.6053 55.744)" class="st2 st3 st4">GND</text>
+	<line class="st0" x1="35" y1="46.9" x2="35.1" y2="26.4"/>
+	<line class="st0" x1="30.5" y1="53.8" x2="30.5" y2="26.4"/>
+	<line class="st0" x1="39.6" y1="39.7" x2="39.6" y2="26.4"/>
+	<line class="st0" x1="44.1" y1="32.5" x2="44.1" y2="26.4"/>
 </g>
 <g id="g18467" transform="translate(4.4999716,-4.9999826)">
 </g>
@@ -31,139 +55,160 @@
 </desc>
 <desc>Fritzing breadboard generated by brd2svg</desc>
 <g>
-	<path fill="#DCDCDC" d="M184.9,27.1v-0.2c-0.2,0-0.4,0-0.6,0c-0.3,0-0.5,0-0.8-0.1v0.3h-3.1v-0.3c-0.2,0-0.4,0-0.6,0
+	<path class="st7" d="M184.9,27.1v-0.2c-0.2,0-0.4,0-0.6,0c-0.3,0-0.5,0-0.8-0.1v0.3h-3.1v-0.3c-0.2,0-0.4,0-0.6,0
 		c-0.3,0-0.6,0-0.8-0.1V27h-1.3v9.9h1.3v0.2c0.2,0,0.3,0,0.5,0c0.3,0,0.6,0,0.9,0.1V37h3.1v0.3c0.2,0,0.3,0,0.5,0
 		c0.3,0,0.6,0,0.9,0.1V37h1.3v-9.9H184.9z"/>
-	<circle fill="#1E1E1E" cx="181.9" cy="32.1" r="2.5"/>
-	<rect x="177.7" y="36.9" fill="#B4B4B4" width="8.5" height="0.6"/>
-	<rect x="177.7" y="26.7" fill="#B4B4B4" width="8.5" height="0.6"/>
+	<circle class="st8" cx="181.9" cy="32.1" r="2.5"/>
+	<rect x="177.7" y="36.9" class="st9" width="8.5" height="0.6"/>
+	<rect x="177.7" y="26.7" class="st9" width="8.5" height="0.6"/>
 </g>
 <g>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="234.5" y1="42.4" x2="245.1" y2="40.6"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="234.6" y1="38.1" x2="245.1" y2="33.4"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="54.9" x2="234.5" y2="50.2"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="245" y1="47.8" x2="234.5" y2="46.1"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="47.8" x2="255.7" y2="47.8"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="33.4" x2="255.7" y2="33.4"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="40.6" x2="255.7" y2="40.6"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="54.9" x2="255.7" y2="54.9"/>
-	<path fill="#920000" d="M256.9,44.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<line class="st10" x1="234.5" y1="42.4" x2="245.1" y2="40.6"/>
+	<line class="st11" x1="234.6" y1="38.1" x2="245.1" y2="33.4"/>
+	<line class="st12" x1="245.1" y1="54.9" x2="234.5" y2="50.2"/>
+	<line class="st13" x1="245" y1="47.8" x2="234.5" y2="46.1"/>
+	<line class="st13" x1="245.1" y1="47.8" x2="255.7" y2="47.8"/>
+	<line class="st11" x1="245.1" y1="33.4" x2="255.7" y2="33.4"/>
+	<line class="st10" x1="245.1" y1="40.6" x2="255.7" y2="40.6"/>
+	<line class="st12" x1="245.1" y1="54.9" x2="255.7" y2="54.9"/>
+	<path class="st1" d="M256.9,44.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,45.2,256.2,44.7,256.9,44.7z"/>
-	<text transform="matrix(1 0 0 1 258.7333 49.4797)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path fill="#FFFF6D" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 258.7333 49.4797)" class="st2 st3 st4">3.3V</text>
+	<path class="st5" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,30.9,256.2,30.4,256.8,30.4z"/>
-	<text transform="matrix(1 0 0 1 260.5004 35.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#006DDB" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5004 35.1569)" class="st3 st4">SCL</text>
+	<path class="st6" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,38.1,256.2,37.6,256.8,37.6z"/>
-	<text transform="matrix(1 0 0 1 260.5004 42.3569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
+	<text transform="matrix(1 0 0 1 260.5004 42.3569)" class="st2 st3 st4">SDA</text>
 	<path d="M256.9,51.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,52.3,256.2,51.8,256.9,51.8z"/>
-	<text transform="matrix(1 0 0 1 260.5336 56.6027)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<path fill="#FFFF00" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5336 56.6027)" class="st2 st3 st4">GND</text>
+	<path class="st14" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,30.9,256.2,30.4,256.8,30.4z"/>
-	<text transform="matrix(1 0 0 1 260.5002 35.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#0000FF" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5002 35.1569)" class="st3 st4">SCL</text>
+	<path class="st15" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,38.1,256.2,37.6,256.8,37.6z"/>
-	<text transform="matrix(1 0 0 1 260.5002 42.3569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="38.1" x2="234.5" y2="38.1"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="42.4" x2="234.5" y2="42.4"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="46.1" x2="234.4" y2="46.1"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="50.2" x2="234.5" y2="50.2"/>
+	<text transform="matrix(1 0 0 1 260.5002 42.3569)" class="st2 st3 st4">SDA</text>
+	<line class="st11" x1="223.8" y1="38.1" x2="234.5" y2="38.1"/>
+	<line class="st10" x1="223.8" y1="42.4" x2="234.5" y2="42.4"/>
+	<line class="st13" x1="223.8" y1="46.1" x2="234.4" y2="46.1"/>
+	<line class="st12" x1="223.8" y1="50.2" x2="234.5" y2="50.2"/>
 	<g>
-		
-			<rect id="rect18427_1_" x="209.9" y="36.2" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="12.6" height="15.5"/>
-		<rect id="rect18429_1_" x="222.4" y="33.6" fill="#666666" width="3.3" height="20.8"/>
+		<rect id="rect18427_1_" x="209.9" y="36.2" class="st16" width="12.6" height="15.5"/>
+		<rect id="rect18429_1_" x="222.4" y="33.6" class="st17" width="3.3" height="20.8"/>
 		<g>
-			<rect id="rect18431_1_" x="218.8" y="49.2" fill="#666666" width="3.9" height="2.8"/>
-			<rect id="rect18433_1_" x="218.8" y="46.5" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18435_1_" x="218.8" y="43.4" fill="#666666" width="3.9" height="1.1"/>
-			<rect id="rect18437_1_" x="218.8" y="39.8" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18439_1_" x="218.8" y="36" fill="#666666" width="3.9" height="2.6"/>
+			<rect id="rect18431_1_" x="218.8" y="49.2" class="st17" width="3.9" height="2.8"/>
+			<rect id="rect18433_1_" x="218.8" y="46.5" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18435_1_" x="218.8" y="43.4" class="st17" width="3.9" height="1.1"/>
+			<rect id="rect18437_1_" x="218.8" y="39.8" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18439_1_" x="218.8" y="36" class="st17" width="3.9" height="2.6"/>
 		</g>
 	</g>
 </g>
 <g>
-	<path fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,55.5h-43.7
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
-	<path fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,62.7h-47
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
-	<path fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,41.1h-37
-		c-1,0-1.9-0.9-1.9-1.9v-4.5"/>
-	<path fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,48.3h-40.4
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st18" d="M145.5,55.5h-43.7c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st19" d="M145.5,62.7h-47c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st20" d="M145.5,41.1h-37c-1,0-1.9-0.9-1.9-1.9v-4.5"/>
+	<path class="st21" d="M145.5,48.3h-40.4c-1,0-1.9-0.9-1.9-1.9V34.7"/>
 	<g>
-		
-			<rect id="rect18427_2_" x="93.8" y="19.6" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="15.5" height="12.6"/>
-		<rect id="rect18429_2_" x="91.1" y="32" fill="#666666" width="20.8" height="3.3"/>
+		<rect id="rect18427_2_" x="93.8" y="19.6" class="st16" width="15.5" height="12.6"/>
+		<rect id="rect18429_2_" x="91.1" y="32" class="st17" width="20.8" height="3.3"/>
 		<g>
-			<rect id="rect18431_2_" x="106.8" y="28.4" fill="#666666" width="2.8" height="3.9"/>
-			<rect id="rect18433_2_" x="104.1" y="28.4" fill="#666666" width="1.5" height="3.9"/>
-			<rect id="rect18435_2_" x="100.9" y="28.4" fill="#666666" width="1.1" height="3.9"/>
-			<rect id="rect18437_2_" x="97.4" y="28.4" fill="#666666" width="1.5" height="3.9"/>
-			<rect id="rect18439_2_" x="93.5" y="28.4" fill="#666666" width="2.6" height="3.9"/>
+			<rect id="rect18431_2_" x="106.8" y="28.4" class="st17" width="2.8" height="3.9"/>
+			<rect id="rect18433_2_" x="104.1" y="28.4" class="st17" width="1.5" height="3.9"/>
+			<rect id="rect18435_2_" x="100.9" y="28.4" class="st17" width="1.1" height="3.9"/>
+			<rect id="rect18437_2_" x="97.4" y="28.4" class="st17" width="1.5" height="3.9"/>
+			<rect id="rect18439_2_" x="93.5" y="28.4" class="st17" width="2.6" height="3.9"/>
 		</g>
 	</g>
-	<path fill="#920000" d="M136.4,52.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<path class="st1" d="M136.4,52.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,53,135.8,52.5,136.4,52.5z"/>
-	<text transform="matrix(1 0 0 1 138.337 57.2971)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path fill="#0000FF" d="M136.4,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 138.337 57.2971)" class="st2 st3 st4">3.3V</text>
+	<path class="st15" d="M136.4,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,45.8,135.8,45.3,136.4,45.3z"/>
-	<text transform="matrix(1 0 0 1 140.1373 50.097)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<path fill="#FFFF00" d="M136.4,38.1h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 140.1373 50.097)" class="st2 st3 st4">SDA</text>
+	<path class="st14" d="M136.4,38.1h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,38.6,135.8,38.1,136.4,38.1z"/>
-	<text transform="matrix(1 0 0 1 140.1373 42.897)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
+	<text transform="matrix(1 0 0 1 140.1373 42.897)" class="st3 st4">SCL</text>
 	<path d="M136.4,59.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,60.2,135.8,59.7,136.4,59.7z"/>
-	<text transform="matrix(1 0 0 1 140.1373 64.497)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
+	<text transform="matrix(1 0 0 1 140.1373 64.497)" class="st2 st3 st4">GND</text>
 </g>
 <g>
-	
-		<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="343.0755" y1="46.4046" x2="332.4755" y2="48.2046"/>
-	
-		<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="342.9755" y1="50.7046" x2="332.4755" y2="55.4046"/>
-	
-		<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="332.4755" y1="33.9046" x2="343.0755" y2="38.6046"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="332.5755" y1="41.0046" x2="343.0755" y2="42.7046"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="332.4755" y1="41.0046" x2="321.8755" y2="41.0046"/>
-	
-		<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="332.4755" y1="55.4046" x2="321.8755" y2="55.4046"/>
-	
-		<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="332.4755" y1="48.2046" x2="321.8755" y2="48.2046"/>
-	
-		<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="332.4755" y1="33.9046" x2="321.8755" y2="33.9046"/>
-	
-		<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="353.7755" y1="50.7046" x2="343.0755" y2="50.7046"/>
-	
-		<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="353.7755" y1="46.4046" x2="343.0755" y2="46.4046"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="353.7755" y1="42.7046" x2="343.1755" y2="42.7046"/>
-	
-		<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="353.7755" y1="38.6046" x2="343.0755" y2="38.6046"/>
+	<line class="st10" x1="343.1" y1="46.4" x2="332.5" y2="48.2"/>
+	<line class="st11" x1="343" y1="50.7" x2="332.5" y2="55.4"/>
+	<line class="st12" x1="332.5" y1="33.9" x2="343.1" y2="38.6"/>
+	<line class="st13" x1="332.6" y1="41" x2="343.1" y2="42.7"/>
+	<line class="st13" x1="332.5" y1="41" x2="321.9" y2="41"/>
+	<line class="st11" x1="332.5" y1="55.4" x2="321.9" y2="55.4"/>
+	<line class="st10" x1="332.5" y1="48.2" x2="321.9" y2="48.2"/>
+	<line class="st12" x1="332.5" y1="33.9" x2="321.9" y2="33.9"/>
+	<line class="st11" x1="353.8" y1="50.7" x2="343.1" y2="50.7"/>
+	<line class="st10" x1="353.8" y1="46.4" x2="343.1" y2="46.4"/>
+	<line class="st13" x1="353.8" y1="42.7" x2="343.2" y2="42.7"/>
+	<line class="st12" x1="353.8" y1="38.6" x2="343.1" y2="38.6"/>
 	<g>
-		
-			<rect id="rect18427_3_" x="355.8087" y="37.0046" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="12.6" height="15.5"/>
-		<rect id="rect18429_3_" x="352.6087" y="34.3046" fill="#666666" width="3.3" height="20.8"/>
+		<rect id="rect18427_3_" x="355.8" y="37" class="st16" width="12.6" height="15.5"/>
+		<rect id="rect18429_3_" x="352.6" y="34.3" class="st17" width="3.3" height="20.8"/>
 		<g>
-			<rect id="rect18431_3_" x="355.6087" y="36.7046" fill="#666666" width="3.9" height="2.8"/>
-			<rect id="rect18433_3_" x="355.6087" y="40.7046" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18435_3_" x="355.6087" y="44.2046" fill="#666666" width="3.9" height="1.1"/>
-			<rect id="rect18437_3_" x="355.6087" y="47.4046" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18439_3_" x="355.6087" y="50.1046" fill="#666666" width="3.9" height="2.6"/>
+			<rect id="rect18431_3_" x="355.6" y="36.7" class="st17" width="3.9" height="2.8"/>
+			<rect id="rect18433_3_" x="355.6" y="40.7" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18435_3_" x="355.6" y="44.2" class="st17" width="3.9" height="1.1"/>
+			<rect id="rect18437_3_" x="355.6" y="47.4" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18439_3_" x="355.6" y="50.1" class="st17" width="3.9" height="2.6"/>
 		</g>
 	</g>
-	<path fill="#920000" d="M304.0695,38.15h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C302.8695,38.65,303.3695,38.15,304.0695,38.15z"/>
-	<text transform="matrix(1 0 0 1 305.9028 42.9297)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path d="M304.0695,31h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C302.8695,31.5,303.3695,31,304.0695,31z"/>
-	<text transform="matrix(1 0 0 1 307.7031 35.8027)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<path fill="#FFFF00" d="M304.1568,52.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C303.0568,52.9,303.5568,52.4,304.1568,52.4z"/>
-	<text transform="matrix(1 0 0 1 307.857 57.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#0000FF" d="M304.1568,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C303.0568,45.8,303.5568,45.3,304.1568,45.3z"/>
-	<text transform="matrix(1 0 0 1 307.857 50.0569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
+	<path class="st1" d="M304.1,38.2h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C302.9,38.7,303.4,38.2,304.1,38.2z"/>
+	<text transform="matrix(1 0 0 1 305.9028 42.9297)" class="st2 st3 st4">3.3V</text>
+	<path d="M304.1,31h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C302.9,31.5,303.4,31,304.1,31z"/>
+	<text transform="matrix(1 0 0 1 307.7031 35.8027)" class="st2 st3 st4">GND</text>
+	<path class="st14" d="M304.2,52.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C303.1,52.9,303.6,52.4,304.2,52.4z"/>
+	<text transform="matrix(1 0 0 1 307.857 57.1569)" class="st3 st4">SCL</text>
+	<path class="st15" d="M304.2,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C303.1,45.8,303.6,45.3,304.2,45.3z"/>
+	<text transform="matrix(1 0 0 1 307.857 50.0569)" class="st2 st3 st4">SDA</text>
+</g>
+<g>
+	<g>
+		<path class="st18" d="M456.4,39.2v18.9c0,1-0.9,1.9-1.9,1.9h-43.7"/>
+		<path class="st19" d="M459.7,39.2v26.1c0,1-0.9,1.9-1.9,1.9h-47"/>
+		<path class="st20" d="M449.7,39.2v4.5c0,1-0.9,1.9-1.9,1.9h-37"/>
+		<path class="st21" d="M453.1,39.2v11.7c0,1-0.9,1.9-1.9,1.9h-40.4"/>
+	</g>
+	<g>
+		
+			<rect id="rect18427_00000178914106809447511930000013866159404436575389_" x="447.2" y="23.9" class="st16" width="15.5" height="12.6"/>
+		
+			<rect id="rect18429_00000031928373075921312910000014790377498140978847_" x="444.5" y="36.3" class="st17" width="20.8" height="3.3"/>
+		<g>
+			
+				<rect id="rect18431_00000170993680101322717880000001644850932840291517_" x="460.2" y="32.7" class="st17" width="2.8" height="3.9"/>
+			
+				<rect id="rect18433_00000103241704361221988900000015591929497546297534_" x="457.5" y="32.7" class="st17" width="1.5" height="3.9"/>
+			
+				<rect id="rect18435_00000173155515476320139280000004429963318720837812_" x="454.3" y="32.7" class="st17" width="1.1" height="3.9"/>
+			
+				<rect id="rect18437_00000061454898119703330670000013955461483550485126_" x="450.8" y="32.7" class="st17" width="1.5" height="3.9"/>
+			
+				<rect id="rect18439_00000055704433746169303960000015895652824250320515_" x="446.9" y="32.7" class="st17" width="2.6" height="3.9"/>
+		</g>
+	</g>
+	<g>
+		<path class="st1" d="M409.6,56.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+			C408.5,57.3,409,56.8,409.6,56.8z"/>
+		<text transform="matrix(1 0 0 1 411.4896 61.5797)" class="st2 st3 st4">3.3V</text>
+		<path class="st15" d="M409.6,49.6h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+			C408.5,50.1,409,49.6,409.6,49.6z"/>
+		<text transform="matrix(1 0 0 1 413.2899 54.3796)" class="st2 st3 st4">SDA</text>
+		<path class="st14" d="M409.6,42.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+			C408.5,42.9,409,42.4,409.6,42.4z"/>
+		<text transform="matrix(1 0 0 1 413.2899 47.1795)" class="st3 st4">SCL</text>
+		<path d="M409.6,64h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+			C408.5,64.5,409,64,409.6,64z"/>
+		<text transform="matrix(1 0 0 1 413.2899 68.7795)" class="st2 st3 st4">GND</text>
+	</g>
 </g>
 </svg>
