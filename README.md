@@ -50,6 +50,16 @@ Once you have an SVG, PDF and PNG, you need to upload them to the following loca
 ## Example PrettyPins Command Structure by Board Type
 These are some examples of what the PrettyPins commandline command looks like, based on board chip type. More to be added soon!
 
+#### ATMega328:
+ATMega328 does not support CircuitPython.
+
+```python3 parser.py "Adafruit Metro Mini.fzpz" None atmega328pins.csv -s "^IO([0-9])" "D\1"```
+
+#### ATtiny8x
+ATtiny8x does not support CircuitPython.
+
+```python parser.py "Adafruit Trinket 3V.fzpz" None attiny8xpins.csv```
+
 #### RP2040:
 RP2040 does not have official Arduino support (yet).
 
