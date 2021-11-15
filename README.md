@@ -48,7 +48,7 @@ Once you have an SVG, PDF and PNG, you need to upload them to the following loca
 1. Upload the SVG to Learn as a file using Media > Upload, under the "Files" section on the Downloads page. Title the file "PrettyPins SVG for Board Name".
 
 ## Example PrettyPins Command Structure by Board Type
-These are some examples of what the PrettyPins commandline command looks like, based on board chip type.
+These are some examples of what the PrettyPins commandline command looks like, based on board chip type. More to be added soon!
 
 #### RP2040:
 RP2040 does not have official Arduino support (yet).
