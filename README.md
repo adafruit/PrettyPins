@@ -10,6 +10,12 @@ The following is a list of required software and files necessary to run PrettyPi
 * Python 3 installed on your machine
 * A local clone of the CircuitPython repository (for boards that support CircuitPython)
 * The latest Arduino core for the board-type you're working with installed on your machine (for boards that support Arduino)
+* `pip install` the following libraries (in a virtual environment or otherwise):
+  * `click`
+  * `lxml`
+  * `svgutils`
+  * `svgwrite`
+  * `xmltodict`
 
 ## Running PrettyPins
 1. Place the Fritzing object file in the PrettyPins directory.
@@ -27,6 +33,19 @@ The following is a list of required software and files necessary to run PrettyPi
     * In Illustrator, do "Save as", click "Ok", (and "Yes" to replacing the file if it already exists), then, under "Advanced Options", change "CSS Properties" to "Presentation Attributes". and "Decimal Places" to "4". Then, click Ok.
     * In Inkscape, save the file.
 10. Finally, save the file as both a PDF and a PNG as well.
+
+## Upload Files
+Once you have an SVG, PDF and PNG, you need to upload them to the following locations, and link to them where indicated.
+#### The PNG
+1. The PNG gets added to the Pinouts page of the guide, rendered, immediately below the board image at the top of the page.
+
+#### The PDF
+1. Upload to the EagleCAD PCB file repository on GitHub.
+2. Link under "Files:" on the Downloads page in the applicable board guide.
+3. Link on the Pinouts page in the applicable board guide (under the rendered PNG of the diagram).
+
+#### The SVG
+1. Upload the SVG to Learn as a file using Media > Upload, under the "Files" section on the Downloads page. Title the file "PrettyPins SVG for Board Name".
 
 ## Example PrettyPins Command Structure by Board Type
 These are some examples of what the PrettyPins commandline command looks like, based on board chip type.
