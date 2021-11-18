@@ -222,7 +222,7 @@ def get_arduino_mapping(connections, variantfolder):
         for conn in connections:
             print(conn['name'])
             # digital pins
-            matches = re.match(r'(IO|D)([0-9]+)', conn['name'])
+            matches = re.match(r'(IO|D|#)([0-9]+)', conn['name'])
             if matches:
                 #print(matches)
                 digitalname = matches.group(2)
