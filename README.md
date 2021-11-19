@@ -40,7 +40,7 @@ Once you have an SVG, PDF and PNG, you need to upload them to the following loca
 1. The PNG gets added to the Pinouts page of the guide, rendered, immediately below the board image at the top of the page.
 
 #### The PDF
-1. Upload to the EagleCAD PCB file repository on GitHub.
+1. Upload to the board-specific EagleCAD PCB file repository on GitHub.
 2. Link under "Files:" on the Downloads page in the applicable board guide.
 3. Link on the Pinouts page in the applicable board guide (under the rendered PNG of the diagram).
 
