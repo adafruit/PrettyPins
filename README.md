@@ -2,6 +2,8 @@
 
 PrettyPins is designed to create lovely pinout diagrams. 
 
+![KB2040 pinout diagram](https://cdn-learn.adafruit.com/assets/assets/000/106/984/original/adafruit_products_Adafruit_KB2040_Pinout.png)
+
 ## Requirements
 The following is a list of required software and files necessary to run PrettyPins:
 * A local clone of the PrettyPins repository
