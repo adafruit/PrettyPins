@@ -191,8 +191,7 @@ def get_arduino_mapping(connections, variantfolder):
     global longest_arduinopin
     if not variantfolder:
         return connections
-
-    # special case of very early chips
+    ###################################################### special case of very early chips
     if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder) or ("attiny8x" in variantfolder):
         pinmap8x = ["PB0", "PB1", "PB2", "PB3", "PB4"]
         pinmap328 = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
@@ -237,8 +236,8 @@ def get_arduino_mapping(connections, variantfolder):
         #print(connections)
         return connections
         
-    # NRF52 board variant handler
-    if "nrf52" in variantfolder.lower():
+    ###################################################### NRF52 board variant handler
+    elif "nrf52" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
         variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
@@ -292,8 +291,8 @@ int main(void) {
             outfileh.write(line)
         outfileh.close()
 
-    # SAMDxx board variant handler
-    if "samd" in variantfolder.lower():
+    ###################################################### SAMDxx board variant handler
+    elif "samd" in variantfolder.lower():
         # copy over the variant.cpp minus any includes
 
         variantcpp = open(variantfolder+"/"+"variant.cpp").readlines()
@@ -403,15 +402,55 @@ int main(void) {
 
         outfileh.close()
 
-    time.sleep(1)
-    # now compile it!
-    compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
-    #print(compileit.stdout.read())
-    runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
-    time.sleep(1)
-    arduinopins = runit.stdout.read().decode("utf-8")
-    #print(arduinopins)
-    #exit()
+    ###################################################### SAMDxx board variant handler
+    elif "esp32" in variantfolder.lower():
+        for conn in connections:
+            #print(conn['name'])
+            # digital pins
+            matches1 = re.match(r'(GPIO|IO|D|#)([0-9]+)', conn['name'])
+            if matches1:
+                #print(matches)
+                digitalname = matches1.group(2)
+                conn['pinname'] = pinmap[int(digitalname)]
+                conn['arduinopin'] = digitalname
+                longest_arduinopin = max(longest_arduinopin, len(digitalname))
+            else:
+                conn['pinname'] = conn['name']
+
+        # open the file
+        varianth = open(variantfolder+"/"+"pins_arduino.h").readlines()
+        arduinopins = ""
+        for line in varianth:
+            #print(line)
+            # find the const defines
+            matches2 = re.match(r'\s*static\s*const\s*uint8_t\s*([A-Z0-9_]+)\s*=\s*([0-9]+)\s*;.*', line)
+            if matches2:
+                prettyname = matches2[1]
+                pinnumber = matches2[2]
+                print(prettyname, pinnumber)
+                for conn in connections:
+                    if conn['pinname'] == prettyname:
+                        conn['pinname'] = pinnumber
+                        #conn['arduinopin'] = pinnumber
+                    print(conn)
+                arduinopins +=  matches2[2] + ", " + matches2[1] + "\n"
+        #exit()
+        #print(arduinopins)
+
+
+    else:
+        raise UnimplementedError("Unknown arduino variant type!", variantfolder.lower())
+
+    if not arduinopins:  # some variants can auto-extract the pins for us, if not we do it the hard way
+        time.sleep(1)
+        # now compile it!
+        compileit = subprocess.Popen("g++ -w variant.cpp -o arduinopins", shell=True, stdout=subprocess.PIPE)
+        #print(compileit.stdout.read())
+        runit = subprocess.Popen("./arduinopins", shell=True, stdout=subprocess.PIPE)
+        time.sleep(1)
+        arduinopins = runit.stdout.read().decode("utf-8")
+        #print(arduinopins)
+        #exit()
     for pinpair in arduinopins.split("\n"):
         if not pinpair:
             continue
@@ -420,8 +459,8 @@ int main(void) {
             if 'arduinopin' in conn:
                 continue
             conn['arduinopin'] = arduinopin
+            #print(arduinopin, pinname, conn)
         longest_arduinopin = max(longest_arduinopin, len(arduinopin))
-        #print(arduinopin, pinname, connection)
 
     return connections
 
@@ -765,6 +804,8 @@ def draw_pinlabels_svg(connections):
                     label_type = 'High Speed'
                 elif mux == 'Low Speed':
                     label_type = 'Low Speed'
+                elif mux == 'RTC':
+                    label_type = 'Low Speed'
                 elif mux == 'Speed':
                     label_type = 'Speed'
                 elif mux in('Special', 'SPECIAL'):
@@ -781,6 +822,8 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Timer'
                 elif mux == 'Timer Alt':
                     label_type = 'Timer Alt'
+                elif mux == 'SDMMC':
+                    label_type = 'SERCOM'
                 else:
                     continue
                 
