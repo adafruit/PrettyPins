@@ -431,10 +431,20 @@ int main(void) {
                 for conn in connections:
                     if conn['pinname'] == prettyname:
                         conn['pinname'] = pinnumber
-                        #conn['arduinopin'] = pinnumber
-                    print(conn)
-                arduinopins +=  matches2[2] + ", " + matches2[1] + "\n"
-        #exit()
+                    #print(conn)
+                arduinopins +=  pinnumber + ", " + prettyname + "\n"
+        # ok after we map everything, lets find internal pins
+        for pinpair in arduinopins.split('\n'):
+            if not pinpair:
+                continue
+            pinnumber, prettyname = pinpair.split(",")
+            conn = next((c for c in connections if c.get('pinname') == pinnumber), None)
+            if conn:
+                continue
+            print("Found an internal pin!")
+            newconn = {'name': prettyname, 'pinname': pinnumber}
+            print(newconn)
+            connections.append(newconn)
         #print(arduinopins)
 
 
