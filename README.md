@@ -86,6 +86,10 @@ RP2040 does not have official Arduino support (yet).
 
 ```python3 parser.py "Adafruit QT Py ESP32 Pico.fzpz" None -a ../../ArduinoSketches/hardware/espressif/esp32/variants/adafruit_qtpy_esp32  esp32pins.csv```
 
+```python3 parser.py "Adafruit ESP32 Feather V2.fzpz" None -a ../../ArduinoSketches/hardware/espressif/esp32/variants/adafruit_feather_esp32_v2  esp32pins.csv```
+
+```python3 parser.py "Adafruit HUZZAH32 ESP32 Feather.fzpz" None -a ../../ArduinoSketches/hardware/espressif/esp32/variants/feather_esp32  esp32pins.csv```
+
 
 #### nRF52:
 

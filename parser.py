@@ -405,14 +405,14 @@ int main(void) {
     ###################################################### SAMDxx board variant handler
     elif "esp32" in variantfolder.lower():
         for conn in connections:
-            #print(conn['name'])
+            print(conn['name'])
             # digital pins
-            matches1 = re.match(r'(GPIO|IO|D|#)([0-9]+)', conn['name'])
-            if matches1:
-                #print(matches)
-                digitalname = matches1.group(2)
-                conn['pinname'] = pinmap[int(digitalname)]
-                conn['arduinopin'] = digitalname
+            iomatches = re.match(r'(GPIO|IO|D|I|#)([0-9]+)', conn['name'])
+            if iomatches:
+                print(iomatches)
+                digitalname = iomatches.group(2)
+                conn['pinname'] = digitalname
+                #conn['arduinopin'] = digitalname
                 longest_arduinopin = max(longest_arduinopin, len(digitalname))
             else:
                 conn['pinname'] = conn['name']
