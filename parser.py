@@ -882,7 +882,7 @@ def draw_pinlabels_svg(connections):
         font_family = LABEL_FONT,
         font_weight = 'bold',
         fill = 'black',
-        text_anchor = 'end'
+        text_anchor = 'middle'
         ))
     g.add(dwg.text(
         product_url,
@@ -891,7 +891,7 @@ def draw_pinlabels_svg(connections):
         font_family = LABEL_FONT,
         font_weight = 'bold',
         fill = 'black',
-        text_anchor = 'end'
+        text_anchor = 'middle'
         ))
     dwg.add(g)
 
