@@ -198,7 +198,10 @@ def get_arduino_mapping(connections, variantfolder):
                      "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
                      "PC0", "PC1", "PC2", "PC3", "PC4", "PC5"]
         specialnames328 = {"A0" : "PC0", "A1" : "PC1", "A2" : "PC2",
-                           "A3" : "PC3", "A4" : "PC4", "A5" : "PC5" }
+                           "A3" : "PC3", "A4" : "PC4", "A5" : "PC5",
+                           "A4/SDA" : "PC4", "A5/SCL" : "PC5",
+                           "SS" : "PB2", "MOSI" : "PB3",
+                           "MISO": "PB4", "SCK": "PB5"}
         pinmap32u4 = ["PD2", "PD3", "PD1", "PD0", "PD4", "PC6", "PD7", "PE6",
                       "PB4", "PB5", "PB6", "PB7", "PD6", "PC7",
                       "PB3", "PB1", "PB2", "PB0",
@@ -227,12 +230,13 @@ def get_arduino_mapping(connections, variantfolder):
                 digitalname = matches.group(2)
                 conn['pinname'] = pinmap[int(digitalname)]
                 conn['arduinopin'] = digitalname
-                longest_arduinopin = max(longest_arduinopin, len(digitalname))
+                longest_arduinopin = max(longest_arduinopin, len(str(conn['arduinopin'])))
             # other pins :/
             if specialnames:
                 if conn['name'] in specialnames:
                     conn['pinname'] = specialnames[conn['name']]
                     conn['arduinopin'] = pinmap.index(conn['pinname'])
+                    longest_arduinopin = max(longest_arduinopin, len(str(conn['arduinopin'])))
         #print(connections)
         return connections
         
@@ -688,6 +692,7 @@ def draw_pinlabels_svg(connections):
         if 'arduinopin' in conn:
             #box_w = (longest_arduinopin + 1) * BOX_WIDTH_PER_CHAR
             box_w = longest_arduinopin * BOX_WIDTH_PER_CHAR
+
             if conn['location'] in ('top', 'right', 'unknown'):
                 last_used_x = box_x # Save-and-increment
                 box_x += box_w
@@ -739,7 +744,7 @@ def draw_pinlabels_svg(connections):
         # clean up some names!
 
         label_type = 'CircuitPython Name'
-        if name_label in ("3.3V", "VMAX", "VHIGH", "VIN", "5V", "VBAT", "VBUS", "VHI"):
+        if name_label in ("3.3V", "VMAX", "VHIGH", "VIN", "5V", "VBAT", "VBUS", "VHI", "VCCIO", "VIO"):
             label_type = 'Power'
         if name_label in ("GND"):
             label_type = 'GND'
