@@ -811,6 +811,8 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Touch'
                 elif mux == 'ADC':  # analog ins
                     label_type = 'Analog'
+                elif mux == 'Arduino ADC':  # analog ins
+                    label_type = 'SERCOM'
                 elif mux == 'Other':
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
