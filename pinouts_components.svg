@@ -1,28 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="1280px" height="1024px" viewBox="0 0 1280 1024" enable-background="new 0 0 1280 1024" xml:space="preserve">
+	 width="1280px" height="1024px" viewBox="0 0 1280 1024" style="enable-background:new 0 0 1280 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#8C8C8C;stroke-width:0.7087;stroke-linecap:round;}
+	.st1{fill:#920000;}
+	.st2{fill:#FFFFFF;}
+	.st3{font-family:'CourierNewPS-BoldMT';}
+	.st4{font-size:6px;}
+	.st5{fill:#FFFF6D;}
+	.st6{fill:#006DDB;}
+	.st7{fill:#DCDCDC;}
+	.st8{fill:#1E1E1E;}
+	.st9{fill:#B4B4B4;}
+	.st10{fill:none;stroke:#0000FF;stroke-width:0.7087;stroke-linecap:round;}
+	.st11{fill:none;stroke:#FFFF00;stroke-width:0.7087;stroke-linecap:round;}
+	.st12{fill:none;stroke:#000000;stroke-width:0.7087;stroke-linecap:round;}
+	.st13{fill:none;stroke:#FF0000;stroke-width:0.7087;stroke-linecap:round;}
+	.st14{fill:#FFFF00;}
+	.st15{fill:#0000FF;}
+	.st16{fill:#333333;stroke:#333333;stroke-width:0.2877;stroke-miterlimit:3.8362;}
+	.st17{fill:#666666;}
+	.st18{fill:none;stroke:#FF0000;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st19{fill:none;stroke:#000000;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st20{fill:none;stroke:#FFFF00;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st21{fill:none;stroke:#0000FF;stroke-width:0.7087;stroke-linecap:round;stroke-linejoin:round;}
+	.st22{fill:#E91E32;}
+	.st23{fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;}
+	.st24{fill:#231F20;}
+	.st25{fill:#F4F4F4;}
+	.st26{fill:none;stroke:#231F20;stroke-width:0.2;}
+	.st27{fill:#919497;}
+	.st28{fill:none;stroke:#231F20;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;}
+	.st29{fill:#E1E1E1;}
+	.st30{fill:none;stroke:#000000;stroke-width:0.2;}
+	.st31{fill:#F1EED9;}
+	.st32{fill:#E6E1CC;}
+	.st33{fill:none;stroke:#6E7071;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;}
+	.st34{fill:#A3A5A7;}
+	.st35{fill-rule:evenodd;clip-rule:evenodd;fill:#F39337;}
+	.st36{fill:#E3E4E4;}
+	.st37{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st38{fill-rule:evenodd;clip-rule:evenodd;fill:#1536FF;}
+	.st39{font-family:'ArialRoundedMTBold';}
+	.st40{font-size:13px;}
+</style>
 <g>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="35" y1="46.9" x2="59" y2="46.9"/>
-	<path fill="#920000" d="M49.9,43.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1V45
+	<line class="st0" x1="35" y1="46.9" x2="59" y2="46.9"/>
+	<path class="st1" d="M49.9,43.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1V45
 		C48.8,44.3,49.3,43.8,49.9,43.8z"/>
-	<text transform="matrix(1 0 0 1 51.8051 48.6211)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="44.2" y1="32.5" x2="59" y2="32.5"/>
-	<path fill="#FFFF6D" d="M49.9,29.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 51.8051 48.6211)" class="st2 st3 st4">3.3V</text>
+	<line class="st0" x1="44.2" y1="32.5" x2="59" y2="32.5"/>
+	<path class="st5" d="M49.9,29.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.7,30,49.2,29.5,49.9,29.5z"/>
-	<text transform="matrix(1 0 0 1 53.5721 34.2982)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="39.6" y1="39.7" x2="59" y2="39.7"/>
-	<path fill="#006DDB" d="M49.9,36.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 53.5721 34.2982)" class="st3 st4">SCL</text>
+	<line class="st0" x1="39.6" y1="39.7" x2="59" y2="39.7"/>
+	<path class="st6" d="M49.9,36.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.7,37.2,49.2,36.7,49.9,36.7z"/>
-	<text transform="matrix(1 0 0 1 53.5721 41.4981)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="30.5" y1="54" x2="59" y2="54"/>
+	<text transform="matrix(1 0 0 1 53.5721 41.4981)" class="st2 st3 st4">SDA</text>
+	<line class="st0" x1="30.5" y1="54" x2="59" y2="54"/>
 	<path d="M49.9,51h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1H49.9c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C48.8,51.5,49.3,51,49.9,51z"/>
-	<text transform="matrix(1 0 0 1 53.6053 55.744)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="35" y1="46.9" x2="35.1" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="30.5" y1="53.8" x2="30.5" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="39.6" y1="39.7" x2="39.6" y2="26.4"/>
-	<line fill="none" stroke="#8C8C8C" stroke-width="0.7087" stroke-linecap="round" x1="44.1" y1="32.5" x2="44.1" y2="26.4"/>
+	<text transform="matrix(1 0 0 1 53.6053 55.744)" class="st2 st3 st4">GND</text>
+	<line class="st0" x1="35" y1="46.9" x2="35.1" y2="26.4"/>
+	<line class="st0" x1="30.5" y1="53.8" x2="30.5" y2="26.4"/>
+	<line class="st0" x1="39.6" y1="39.7" x2="39.6" y2="26.4"/>
+	<line class="st0" x1="44.1" y1="32.5" x2="44.1" y2="26.4"/>
 </g>
 <g id="g18467" transform="translate(4.4999716,-4.9999826)">
 </g>
@@ -31,315 +74,290 @@
 </desc>
 <desc>Fritzing breadboard generated by brd2svg</desc>
 <g>
-	<path fill="#DCDCDC" d="M184.9,27.1v-0.2c-0.2,0-0.4,0-0.6,0c-0.3,0-0.5,0-0.8-0.1v0.3h-3.1v-0.3c-0.2,0-0.4,0-0.6,0
+	<path class="st7" d="M184.9,27.1v-0.2c-0.2,0-0.4,0-0.6,0c-0.3,0-0.5,0-0.8-0.1v0.3h-3.1v-0.3c-0.2,0-0.4,0-0.6,0
 		c-0.3,0-0.6,0-0.8-0.1V27h-1.3v9.9h1.3v0.2c0.2,0,0.3,0,0.5,0c0.3,0,0.6,0,0.9,0.1V37h3.1v0.3c0.2,0,0.3,0,0.5,0
 		c0.3,0,0.6,0,0.9,0.1V37h1.3v-9.9H184.9z"/>
-	<circle fill="#1E1E1E" cx="181.9" cy="32.1" r="2.5"/>
-	<rect x="177.7" y="36.9" fill="#B4B4B4" width="8.5" height="0.6"/>
-	<rect x="177.7" y="26.7" fill="#B4B4B4" width="8.5" height="0.6"/>
+	<circle class="st8" cx="181.9" cy="32.1" r="2.5"/>
+	<rect x="177.7" y="36.9" class="st9" width="8.5" height="0.6"/>
+	<rect x="177.7" y="26.7" class="st9" width="8.5" height="0.6"/>
 </g>
 <g>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="234.5" y1="42.4" x2="245.1" y2="40.6"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="234.6" y1="38.1" x2="245.1" y2="33.4"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="54.9" x2="234.5" y2="50.2"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="245" y1="47.8" x2="234.5" y2="46.1"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="47.8" x2="255.7" y2="47.8"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="33.4" x2="255.7" y2="33.4"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="40.6" x2="255.7" y2="40.6"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="245.1" y1="54.9" x2="255.7" y2="54.9"/>
-	<path fill="#920000" d="M256.9,44.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<line class="st10" x1="234.5" y1="42.4" x2="245.1" y2="40.6"/>
+	<line class="st11" x1="234.6" y1="38.1" x2="245.1" y2="33.4"/>
+	<line class="st12" x1="245.1" y1="54.9" x2="234.5" y2="50.2"/>
+	<line class="st13" x1="245" y1="47.8" x2="234.5" y2="46.1"/>
+	<line class="st13" x1="245.1" y1="47.8" x2="255.7" y2="47.8"/>
+	<line class="st11" x1="245.1" y1="33.4" x2="255.7" y2="33.4"/>
+	<line class="st10" x1="245.1" y1="40.6" x2="255.7" y2="40.6"/>
+	<line class="st12" x1="245.1" y1="54.9" x2="255.7" y2="54.9"/>
+	<path class="st1" d="M256.9,44.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,45.2,256.2,44.7,256.9,44.7z"/>
-	<text transform="matrix(1 0 0 1 258.7333 49.4797)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path fill="#FFFF6D" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 258.7333 49.4797)" class="st2 st3 st4">3.3V</text>
+	<path class="st5" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,30.9,256.2,30.4,256.8,30.4z"/>
-	<text transform="matrix(1 0 0 1 260.5004 35.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#006DDB" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5004 35.1569)" class="st3 st4">SCL</text>
+	<path class="st6" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,38.1,256.2,37.6,256.8,37.6z"/>
-	<text transform="matrix(1 0 0 1 260.5004 42.3569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
+	<text transform="matrix(1 0 0 1 260.5004 42.3569)" class="st2 st3 st4">SDA</text>
 	<path d="M256.9,51.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,52.3,256.2,51.8,256.9,51.8z"/>
-	<text transform="matrix(1 0 0 1 260.5336 56.6027)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<path fill="#FFFF00" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5336 56.6027)" class="st2 st3 st4">GND</text>
+	<path class="st14" d="M256.8,30.4H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,30.9,256.2,30.4,256.8,30.4z"/>
-	<text transform="matrix(1 0 0 1 260.5002 35.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#0000FF" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 260.5002 35.1569)" class="st3 st4">SCL</text>
+	<path class="st15" d="M256.8,37.6H275c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C255.7,38.1,256.2,37.6,256.8,37.6z"/>
-	<text transform="matrix(1 0 0 1 260.5002 42.3569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="38.1" x2="234.5" y2="38.1"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="42.4" x2="234.5" y2="42.4"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="46.1" x2="234.4" y2="46.1"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="223.8" y1="50.2" x2="234.5" y2="50.2"/>
+	<text transform="matrix(1 0 0 1 260.5002 42.3569)" class="st2 st3 st4">SDA</text>
+	<line class="st11" x1="223.8" y1="38.1" x2="234.5" y2="38.1"/>
+	<line class="st10" x1="223.8" y1="42.4" x2="234.5" y2="42.4"/>
+	<line class="st13" x1="223.8" y1="46.1" x2="234.4" y2="46.1"/>
+	<line class="st12" x1="223.8" y1="50.2" x2="234.5" y2="50.2"/>
 	<g>
-		
-			<rect id="rect18427_1_" x="209.9" y="36.2" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="12.6" height="15.5"/>
-		<rect id="rect18429_1_" x="222.4" y="33.6" fill="#666666" width="3.3" height="20.8"/>
+		<rect id="rect18427_1_" x="209.9" y="36.2" class="st16" width="12.6" height="15.5"/>
+		<rect id="rect18429_1_" x="222.4" y="33.6" class="st17" width="3.3" height="20.8"/>
 		<g>
-			<rect id="rect18431_1_" x="218.8" y="49.2" fill="#666666" width="3.9" height="2.8"/>
-			<rect id="rect18433_1_" x="218.8" y="46.5" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18435_1_" x="218.8" y="43.4" fill="#666666" width="3.9" height="1.1"/>
-			<rect id="rect18437_1_" x="218.8" y="39.8" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18439_1_" x="218.8" y="36" fill="#666666" width="3.9" height="2.6"/>
+			<rect id="rect18431_1_" x="218.8" y="49.2" class="st17" width="3.9" height="2.8"/>
+			<rect id="rect18433_1_" x="218.8" y="46.5" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18435_1_" x="218.8" y="43.4" class="st17" width="3.9" height="1.1"/>
+			<rect id="rect18437_1_" x="218.8" y="39.8" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18439_1_" x="218.8" y="36" class="st17" width="3.9" height="2.6"/>
 		</g>
 	</g>
 </g>
 <g>
-	<path fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,55.5h-43.7
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
-	<path fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,62.7h-47
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
-	<path fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,41.1h-37
-		c-1,0-1.9-0.9-1.9-1.9v-4.5"/>
-	<path fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M145.5,48.3h-40.4
-		c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st18" d="M145.5,55.5h-43.7c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st19" d="M145.5,62.7h-47c-1,0-1.9-0.9-1.9-1.9V34.7"/>
+	<path class="st20" d="M145.5,41.1h-37c-1,0-1.9-0.9-1.9-1.9v-4.5"/>
+	<path class="st21" d="M145.5,48.3h-40.4c-1,0-1.9-0.9-1.9-1.9V34.7"/>
 	<g>
-		
-			<rect id="rect18427_2_" x="93.8" y="19.6" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="15.5" height="12.6"/>
-		<rect id="rect18429_2_" x="91.1" y="32" fill="#666666" width="20.8" height="3.3"/>
+		<rect id="rect18427_2_" x="93.8" y="19.6" class="st16" width="15.5" height="12.6"/>
+		<rect id="rect18429_2_" x="91.1" y="32" class="st17" width="20.8" height="3.3"/>
 		<g>
-			<rect id="rect18431_2_" x="106.8" y="28.4" fill="#666666" width="2.8" height="3.9"/>
-			<rect id="rect18433_2_" x="104.1" y="28.4" fill="#666666" width="1.5" height="3.9"/>
-			<rect id="rect18435_2_" x="100.9" y="28.4" fill="#666666" width="1.1" height="3.9"/>
-			<rect id="rect18437_2_" x="97.4" y="28.4" fill="#666666" width="1.5" height="3.9"/>
-			<rect id="rect18439_2_" x="93.5" y="28.4" fill="#666666" width="2.6" height="3.9"/>
+			<rect id="rect18431_2_" x="106.8" y="28.4" class="st17" width="2.8" height="3.9"/>
+			<rect id="rect18433_2_" x="104.1" y="28.4" class="st17" width="1.5" height="3.9"/>
+			<rect id="rect18435_2_" x="100.9" y="28.4" class="st17" width="1.1" height="3.9"/>
+			<rect id="rect18437_2_" x="97.4" y="28.4" class="st17" width="1.5" height="3.9"/>
+			<rect id="rect18439_2_" x="93.5" y="28.4" class="st17" width="2.6" height="3.9"/>
 		</g>
 	</g>
-	<path fill="#920000" d="M136.4,52.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<path class="st1" d="M136.4,52.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,53,135.8,52.5,136.4,52.5z"/>
-	<text transform="matrix(1 0 0 1 138.337 57.2971)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path fill="#0000FF" d="M136.4,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 138.337 57.2971)" class="st2 st3 st4">3.3V</text>
+	<path class="st15" d="M136.4,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,45.8,135.8,45.3,136.4,45.3z"/>
-	<text transform="matrix(1 0 0 1 140.1373 50.097)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<path fill="#FFFF00" d="M136.4,38.1h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 140.1373 50.097)" class="st2 st3 st4">SDA</text>
+	<path class="st14" d="M136.4,38.1h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,38.6,135.8,38.1,136.4,38.1z"/>
-	<text transform="matrix(1 0 0 1 140.1373 42.897)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
+	<text transform="matrix(1 0 0 1 140.1373 42.897)" class="st3 st4">SCL</text>
 	<path d="M136.4,59.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C135.3,60.2,135.8,59.7,136.4,59.7z"/>
-	<text transform="matrix(1 0 0 1 140.1373 64.497)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
+	<text transform="matrix(1 0 0 1 140.1373 64.497)" class="st2 st3 st4">GND</text>
 </g>
 <g>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="343.1" y1="46.4" x2="332.5" y2="48.2"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="343" y1="50.7" x2="332.5" y2="55.4"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="332.5" y1="33.9" x2="343.1" y2="38.6"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="332.6" y1="41" x2="343.1" y2="42.7"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="332.5" y1="41" x2="321.9" y2="41"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="332.5" y1="55.4" x2="321.9" y2="55.4"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="332.5" y1="48.2" x2="321.9" y2="48.2"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="332.5" y1="33.9" x2="321.9" y2="33.9"/>
-	<line fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" x1="353.8" y1="50.7" x2="343.1" y2="50.7"/>
-	<line fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" x1="353.8" y1="46.4" x2="343.1" y2="46.4"/>
-	<line fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" x1="353.8" y1="42.7" x2="343.2" y2="42.7"/>
-	<line fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" x1="353.8" y1="38.6" x2="343.1" y2="38.6"/>
+	<line class="st10" x1="343.1" y1="46.4" x2="332.5" y2="48.2"/>
+	<line class="st11" x1="343" y1="50.7" x2="332.5" y2="55.4"/>
+	<line class="st12" x1="332.5" y1="33.9" x2="343.1" y2="38.6"/>
+	<line class="st13" x1="332.6" y1="41" x2="343.1" y2="42.7"/>
+	<line class="st13" x1="332.5" y1="41" x2="321.9" y2="41"/>
+	<line class="st11" x1="332.5" y1="55.4" x2="321.9" y2="55.4"/>
+	<line class="st10" x1="332.5" y1="48.2" x2="321.9" y2="48.2"/>
+	<line class="st12" x1="332.5" y1="33.9" x2="321.9" y2="33.9"/>
+	<line class="st11" x1="353.8" y1="50.7" x2="343.1" y2="50.7"/>
+	<line class="st10" x1="353.8" y1="46.4" x2="343.1" y2="46.4"/>
+	<line class="st13" x1="353.8" y1="42.7" x2="343.2" y2="42.7"/>
+	<line class="st12" x1="353.8" y1="38.6" x2="343.1" y2="38.6"/>
 	<g>
-		
-			<rect id="rect18427_3_" x="355.8" y="37" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="12.6" height="15.5"/>
-		<rect id="rect18429_3_" x="352.6" y="34.3" fill="#666666" width="3.3" height="20.8"/>
+		<rect id="rect18427_3_" x="355.8" y="37" class="st16" width="12.6" height="15.5"/>
+		<rect id="rect18429_3_" x="352.6" y="34.3" class="st17" width="3.3" height="20.8"/>
 		<g>
-			<rect id="rect18431_3_" x="355.6" y="36.7" fill="#666666" width="3.9" height="2.8"/>
-			<rect id="rect18433_3_" x="355.6" y="40.7" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18435_3_" x="355.6" y="44.2" fill="#666666" width="3.9" height="1.1"/>
-			<rect id="rect18437_3_" x="355.6" y="47.4" fill="#666666" width="3.9" height="1.5"/>
-			<rect id="rect18439_3_" x="355.6" y="50.1" fill="#666666" width="3.9" height="2.6"/>
+			<rect id="rect18431_3_" x="355.6" y="36.7" class="st17" width="3.9" height="2.8"/>
+			<rect id="rect18433_3_" x="355.6" y="40.7" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18435_3_" x="355.6" y="44.2" class="st17" width="3.9" height="1.1"/>
+			<rect id="rect18437_3_" x="355.6" y="47.4" class="st17" width="3.9" height="1.5"/>
+			<rect id="rect18439_3_" x="355.6" y="50.1" class="st17" width="3.9" height="2.6"/>
 		</g>
 	</g>
-	<path fill="#920000" d="M304.1,38.2h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<path class="st1" d="M304.1,38.2h18.2c0.6,0,1.1,0.5,1.1,1.1V43c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C302.9,38.7,303.4,38.2,304.1,38.2z"/>
-	<text transform="matrix(1 0 0 1 305.9028 42.9297)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
+	<text transform="matrix(1 0 0 1 305.9028 42.9297)" class="st2 st3 st4">3.3V</text>
 	<path d="M304.1,31h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C302.9,31.5,303.4,31,304.1,31z"/>
-	<text transform="matrix(1 0 0 1 307.7031 35.8027)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<path fill="#FFFF00" d="M304.2,52.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 307.7031 35.8027)" class="st2 st3 st4">GND</text>
+	<path class="st14" d="M304.2,52.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C303.1,52.9,303.6,52.4,304.2,52.4z"/>
-	<text transform="matrix(1 0 0 1 307.857 57.1569)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
-	<path fill="#0000FF" d="M304.2,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+	<text transform="matrix(1 0 0 1 307.857 57.1569)" class="st3 st4">SCL</text>
+	<path class="st15" d="M304.2,45.3h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 		C303.1,45.8,303.6,45.3,304.2,45.3z"/>
-	<text transform="matrix(1 0 0 1 307.857 50.0569)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
+	<text transform="matrix(1 0 0 1 307.857 50.0569)" class="st2 st3 st4">SDA</text>
 </g>
 <g>
 	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M456.4,39.2v18.9
-			c0,1-0.9,1.9-1.9,1.9h-43.7"/>
-		<path fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M459.7,39.2v26.1
-			c0,1-0.9,1.9-1.9,1.9h-47"/>
-		<path fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M449.7,39.2v4.5
-			c0,1-0.9,1.9-1.9,1.9h-37"/>
-		<path fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M453.1,39.2v11.7
-			c0,1-0.9,1.9-1.9,1.9h-40.4"/>
+		<path class="st18" d="M456.4,39.2v18.9c0,1-0.9,1.9-1.9,1.9h-43.7"/>
+		<path class="st19" d="M459.7,39.2v26.1c0,1-0.9,1.9-1.9,1.9h-47"/>
+		<path class="st20" d="M449.7,39.2v4.5c0,1-0.9,1.9-1.9,1.9h-37"/>
+		<path class="st21" d="M453.1,39.2v11.7c0,1-0.9,1.9-1.9,1.9h-40.4"/>
 	</g>
 	<g>
 		
-			<rect id="rect18427_00000178914106809447511930000013866159404436575389_" x="447.2" y="23.9" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="15.5" height="12.6"/>
+			<rect id="rect18427_00000178914106809447511930000013866159404436575389_" x="447.2" y="23.9" class="st16" width="15.5" height="12.6"/>
 		
-			<rect id="rect18429_00000031928373075921312910000014790377498140978847_" x="444.5" y="36.3" fill="#666666" width="20.8" height="3.3"/>
+			<rect id="rect18429_00000031928373075921312910000014790377498140978847_" x="444.5" y="36.3" class="st17" width="20.8" height="3.3"/>
 		<g>
 			
-				<rect id="rect18431_00000170993680101322717880000001644850932840291517_" x="460.2" y="32.7" fill="#666666" width="2.8" height="3.9"/>
+				<rect id="rect18431_00000170993680101322717880000001644850932840291517_" x="460.2" y="32.7" class="st17" width="2.8" height="3.9"/>
 			
-				<rect id="rect18433_00000103241704361221988900000015591929497546297534_" x="457.5" y="32.7" fill="#666666" width="1.5" height="3.9"/>
+				<rect id="rect18433_00000103241704361221988900000015591929497546297534_" x="457.5" y="32.7" class="st17" width="1.5" height="3.9"/>
 			
-				<rect id="rect18435_00000173155515476320139280000004429963318720837812_" x="454.3" y="32.7" fill="#666666" width="1.1" height="3.9"/>
+				<rect id="rect18435_00000173155515476320139280000004429963318720837812_" x="454.3" y="32.7" class="st17" width="1.1" height="3.9"/>
 			
-				<rect id="rect18437_00000061454898119703330670000013955461483550485126_" x="450.8" y="32.7" fill="#666666" width="1.5" height="3.9"/>
+				<rect id="rect18437_00000061454898119703330670000013955461483550485126_" x="450.8" y="32.7" class="st17" width="1.5" height="3.9"/>
 			
-				<rect id="rect18439_00000055704433746169303960000015895652824250320515_" x="446.9" y="32.7" fill="#666666" width="2.6" height="3.9"/>
+				<rect id="rect18439_00000055704433746169303960000015895652824250320515_" x="446.9" y="32.7" class="st17" width="2.6" height="3.9"/>
 		</g>
 	</g>
 	<g>
-		<path fill="#920000" d="M409.6,56.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		<path class="st1" d="M409.6,56.8h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 			C408.5,57.3,409,56.8,409.6,56.8z"/>
-		<text transform="matrix(1 0 0 1 411.4896 61.5797)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-		<path fill="#0000FF" d="M409.6,49.6h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		<text transform="matrix(1 0 0 1 411.4896 61.5797)" class="st2 st3 st4">3.3V</text>
+		<path class="st15" d="M409.6,49.6h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 			C408.5,50.1,409,49.6,409.6,49.6z"/>
-		<text transform="matrix(1 0 0 1 413.2899 54.3796)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-		<path fill="#FFFF00" d="M409.6,42.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		<text transform="matrix(1 0 0 1 413.2899 54.3796)" class="st2 st3 st4">SDA</text>
+		<path class="st14" d="M409.6,42.4h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 			C408.5,42.9,409,42.4,409.6,42.4z"/>
-		<text transform="matrix(1 0 0 1 413.2899 47.1795)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
+		<text transform="matrix(1 0 0 1 413.2899 47.1795)" class="st3 st4">SCL</text>
 		<path d="M409.6,64h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
 			C408.5,64.5,409,64,409.6,64z"/>
-		<text transform="matrix(1 0 0 1 413.2899 68.7795)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
+		<text transform="matrix(1 0 0 1 413.2899 68.7795)" class="st2 st3 st4">GND</text>
 	</g>
 </g>
 <g>
-	<path fill="#E91E32" d="M529.428,45.4823c-0.067,0-0.1218,0.0548-0.1218,0.1222v2.2798c0,0.067,0.0548,0.1221,0.1218,0.1221
-		h25.6078c0.0674,0,0.1221-0.0552,0.1221-0.1221v-2.2798c0-0.0674-0.0547-0.1222-0.1221-0.1222H529.428z"/>
-	<path fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" d="M529.428,45.4823
-		c-0.067,0-0.1218,0.0548-0.1218,0.1222v2.2798c0,0.067,0.0548,0.1221,0.1218,0.1221h25.6078c0.0674,0,0.1221-0.0552,0.1221-0.1221
-		v-2.2798c0-0.0674-0.0547-0.1222-0.1221-0.1222H529.428z"/>
-	<path fill="#231F20" d="M529.428,38.8621c-0.067,0-0.1218,0.0548-0.1218,0.1222v2.2798c0,0.067,0.0548,0.1221,0.1218,0.1221
-		h25.6078c0.0674,0,0.1221-0.0552,0.1221-0.1221v-2.2798c0-0.0674-0.0547-0.1222-0.1221-0.1222H529.428z"/>
-	<path fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" d="M529.428,38.8621
-		c-0.067,0-0.1218,0.0548-0.1218,0.1222v2.2798c0,0.067,0.0548,0.1221,0.1218,0.1221h25.6078c0.0674,0,0.1221-0.0552,0.1221-0.1221
-		v-2.2798c0-0.0674-0.0547-0.1222-0.1221-0.1222H529.428z"/>
-	<polygon fill="#F4F4F4" points="529.9408,44.9709 529.9408,48.6462 531.6237,49.3527 531.6237,53.1396 528.9308,53.1396 
-		525.4332,51.1199 508.5671,51.1199 508.5671,44.2474 508.5671,35.7488 525.4332,35.7488 528.9308,33.7287 531.6237,33.7287 
-		531.6237,37.5152 529.9408,38.2395 529.9408,42.026 531.6237,42.7325 531.6237,44.2474 	"/>
-	<polygon fill="none" stroke="#231F20" stroke-width="0.2" points="529.9408,44.9709 529.9408,48.6462 531.6237,49.3527 
-		531.6237,53.1396 528.9308,53.1396 525.4332,51.1199 508.5671,51.1199 508.5671,44.2474 508.5671,35.7488 525.4332,35.7488 
-		528.9308,33.7287 531.6237,33.7287 531.6237,37.5152 529.9408,38.2395 529.9408,42.026 531.6237,42.7325 531.6237,44.2474 	"/>
-	<rect x="508.567" y="35.7491" fill="#919497" width="16.8661" height="15.3708"/>
-	
-		<rect x="508.567" y="35.7491" fill="none" stroke="#231F20" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="16.8661" height="15.3708"/>
-	<polygon fill="#F4F4F4" points="513.7169,51.1198 508.5673,51.1198 508.5673,44.2473 513.7169,44.2473 513.7169,45.4821 
-		510.5865,45.4821 510.5865,48.0062 513.7169,48.0062 	"/>
-	<polygon fill="none" stroke="#231F20" stroke-width="0.2" points="513.7169,51.1198 508.5673,51.1198 508.5673,44.2473 
-		513.7169,44.2473 513.7169,45.4821 510.5865,45.4821 510.5865,48.0062 513.7169,48.0062 	"/>
-	<rect x="508.567" y="42.7324" fill="#E1E1E1" width="14.4403" height="1.5148"/>
-	<rect x="508.567" y="42.7324" fill="none" stroke="#231F20" stroke-width="0.2" width="14.4403" height="1.5148"/>
-	<rect x="513.717" y="49.353" fill="#E1E1E1" width="9.1264" height="1.7668"/>
-	<rect x="513.717" y="49.353" fill="none" stroke="#231F20" stroke-width="0.2" width="9.1264" height="1.7668"/>
-	<rect x="513.717" y="35.7487" fill="#E1E1E1" width="9.1264" height="1.7668"/>
-	<rect x="513.717" y="35.7487" fill="none" stroke="#231F20" stroke-width="0.2" width="9.1264" height="1.7668"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="516.2115" y1="44.6681" x2="516.2115" y2="48.9323"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="525.433" y1="51.1198" x2="525.433" y2="44.8361"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="512.1016" y1="48.0063" x2="512.1016" y2="45.4822"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="512.1016" y1="41.3863" x2="512.1016" y2="38.8618"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="516.2115" y1="37.9446" x2="516.2115" y2="42.3113"/>
-	
-		<line fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" x1="529.9408" y1="38.2396" x2="529.9408" y2="33.7287"/>
-	<line fill="none" stroke="#000000" stroke-width="0.2" x1="525.433" y1="44.8362" x2="525.433" y2="35.7488"/>
-	<rect x="529.9407" y="42.7324" fill="#FFFFFF" width="1.6828" height="1.5148"/>
-	
-		<rect x="529.9407" y="42.7324" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="1.6828" height="1.5148"/>
-	<rect x="525.4331" y="42.026" fill="#FFFFFF" width="4.5076" height="2.9449"/>
-	<rect x="525.4331" y="42.026" fill="none" stroke="#000000" stroke-width="0.2" width="4.5076" height="2.9449"/>
-	<rect x="528.9307" y="44.9708" fill="#FFFFFF" width="1.01" height="8.1687"/>
-	
-		<rect x="528.9307" y="44.9708" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="1.01" height="8.1687"/>
-	<rect x="528.9307" y="33.7286" fill="#FFFFFF" width="1.01" height="8.2973"/>
-	
-		<rect x="528.9307" y="33.7286" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="1.01" height="8.2973"/>
-	<rect x="510.5866" y="38.8619" fill="#F1EED9" width="5.2003" height="2.5241"/>
-	
-		<rect x="510.5866" y="38.8619" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="5.2003" height="2.5241"/>
-	<rect x="515.0768" y="38.8619" fill="#E6E1CC" width="0.7101" height="2.5241"/>
-	
-		<rect x="515.0768" y="38.8619" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="0.7101" height="2.5241"/>
-	
-		<line fill="none" stroke="#6E7071" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" x1="513.7169" y1="44.2475" x2="513.7169" y2="42.7327"/>
-	<rect x="510.5866" y="45.4821" fill="#F1EED9" width="5.2003" height="2.5241"/>
-	
-		<rect x="510.5866" y="45.4821" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="5.2003" height="2.5241"/>
-	<rect x="515.0768" y="45.4821" fill="#E6E1CC" width="0.7101" height="2.5241"/>
-	
-		<rect x="515.0768" y="45.4821" fill="none" stroke="#000000" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="0.7101" height="2.5241"/>
-	<path fill="#F4F4F4" d="M522.4684,51.1198h2.9647V35.7491h-2.9647v1.1772c0,0.5576-0.452,1.01-1.0096,1.01h-5.7221v4.3749h5.7221
-		c0.5576,0,1.0096,0.4529,1.0096,1.01v0.3368c0,0.558-0.452,1.01-1.0096,1.01h-5.7221v4.2641h5.7221
-		c0.5576,0,1.0096,0.4521,1.0096,1.0096V51.1198z"/>
-	<path fill="none" stroke="#231F20" stroke-width="0.2" d="M522.4684,51.1198h2.9647V35.7491h-2.9647v1.1772
-		c0,0.5576-0.452,1.01-1.0096,1.01h-5.7221v4.3749h5.7221c0.5576,0,1.0096,0.4529,1.0096,1.01v0.3368
-		c0,0.558-0.452,1.01-1.0096,1.01h-5.7221v4.2641h5.7221c0.5576,0,1.0096,0.4521,1.0096,1.0096V51.1198z"/>
-	<polyline fill="#F4F4F4" points="513.7169,35.7483 508.5673,35.7487 508.5673,42.7325 513.7169,42.7325 513.7169,41.3865 
-		510.5865,41.3865 510.5865,38.862 513.7169,38.862 513.7169,35.7487 	"/>
-	<polyline fill="none" stroke="#231F20" stroke-width="0.2" points="513.7169,35.7483 508.5673,35.7487 508.5673,42.7325 
-		513.7169,42.7325 513.7169,41.3865 510.5865,41.3865 510.5865,38.862 513.7169,38.862 513.7169,35.7487 	"/>
+	<path class="st22" d="M529.4,45.5c-0.1,0-0.1,0.1-0.1,0.1v2.3c0,0.1,0.1,0.1,0.1,0.1H555c0.1,0,0.1-0.1,0.1-0.1v-2.3
+		c0-0.1-0.1-0.1-0.1-0.1H529.4z"/>
+	<path class="st23" d="M529.4,45.5c-0.1,0-0.1,0.1-0.1,0.1v2.3c0,0.1,0.1,0.1,0.1,0.1H555c0.1,0,0.1-0.1,0.1-0.1v-2.3
+		c0-0.1-0.1-0.1-0.1-0.1H529.4z"/>
+	<path class="st24" d="M529.4,38.9c-0.1,0-0.1,0.1-0.1,0.1v2.3c0,0.1,0.1,0.1,0.1,0.1H555c0.1,0,0.1-0.1,0.1-0.1V39
+		c0-0.1-0.1-0.1-0.1-0.1H529.4z"/>
+	<path class="st23" d="M529.4,38.9c-0.1,0-0.1,0.1-0.1,0.1v2.3c0,0.1,0.1,0.1,0.1,0.1H555c0.1,0,0.1-0.1,0.1-0.1V39
+		c0-0.1-0.1-0.1-0.1-0.1H529.4z"/>
+	<polygon class="st25" points="529.9,45 529.9,48.6 531.6,49.4 531.6,53.1 528.9,53.1 525.4,51.1 508.6,51.1 508.6,44.2 508.6,35.7 
+		525.4,35.7 528.9,33.7 531.6,33.7 531.6,37.5 529.9,38.2 529.9,42 531.6,42.7 531.6,44.2 	"/>
+	<polygon class="st26" points="529.9,45 529.9,48.6 531.6,49.4 531.6,53.1 528.9,53.1 525.4,51.1 508.6,51.1 508.6,44.2 508.6,35.7 
+		525.4,35.7 528.9,33.7 531.6,33.7 531.6,37.5 529.9,38.2 529.9,42 531.6,42.7 531.6,44.2 	"/>
+	<rect x="508.6" y="35.7" class="st27" width="16.9" height="15.4"/>
+	<rect x="508.6" y="35.7" class="st28" width="16.9" height="15.4"/>
+	<polygon class="st25" points="513.7,51.1 508.6,51.1 508.6,44.2 513.7,44.2 513.7,45.5 510.6,45.5 510.6,48 513.7,48 	"/>
+	<polygon class="st26" points="513.7,51.1 508.6,51.1 508.6,44.2 513.7,44.2 513.7,45.5 510.6,45.5 510.6,48 513.7,48 	"/>
+	<rect x="508.6" y="42.7" class="st29" width="14.4" height="1.5"/>
+	<rect x="508.6" y="42.7" class="st26" width="14.4" height="1.5"/>
+	<rect x="513.7" y="49.4" class="st29" width="9.1" height="1.8"/>
+	<rect x="513.7" y="49.4" class="st26" width="9.1" height="1.8"/>
+	<rect x="513.7" y="35.7" class="st29" width="9.1" height="1.8"/>
+	<rect x="513.7" y="35.7" class="st26" width="9.1" height="1.8"/>
+	<line class="st30" x1="516.2" y1="44.7" x2="516.2" y2="48.9"/>
+	<line class="st30" x1="525.4" y1="51.1" x2="525.4" y2="44.8"/>
+	<line class="st30" x1="512.1" y1="48" x2="512.1" y2="45.5"/>
+	<line class="st30" x1="512.1" y1="41.4" x2="512.1" y2="38.9"/>
+	<line class="st30" x1="516.2" y1="37.9" x2="516.2" y2="42.3"/>
+	<line class="st23" x1="529.9" y1="38.2" x2="529.9" y2="33.7"/>
+	<line class="st30" x1="525.4" y1="44.8" x2="525.4" y2="35.7"/>
+	<rect x="529.9" y="42.7" class="st2" width="1.7" height="1.5"/>
+	<rect x="529.9" y="42.7" class="st23" width="1.7" height="1.5"/>
+	<rect x="525.4" y="42" class="st2" width="4.5" height="2.9"/>
+	<rect x="525.4" y="42" class="st30" width="4.5" height="2.9"/>
+	<rect x="528.9" y="45" class="st2" width="1" height="8.2"/>
+	<rect x="528.9" y="45" class="st23" width="1" height="8.2"/>
+	<rect x="528.9" y="33.7" class="st2" width="1" height="8.3"/>
+	<rect x="528.9" y="33.7" class="st23" width="1" height="8.3"/>
+	<rect x="510.6" y="38.9" class="st31" width="5.2" height="2.5"/>
+	<rect x="510.6" y="38.9" class="st23" width="5.2" height="2.5"/>
+	<rect x="515.1" y="38.9" class="st32" width="0.7" height="2.5"/>
+	<rect x="515.1" y="38.9" class="st23" width="0.7" height="2.5"/>
+	<line class="st33" x1="513.7" y1="44.2" x2="513.7" y2="42.7"/>
+	<rect x="510.6" y="45.5" class="st31" width="5.2" height="2.5"/>
+	<rect x="510.6" y="45.5" class="st23" width="5.2" height="2.5"/>
+	<rect x="515.1" y="45.5" class="st32" width="0.7" height="2.5"/>
+	<rect x="515.1" y="45.5" class="st23" width="0.7" height="2.5"/>
+	<path class="st25" d="M522.5,51.1h3V35.7h-3v1.2c0,0.6-0.5,1-1,1h-5.7v4.4h5.7c0.6,0,1,0.5,1,1v0.3c0,0.6-0.5,1-1,1h-5.7v4.3h5.7
+		c0.6,0,1,0.5,1,1V51.1z"/>
+	<path class="st26" d="M522.5,51.1h3V35.7h-3v1.2c0,0.6-0.5,1-1,1h-5.7v4.4h5.7c0.6,0,1,0.5,1,1v0.3c0,0.6-0.5,1-1,1h-5.7v4.3h5.7
+		c0.6,0,1,0.5,1,1V51.1z"/>
+	<polyline class="st25" points="513.7,35.7 508.6,35.7 508.6,42.7 513.7,42.7 513.7,41.4 510.6,41.4 510.6,38.9 513.7,38.9 
+		513.7,35.7 	"/>
+	<polyline class="st26" points="513.7,35.7 508.6,35.7 508.6,42.7 513.7,42.7 513.7,41.4 510.6,41.4 510.6,38.9 513.7,38.9 
+		513.7,35.7 	"/>
 </g>
 <g>
-	<path fill="#A3A5A7" d="M617.2269,53.4165h-17.032c-0.0569,0-0.113-0.005-0.168-0.016c-0.891-0.072-1.602-0.842-1.602-1.753
-		c0-0.297,0.076-0.591,0.22-0.851c0.01-0.025,0.029-0.062,0.051-0.097l8.516-13.801c0.031-0.049,0.065-0.095,0.103-0.136
-		c0.327-0.428,0.837-0.679,1.388-0.679c0.58,0,1.1039,0.273,1.437,0.748c0.021,0.023,0.047,0.059,0.07,0.097l8.516,13.801
-		c0.028,0.046,0.052,0.094,0.071,0.142c0.118,0.234,0.183,0.506,0.183,0.776c0,0.906-0.679,1.659-1.581,1.751
-		C617.3539,53.4095,617.2899,53.4165,617.2269,53.4165 M608.7029,36.3775c-0.459,0-0.8831,0.209-1.163,0.573
-		c-0.035,0.038-0.058,0.07-0.079,0.103l-8.515,13.801c-0.014,0.023-0.027,0.046-0.037,0.071c-0.126,0.229-0.19,0.474-0.19,0.722
-		c0,0.758,0.592,1.401,1.348,1.462c0.052,0.01,0.09,0.013,0.128,0.013h17.032c0.042,0,0.084-0.004,0.125-0.014
-		c0.756-0.078,1.335-0.719,1.335-1.461c0-0.224-0.055-0.451-0.158-0.656c-0.018-0.045-0.034-0.077-0.053-0.108l-8.516-13.801
-		c-0.015-0.025-0.032-0.049-0.051-0.07C609.6219,36.6045,609.1849,36.3775,608.7029,36.3775"/>
-	<path fill-rule="evenodd" clip-rule="evenodd" fill="#F39337" d="M618.0993,51.647c0,0.483-0.39,0.875-0.873,0.88v0.009h-17.031
-		v-0.009c-0.003,0-0.006,0.001-0.008,0.001c-0.487,0-0.881-0.395-0.881-0.881c0-0.178,0.053-0.343,0.144-0.481l-0.005-0.003
-		l8.516-13.801l0.005,0.003c0.157-0.241,0.428-0.401,0.737-0.401c0.32,0,0.598,0.173,0.752,0.43l0.005-0.003l8.516,13.801
-		l-0.005,0.004C618.0513,51.328,618.0993,51.481,618.0993,51.647"/>
-	<path fill="#E3E4E4" d="M617.2265,52.6822h-17.178v-0.02c-0.508-0.072-0.889-0.5-0.889-1.015c0-0.149,0.032-0.294,0.094-0.428
-		l-0.006-0.004l0.073-0.13l8.593-13.925l0.016,0.009c0.194-0.222,0.474-0.351,0.773-0.351c0.313,0,0.6,0.139,0.795,0.38l0.007-0.004
-		l0.081,0.12l8.592,13.925l-0.014,0.009c0.054,0.127,0.083,0.263,0.083,0.399c0,0.512-0.38,0.939-0.873,1.014v0.012
-		L617.2265,52.6822z M600.3415,52.3892h16.738v-0.008l0.146-0.001c0.401-0.004,0.727-0.333,0.727-0.733
-		c0-0.131-0.036-0.258-0.107-0.376l-0.074-0.123l0.0031-0.003l-8.363-13.554l-0.001,0.001l-0.081-0.123
-		c-0.134-0.224-0.369-0.358-0.627-0.358c-0.248,0-0.477,0.125-0.613,0.334l-0.079,0.12l-0.002-0.001l-8.36,13.55l0.003,0.002
-		l-0.078,0.13c-0.079,0.121-0.121,0.259-0.121,0.401c0,0.404,0.33,0.734,0.735,0.734l0.154-0.009v0.017H600.3415z"/>
-	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M609.8772,41.9566c0-0.648-0.526-1.175-1.174-1.175
-		c-0.649,0-1.175,0.527-1.175,1.175v4.404c0,0.65,0.526,1.175,1.175,1.175c0.648,0,1.174-0.525,1.174-1.175V41.9566z"/>
-	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M608.7029,48.4165c-0.649,0-1.175,0.526-1.175,1.175
-		c0,0.648,0.526,1.175,1.175,1.175c0.6479,0,1.174-0.527,1.174-1.175C609.8769,48.9425,609.3509,48.4165,608.7029,48.4165"/>
+	<path class="st34" d="M617.2,53.4h-17c-0.1,0-0.1,0-0.2,0c-0.9-0.1-1.6-0.8-1.6-1.8c0-0.3,0.1-0.6,0.2-0.9c0,0,0-0.1,0.1-0.1
+		l8.5-13.8c0,0,0.1-0.1,0.1-0.1c0.3-0.4,0.8-0.7,1.4-0.7c0.6,0,1.1,0.3,1.4,0.7c0,0,0,0.1,0.1,0.1l8.5,13.8c0,0,0.1,0.1,0.1,0.1
+		c0.1,0.2,0.2,0.5,0.2,0.8c0,0.9-0.7,1.7-1.6,1.8C617.4,53.4,617.3,53.4,617.2,53.4 M608.7,36.4c-0.5,0-0.9,0.2-1.2,0.6
+		c0,0-0.1,0.1-0.1,0.1l-8.5,13.8c0,0,0,0,0,0.1c-0.1,0.2-0.2,0.5-0.2,0.7c0,0.8,0.6,1.4,1.3,1.5c0.1,0,0.1,0,0.1,0h17
+		c0,0,0.1,0,0.1,0c0.8-0.1,1.3-0.7,1.3-1.5c0-0.2-0.1-0.5-0.2-0.7c0,0,0-0.1-0.1-0.1L610,37.1c0,0,0,0-0.1-0.1
+		C609.6,36.6,609.2,36.4,608.7,36.4"/>
+	<path class="st35" d="M618.1,51.6c0,0.5-0.4,0.9-0.9,0.9v0h-17v0c0,0,0,0,0,0c-0.5,0-0.9-0.4-0.9-0.9c0-0.2,0.1-0.3,0.1-0.5l0,0
+		l8.5-13.8l0,0c0.2-0.2,0.4-0.4,0.7-0.4c0.3,0,0.6,0.2,0.8,0.4l0,0l8.5,13.8l0,0C618.1,51.3,618.1,51.5,618.1,51.6"/>
+	<path class="st36" d="M617.2,52.7H600v0c-0.5-0.1-0.9-0.5-0.9-1c0-0.1,0-0.3,0.1-0.4l0,0l0.1-0.1l8.6-13.9l0,0
+		c0.2-0.2,0.5-0.4,0.8-0.4c0.3,0,0.6,0.1,0.8,0.4l0,0l0.1,0.1l8.6,13.9l0,0c0.1,0.1,0.1,0.3,0.1,0.4c0,0.5-0.4,0.9-0.9,1v0
+		L617.2,52.7z M600.3,52.4h16.7v0l0.1,0c0.4,0,0.7-0.3,0.7-0.7c0-0.1,0-0.3-0.1-0.4l-0.1-0.1l0,0l-8.4-13.6l0,0l-0.1-0.1
+		c-0.1-0.2-0.4-0.4-0.6-0.4c-0.2,0-0.5,0.1-0.6,0.3l-0.1,0.1l0,0l-8.4,13.5l0,0l-0.1,0.1c-0.1,0.1-0.1,0.3-0.1,0.4
+		c0,0.4,0.3,0.7,0.7,0.7L600.3,52.4L600.3,52.4C600.3,52.4,600.3,52.4,600.3,52.4z"/>
+	<path class="st37" d="M609.9,42c0-0.6-0.5-1.2-1.2-1.2c-0.6,0-1.2,0.5-1.2,1.2v4.4c0,0.7,0.5,1.2,1.2,1.2c0.6,0,1.2-0.5,1.2-1.2V42
+		z"/>
+	<path class="st37" d="M608.7,48.4c-0.6,0-1.2,0.5-1.2,1.2c0,0.6,0.5,1.2,1.2,1.2c0.6,0,1.2-0.5,1.2-1.2
+		C609.9,48.9,609.4,48.4,608.7,48.4"/>
 </g>
 <g>
-	<path fill="none" stroke="#0000FF" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M724.2411,36.6
-		l-0.003,19.7636c0.003,1.3527-0.7,2.2542-2.0444,2.2864h-40.2526"/>
-	<path fill="none" stroke="#FF0000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M720.9412,30.65v18.9
-		c0,1-0.8535,1.9-1.8018,1.9H677.7"/>
-	<path fill="none" stroke="#FFFF00" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M727.5411,31.35
-		l-0.0071,31.3369c0.0071,2.7747-0.5222,3.1631-3.2388,3.1631l-35.6541,0"/>
-	<path fill="none" stroke="#000000" stroke-width="0.7087" stroke-linecap="round" stroke-linejoin="round" d="M717.5411,23.7285
-		V42.35c0,0.9793-0.8597,1.9-1.9421,1.9H677.7"/>
-	<path fill="#0000FF" d="M677.4412,55.45h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,55.95,676.8411,55.45,677.4412,55.45z"/>
-	<path d="M677.4412,41.05h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,41.55,676.8411,41.05,677.4412,41.05z"/>
-	<text transform="matrix(1 0 0 1 681.131 45.8295)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">GND</text>
-	<path fill="#FFFF00" d="M677.4412,62.65h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,63.15,676.8411,62.65,677.4412,62.65z"/>
+	<path class="st21" d="M724.2,36.6l0,19.8c0,1.4-0.7,2.3-2,2.3h-40.3"/>
+	<path class="st18" d="M720.9,30.6v18.9c0,1-0.9,1.9-1.8,1.9h-41.4"/>
+	<path class="st20" d="M727.5,31.4l0,31.3c0,2.8-0.5,3.2-3.2,3.2h-35.7"/>
+	<path class="st19" d="M717.5,23.7v18.6c0,1-0.9,1.9-1.9,1.9h-37.9"/>
+	<path class="st15" d="M677.4,55.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,56,676.8,55.5,677.4,55.5z"/>
+	<path d="M677.4,41h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,41.5,676.8,41,677.4,41z"/>
+	<text transform="matrix(1 0 0 1 681.131 45.8295)" class="st2 st3 st4">GND</text>
+	<path class="st14" d="M677.4,62.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,63.2,676.8,62.7,677.4,62.7z"/>
 	<g>
 		
-			<rect id="rect18427_00000060028905247321236260000016538577171732800398_" x="715.0411" y="22.55" fill="#333333" stroke="#333333" stroke-width="0.2877" stroke-miterlimit="3.8362" width="15.5" height="12.6"/>
+			<rect id="rect18427_00000060028905247321236260000016538577171732800398_" x="715" y="22.5" class="st16" width="15.5" height="12.6"/>
 		
-			<rect id="rect18429_00000136380620032927873150000008133730919514636695_" x="712.3411" y="34.95" fill="#666666" width="20.8" height="3.3"/>
+			<rect id="rect18429_00000136380620032927873150000008133730919514636695_" x="712.3" y="35" class="st17" width="20.8" height="3.3"/>
 		<g>
 			
-				<rect id="rect18431_00000067232381136894892490000013012950741728482693_" x="728.0411" y="31.35" fill="#666666" width="2.8" height="3.9"/>
+				<rect id="rect18431_00000067232381136894892490000013012950741728482693_" x="728" y="31.4" class="st17" width="2.8" height="3.9"/>
 			
-				<rect id="rect18433_00000039092270229879896300000000163092724316894638_" x="725.3411" y="31.35" fill="#666666" width="1.5" height="3.9"/>
+				<rect id="rect18433_00000039092270229879896300000000163092724316894638_" x="725.3" y="31.4" class="st17" width="1.5" height="3.9"/>
 			
-				<rect id="rect18435_00000018217946427967510590000005138267382436280508_" x="722.1411" y="31.35" fill="#666666" width="1.1" height="3.9"/>
+				<rect id="rect18435_00000018217946427967510590000005138267382436280508_" x="722.1" y="31.4" class="st17" width="1.1" height="3.9"/>
 			
-				<rect id="rect18437_00000053525560374292404480000001696303565037957564_" x="718.6411" y="31.35" fill="#666666" width="1.5" height="3.9"/>
+				<rect id="rect18437_00000053525560374292404480000001696303565037957564_" x="718.6" y="31.4" class="st17" width="1.5" height="3.9"/>
 			
-				<rect id="rect18439_00000061453906011602837510000005837779149130639238_" x="714.7411" y="31.35" fill="#666666" width="2.6" height="3.9"/>
+				<rect id="rect18439_00000061453906011602837510000005837779149130639238_" x="714.7" y="31.4" class="st17" width="2.6" height="3.9"/>
 		</g>
 	</g>
-	<path fill="#920000" d="M677.4412,48.25h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,48.75,676.8411,48.25,677.4412,48.25z"/>
-	<text transform="matrix(1 0 0 1 679.3307 53.0297)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">3.3V</text>
-	<path fill="#0000FF" d="M677.4412,55.45h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,55.95,676.8411,55.45,677.4412,55.45z"/>
-	<text transform="matrix(1 0 0 1 681.131 60.2296)" fill="#FFFFFF" font-family="'CourierNewPS-BoldMT'" font-size="6px">SDA</text>
-	<path fill="#FFFF00" d="M677.4412,62.65h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
-		C676.3411,63.15,676.8411,62.65,677.4412,62.65z"/>
-	<text transform="matrix(1 0 0 1 681.131 67.4295)" font-family="'CourierNewPS-BoldMT'" font-size="6px">SCL</text>
+	<path class="st1" d="M677.4,48.2h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,48.8,676.8,48.2,677.4,48.2z"/>
+	<text transform="matrix(1 0 0 1 679.3307 53.0297)" class="st2 st3 st4">3.3V</text>
+	<path class="st15" d="M677.4,55.5h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,56,676.8,55.5,677.4,55.5z"/>
+	<text transform="matrix(1 0 0 1 681.131 60.2296)" class="st2 st3 st4">SDA</text>
+	<path class="st14" d="M677.4,62.7h18.2c0.6,0,1.1,0.5,1.1,1.1v3.8c0,0.6-0.5,1.1-1.1,1.1h-18.2c-0.6,0-1.1-0.5-1.1-1.1v-3.8
+		C676.3,63.2,676.8,62.7,677.4,62.7z"/>
+	<text transform="matrix(1 0 0 1 681.131 67.4295)" class="st3 st4">SCL</text>
+</g>
+<g>
+	<path class="st34" d="M617.2,83.2h-17c-0.1,0-0.1,0-0.2,0c-1-0.1-1.7-0.9-1.6-1.9c0-0.2,0.1-0.5,0.2-0.7c0,0,0-0.1,0.1-0.1
+		l8.5-13.8c0,0,0.1-0.1,0.1-0.1c0.6-0.8,1.7-0.9,2.5-0.3c0.1,0.1,0.3,0.2,0.4,0.4c0,0,0,0.1,0.1,0.1l8.5,13.8c0,0,0.1,0.1,0.1,0.1
+		c0.4,0.9,0.1,1.9-0.8,2.4c-0.2,0.1-0.4,0.2-0.6,0.2C617.3,83.2,617.3,83.2,617.2,83.2 M608.7,66.1c-0.5,0-0.9,0.2-1.2,0.6
+		c0,0-0.1,0.1-0.1,0.1l-8.5,13.8c0,0,0,0,0,0.1c-0.1,0.2-0.2,0.5-0.2,0.7c0,0.8,0.6,1.4,1.3,1.5c0,0,0.1,0,0.1,0h17c0,0,0.1,0,0.1,0
+		c0.8-0.1,1.3-0.7,1.3-1.5c0-0.2-0.1-0.5-0.2-0.7c0,0,0-0.1-0.1-0.1L610,66.8c0,0,0,0-0.1-0.1C609.6,66.4,609.2,66.1,608.7,66.1"/>
+	<path class="st38" d="M618.1,81.4c0,0.5-0.4,0.9-0.9,0.9v0h-17v0l0,0c-0.5,0-0.9-0.4-0.9-0.9c0-0.2,0-0.3,0.1-0.5l0,0l8.5-13.8l0,0
+		c0.3-0.4,0.8-0.5,1.2-0.3c0.1,0.1,0.2,0.2,0.3,0.3l0,0L618,81l0,0C618.1,81.1,618.1,81.3,618.1,81.4"/>
+	<path class="st36" d="M617.2,82.4H600v0c-0.5-0.1-0.9-0.5-0.9-1c0-0.1,0-0.3,0.1-0.4l0,0l0.1-0.1l8.6-13.9l0,0
+		c0.4-0.4,1-0.5,1.4-0.1c0,0,0.1,0.1,0.1,0.1l0,0l0.1,0.1l8.6,13.9l0,0c0.2,0.5,0,1.1-0.5,1.3c-0.1,0-0.2,0.1-0.3,0.1v0L617.2,82.4z
+		 M600.3,82.2h16.7v0l0.1,0c0.4,0,0.7-0.3,0.7-0.7c0-0.1,0-0.3-0.1-0.4l-0.1-0.1l0,0l-8.4-13.6l0,0l-0.1-0.1c-0.2-0.3-0.7-0.5-1-0.3
+		c-0.1,0.1-0.2,0.1-0.2,0.2l-0.1,0.1l0,0l-8.4,13.6l0,0l-0.1,0.1c-0.2,0.3-0.1,0.8,0.2,1c0.1,0.1,0.3,0.1,0.4,0.1L600.3,82.2
+		L600.3,82.2L600.3,82.2z"/>
+	<text transform="matrix(1 0 0 1 604.9225 80.8256)" class="st2 st39 st40">?</text>
 </g>
 </svg>
