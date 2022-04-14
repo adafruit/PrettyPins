@@ -327,6 +327,7 @@ int main(void) {
 #define PIO_TIMER 0
 #define PIO_TIMER_ALT 0
 #define PIO_PWM 0
+#define PIO_PWM_ALT 0
 #define PIN_ATTR_TIMER 0        
 #define PIN_ATTR_TIMER_ALT 0        
 #define PIO_COM 0
