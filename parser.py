@@ -405,6 +405,7 @@ int main(void) {
             outfileh.write(line)
 
         outfileh.close()
+        arduinopins = ""
 
     ###################################################### SAMDxx board variant handler
     elif "esp32" in variantfolder.lower():
