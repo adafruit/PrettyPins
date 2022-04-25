@@ -98,3 +98,7 @@ RP2040 does not have official Arduino support (yet).
 ```python3 parser.py "Adafruit ItsyBitsy nRF52840.fzpz"  path/to/circuitpython/ports/nrf/boards/itsybitsy_nrf52840_express/pins.c  nrf52840pins.csv -a ~/Library/Arduino15/packages/adafruit/hardware/nrf52/0.20.5/variants/itsybitsy_nrf52840_express```
 
 ```python3 parser.py "Adafruit nRF52840 CLUE.fzpz"  path/to/circuitpython/ports/nrf/boards/clue_nrf52840_express/pins.c  nrf52840pins.csv -a ~/Library/Arduino15/packages/adafruit/hardware/nrf52/0.20.5/variants/clue_nrf52840```
+
+#### SAMD21:
+
+```python3 parser.py  "Adafruit Feather M0 Express.fzpz"  path/to/circuitpython/ports/atmel-samd/boards/feather_m0_express/pins.c samd21pins.csv -a ~/Library/Arduino15/packages/adafruit/hardware/samd/variants/feather_m0```

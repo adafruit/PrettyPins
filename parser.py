@@ -336,8 +336,11 @@ int main(void) {
 #define DAC_Channel0 0
 """)
         for define in ("NOT_ON_TIMER", "NOT_ON_PWM", "No_ADC_Channel",
-                       "EXTERNAL_INT_NONE", "PIN_ATTR_NONE"):
-            outfilecpp.write("#define %s -1\n" % define)
+                       "EXTERNAL_INT_NONE", "PIN_ATTR_NONE",
+                       "PIN_ATTR_PWM_E", "PIN_ATTR_PWM_F", "PIN_ATTR_PWM_G",
+                       "DAC_Channel1", "TCC_INST_NUM", "TC_INST_NUM", 
+                       "NOT_A_PORT", "PIO_NOT_A_PIN"):
+            outfilecpp.write("#define %s 10\n" % define)
         for adc in range(0, 32):
             outfilecpp.write("#define ADC_Channel%d %d\n" % (adc, adc))
         for irq in range(0, 32):
@@ -347,14 +350,18 @@ int main(void) {
             outfilecpp.write("#define TCC0_CH%d %d\n" % (tcc, tcc))
             outfilecpp.write("#define PWM1_CH%d %d\n" % (tcc, tcc))
             outfilecpp.write("#define TCC1_CH%d %d\n" % (tcc, tcc))
-        for tc in range(0, 2):
+            outfilecpp.write("#define TCC%d_GCLK_ID %d\n" % (tcc, tcc))
+        for tc in range(0, 8):
             outfilecpp.write("#define PWM2_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TCC2_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define PWM3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define PWM4_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC4_CH%d %d\n" % (tc, tc))
-
+            outfilecpp.write("#define TC2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC1_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC0_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC%d_GCLK_ID %d\n" % (tc, tc))
         outfilecpp.write("""
 typedef struct _PinDescription
 {
@@ -475,7 +482,7 @@ int main(void) {
             if 'arduinopin' in conn:
                 continue
             conn['arduinopin'] = arduinopin
-            #print(arduinopin, pinname, conn)
+            print(arduinopin, pinname, conn)
         longest_arduinopin = max(longest_arduinopin, len(arduinopin))
 
     return connections
@@ -998,8 +1005,6 @@ def parse(fzpz, circuitpydef, pinoutcsv, arduinovariantfolder, substitute):
     if not arduinovariantfolder and pinoutcsv == "attiny8xpins.csv":
         arduinovariantfolder = "attiny8x"
     connections = get_arduino_mapping(connections, arduinovariantfolder)
-    #print(connections)
-    
     # open and parse the pinout mapper CSV
     pinarray = get_chip_pinout(connections, pinoutcsv)
     #print(pinarray)
