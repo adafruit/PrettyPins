@@ -808,9 +808,9 @@ def draw_pinlabels_svg(connections):
                     continue
                 if mux == 'GPIO':  # the underlying pin GPIO name
                     label_type = 'Port'
-                elif mux in ('SPI', 'HS/QSPI') :  # SPI ports
+                elif mux in ('SPI', 'HS/QSPI', 'QSPI/CAN') :  # SPI ports
                     label_type = 'SPI'
-                elif mux == 'I2C':  # I2C ports
+                elif mux in ('I2C',):  # I2C ports
                     label_type = 'I2C'
                 elif mux in ('UART', 'Debug'):  # UART ports
                     label_type = 'UART'
@@ -826,7 +826,7 @@ def draw_pinlabels_svg(connections):
                     label_type = 'I2C'
                 elif mux == 'Power Domain':
                     label_type = 'Power Domain'
-                elif mux == 'High Speed':
+                elif mux in ('High Speed', "PCC"):
                     label_type = 'High Speed'
                 elif mux == 'Low Speed':
                     label_type = 'Low Speed'
@@ -848,7 +848,9 @@ def draw_pinlabels_svg(connections):
                     label_type = 'Timer'
                 elif mux == 'Timer Alt':
                     label_type = 'Timer Alt'
-                elif mux == 'SDMMC':
+                elif mux == 'Timer Alt2':
+                    label_type = 'Timer Alt2'
+                elif mux in ('SDMMC', "I2S"):
                     label_type = 'SERCOM'
                 else:
                     continue
