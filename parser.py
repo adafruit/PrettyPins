@@ -354,9 +354,12 @@ int main(void) {
         for tc in range(0, 8):
             outfilecpp.write("#define PWM2_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TCC2_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TCC3_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TCC4_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define PWM3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define PWM4_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC5_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC4_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC2_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC1_CH%d %d\n" % (tc, tc))
