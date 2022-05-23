@@ -318,6 +318,7 @@ int main(void) {
 #define EXTERNAL_INT_NMI 32
 #define PIN_ATTR_PWM 0
 #define PIN_ATTR_ANALOG 0
+#define PIN_ATTR_ANALOG_ALT 0
 #define PIN_ATTR_DIGITAL 0
 #define PIO_SERCOM 0
 #define PIO_DIGITAL 0
