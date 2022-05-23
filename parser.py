@@ -340,7 +340,7 @@ int main(void) {
                        "EXTERNAL_INT_NONE", "PIN_ATTR_NONE",
                        "PIN_ATTR_PWM_E", "PIN_ATTR_PWM_F", "PIN_ATTR_PWM_G",
                        "DAC_Channel1", "TCC_INST_NUM", "TC_INST_NUM", 
-                       "NOT_A_PORT", "PIO_NOT_A_PIN"):
+                       "NOT_A_PORT", "PIO_NOT_A_PIN", "PIN_NOT_A_PIN"):
             outfilecpp.write("#define %s 10\n" % define)
         for adc in range(0, 32):
             outfilecpp.write("#define ADC_Channel%d %d\n" % (adc, adc))
