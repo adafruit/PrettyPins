@@ -334,6 +334,8 @@ int main(void) {
 #define PIO_COM 0
 #define PORTA 0
 #define PORTB 1
+#define PORTC 2
+#define PORTD 3
 #define DAC_Channel0 0
 """)
         for define in ("NOT_ON_TIMER", "NOT_ON_PWM", "No_ADC_Channel",
@@ -360,6 +362,8 @@ int main(void) {
             outfilecpp.write("#define PWM3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC3_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define PWM4_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC7_CH%d %d\n" % (tc, tc))
+            outfilecpp.write("#define TC6_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC5_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC4_CH%d %d\n" % (tc, tc))
             outfilecpp.write("#define TC2_CH%d %d\n" % (tc, tc))
