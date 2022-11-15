@@ -470,7 +470,7 @@ int main(void) {
 
 
     else:
-        raise UnimplementedError("Unknown arduino variant type!", variantfolder.lower())
+        raise NotImplementedError("Unknown Arduino variant type! (if RP2040, leave off -a arguments and try again)", variantfolder.lower())
 
     if not arduinopins:  # some variants can auto-extract the pins for us, if not we do it the hard way
         time.sleep(1)
