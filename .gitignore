@@ -1,2 +1,6 @@
 /workdir
 /*.fzpz
+output.svg
+pinlabels.svg
+.DS_Store
+.idea
