@@ -192,7 +192,7 @@ def get_arduino_mapping(connections, variantfolder):
     if not variantfolder:
         return connections
     ###################################################### special case of very early chips
-    if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder) or ("attiny8x" in variantfolder):
+    if ("atmega328" in variantfolder) or ("atmega32u4" in variantfolder) or ("attiny8x" in variantfolder) or ("CH32V203G8" in variantfolder):
         pinmap8x = ["PB0", "PB1", "PB2", "PB3", "PB4"]
         pinmap328 = ["PD0", "PD1", "PD2", "PD3", "PD4", "PD5", "PD6", "PD7",
                      "PB0", "PB1", "PB2", "PB3", "PB4", "PB5",
@@ -210,6 +210,13 @@ def get_arduino_mapping(connections, variantfolder):
                             "MISO" : "PB3", "SCK" : "PB1", "MOSI" : "PB2",
                             "A0" : "PF7", "A1" : "PF6", "A2" : "PF5",
                             "A3" : "PF4", "A4" : "PF1", "A5" : "PF0" }
+        pinmapch32 = ["PB0", "PB1", "PB6", "PB7", "PB8", "PA0", "PA1", "PA2",
+                      "PA3", "PA4", "PA5", "PA6", "PA7"]
+        specialnamesch32 = {"A1" : "PB0", "A0" : "PB1",
+                            "SCL" : "PB6", "SDA" : "PB7", "BOOT0" : "PB8",
+                            "A3" : "PA0", "A2" : "PA1", "TX" : "PA2",
+                            "RX" : "PA3", "NEOPIXEL" : "PA4", "SCK" : "PA5",
+                            "MISO" : "PA6", "MOSI" : "PA7", }
         
         if "attiny8x" in variantfolder:
             pinmap = pinmap8x
@@ -220,6 +227,9 @@ def get_arduino_mapping(connections, variantfolder):
         if "atmega32u4" in variantfolder:
             pinmap = pinmap32u4
             specialnames = specialnames32u4
+        if "CH32V203G8" in variantfolder:
+            pinmap = pinmapch32
+            specialnames = specialnamesch32
             
         for conn in connections:
             print(conn['name'])
