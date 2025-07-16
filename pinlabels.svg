@@ -7,276 +7,204 @@
         fill: #009292;
       }
 
-      .st1, .st2, .st3, .st4, .st5, .st6 {
-        isolation: isolate;
-      }
-
-      .st1, .st3 {
-        font-family: CourierNewPSMT, 'Courier New';
-      }
-
-      .st1, .st3, .st5, .st6 {
-        font-size: 6px;
-      }
-
-      .st1, .st6 {
-        fill: #fff;
-      }
-
-      .st2 {
+      .st1 {
         font-size: 16px;
       }
 
-      .st2, .st4, .st5, .st6 {
+      .st1, .st2, .st3, .st4, .st5 {
+        isolation: isolate;
+      }
+
+      .st1, .st3, .st4, .st5 {
         font-family: CourierNewPS-BoldMT, 'Courier New';
         font-weight: 700;
       }
 
-      .st7 {
+      .st6 {
         fill: #ffb6db;
       }
 
-      .st4 {
+      .st2 {
+        font-family: CourierNewPSMT, 'Courier New';
+      }
+
+      .st2, .st4, .st5 {
+        font-size: 6px;
+      }
+
+      .st3 {
         font-size: 12px;
       }
 
-      .st8 {
+      .st7 {
         fill: #e6e6e6;
         stroke: #737373;
         stroke-width: .4px;
       }
 
-      .st9 {
+      .st8 {
         fill: none;
         stroke: #8c8c8c;
         stroke-linecap: round;
         stroke-width: .7px;
       }
 
-      .st10 {
+      .st9 {
         fill: #24ff24;
       }
 
-      .st11 {
+      .st10 {
         fill: #b6dbff;
       }
 
-      .st12 {
+      .st11 {
         fill: #ffff6d;
       }
 
-      .st13 {
+      .st12 {
         fill: #490092;
       }
 
-      .st14 {
+      .st13 {
         fill: #920000;
       }
 
-      .st15 {
+      .st14 {
         fill: #6db6ff;
       }
 
-      .st16 {
+      .st5 {
+        fill: #fff;
+      }
+
+      .st15 {
         fill: #b66dff;
       }
     </style>
   </defs>
   <g>
-    <line class="st9" x1="-4" y1="46.8" x2="10.8" y2="46.8"/>
-    <rect class="st14" x=".6" y="43.8" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(3.6 48.5)"><tspan x="0" y="0">3.3V</tspan></text>
+    <line class="st8" x1="-4" y1="46.8" x2="10.8" y2="46.8"/>
+    <rect class="st13" x=".6" y="43.8" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st5" transform="translate(3.6 48.5)"><tspan x="0" y="0">3.3V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="54" x2="10.8" y2="54"/>
-    <rect class="st14" x=".6" y="51" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(3.6 55.8)"><tspan x="0" y="0">3.3V</tspan></text>
+    <line class="st8" x1="-4" y1="54" x2="10.8" y2="54"/>
+    <rect class="st13" x=".6" y="51" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st5" transform="translate(3.6 55.8)"><tspan x="0" y="0">3.3V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="61.2" x2="10.8" y2="61.2"/>
-    <rect class="st14" x=".6" y="58.2" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(3.6 63)"><tspan x="0" y="0">3.3V</tspan></text>
+    <line class="st8" x1="-4" y1="61.2" x2="10.8" y2="61.2"/>
+    <rect class="st13" x=".6" y="58.2" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st5" transform="translate(3.6 63)"><tspan x="0" y="0">3.3V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="75.6" x2="10.8" y2="75.6"/>
-    <rect class="st8" x=".7" y="72.7" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(3.6 77.3)"><tspan x="0" y="0">5.0V</tspan></text>
+    <line class="st8" x1="-4" y1="75.6" x2="10.8" y2="75.6"/>
+    <rect class="st7" x=".7" y="72.7" width="20.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(3.6 77.3)"><tspan x="0" y="0">5.0V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="82.8" x2="10.8" y2="82.8"/>
-    <rect class="st8" x=".7" y="79.9" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(3.6 84.5)"><tspan x="0" y="0">5.0V</tspan></text>
+    <line class="st8" x1="-4" y1="82.8" x2="10.8" y2="82.8"/>
+    <rect class="st7" x=".7" y="79.9" width="20.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(3.6 84.5)"><tspan x="0" y="0">5.0V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="90" x2="10.8" y2="90"/>
-    <rect class="st8" x=".7" y="87.1" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(3.6 91.8)"><tspan x="0" y="0">5.0V</tspan></text>
+    <line class="st8" x1="-4" y1="90" x2="10.8" y2="90"/>
+    <rect class="st7" x=".7" y="87.1" width="20.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(3.6 91.8)"><tspan x="0" y="0">5.0V</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="97.2" x2="10.8" y2="97.2"/>
-    <rect class="st8" x=".7" y="94.3" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(5.4 99)"><tspan x="0" y="0">VCC</tspan></text>
+    <line class="st8" x1="-4" y1="104.4" x2="10.8" y2="104.4"/>
+    <rect class="st7" x=".7" y="101.5" width="20.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(3.6 106.2)"><tspan x="0" y="0">SPKP</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="104.4" x2="10.8" y2="104.4"/>
-    <rect class="st8" x=".7" y="101.5" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(3.6 106.2)"><tspan x="0" y="0">SPKP</tspan></text>
+    <line class="st8" x1="-4" y1="111.6" x2="10.8" y2="111.6"/>
+    <rect class="st7" x=".7" y="108.7" width="20.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(3.6 113.3)"><tspan x="0" y="0">SPKN</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="111.6" x2="10.8" y2="111.6"/>
-    <rect class="st8" x=".7" y="108.7" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(3.6 113.3)"><tspan x="0" y="0">SPKN</tspan></text>
+    <line class="st8" x1="-4" y1="133.2" x2="19.8" y2="133.2"/>
+    <rect class="st7" x=".7" y="130.3" width="38.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 135)"><tspan x="0" y="0">PERIPH_RST</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="133.2" x2="19.8" y2="133.2"/>
-    <rect class="st8" x=".7" y="130.3" width="38.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 135)"><tspan x="0" y="0">PERIPH_RST</tspan></text>
+    <line class="st8" x1="-4" y1="176.4" x2="28.8" y2="176.4"/>
+    <rect class="st7" x=".7" y="173.5" width="56.1" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 178.2)"><tspan x="0" y="0">USBBOOT/BUTTON1</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="176.4" x2="28.8" y2="176.4"/>
-    <rect class="st8" x=".7" y="173.5" width="56.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 178.2)"><tspan x="0" y="0">USBBOOT/BUTTON1</tspan></text>
+    <line class="st8" x1="-4" y1="284.4" x2="12.6" y2="284.4"/>
+    <rect class="st7" x=".7" y="281.5" width="23.7" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 286.1)"><tspan x="0" y="0">D8/TX1</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="284.4" x2="12.6" y2="284.4"/>
-    <rect class="st8" x=".7" y="281.5" width="23.7" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 286.1)"><tspan x="0" y="0">D8/TX1</tspan></text>
+    <line class="st8" x1="-4" y1="291.6" x2="12.6" y2="291.6"/>
+    <rect class="st7" x=".7" y="288.7" width="23.7" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 293.4)"><tspan x="0" y="0">D9/RX1</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="291.6" x2="12.6" y2="291.6"/>
-    <rect class="st8" x=".7" y="288.7" width="23.7" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 293.4)"><tspan x="0" y="0">D9/RX1</tspan></text>
+    <line class="st8" x1="-4" y1="306" x2="14.4" y2="306"/>
+    <rect class="st7" x=".7" y="303.1" width="27.3" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 307.8)"><tspan x="0" y="0">USBH_D+</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="306" x2="14.4" y2="306"/>
-    <rect class="st8" x=".7" y="303.1" width="27.3" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 307.8)"><tspan x="0" y="0">USBH_D+</tspan></text>
+    <line class="st8" x1="-4" y1="313.2" x2="14.4" y2="313.2"/>
+    <rect class="st7" x=".7" y="310.3" width="27.3" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(1.8 315)"><tspan x="0" y="0">USBH_D-</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="313.2" x2="14.4" y2="313.2"/>
-    <rect class="st8" x=".7" y="310.3" width="27.3" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(1.8 315)"><tspan x="0" y="0">USBH_D-</tspan></text>
-  </g>
-  <g>
-    <line class="st9" x1="-4" y1="342" x2="10.8" y2="342"/>
-    <rect x=".6" y="339" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(5.4 343.8)"><tspan x="0" y="0">GND</tspan></text>
-  </g>
-  <g>
-    <line class="st9" x1="-4" y1="349.2" x2="10.8" y2="349.2"/>
+    <line class="st8" x1="-4" y1="349.2" x2="10.8" y2="349.2"/>
     <rect x=".6" y="346.2" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(5.4 351)"><tspan x="0" y="0">GND</tspan></text>
+    <text class="st5" transform="translate(5.4 351)"><tspan x="0" y="0">GND</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="356.4" x2="10.8" y2="356.4"/>
+    <line class="st8" x1="-4" y1="356.4" x2="10.8" y2="356.4"/>
     <rect x=".6" y="353.4" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(5.4 358.1)"><tspan x="0" y="0">GND</tspan></text>
+    <text class="st5" transform="translate(5.4 358.1)"><tspan x="0" y="0">GND</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="363.6" x2="10.8" y2="363.6"/>
+    <line class="st8" x1="-4" y1="363.6" x2="10.8" y2="363.6"/>
     <rect x=".6" y="360.6" width="20.5" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st6" transform="translate(5.4 365.4)"><tspan x="0" y="0">GND</tspan></text>
+    <text class="st5" transform="translate(5.4 365.4)"><tspan x="0" y="0">GND</tspan></text>
   </g>
   <g>
-    <line class="st9" x1="-4" y1="370.8" x2="135" y2="370.8"/>
-    <rect class="st8" x=".7" y="367.9" width="20.1" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(7.2 372.5)"><tspan x="0" y="0">A0</tspan></text>
-    <rect class="st12" x="22.2" y="367.8" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(23.4 372.5)"><tspan x="0" y="0">GPIO40</tspan></text>
-    <rect class="st10" x="47.4" y="367.8" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(50.4 372.5)"><tspan x="0" y="0">RX1</tspan></text>
-    <rect class="st0" x="65.4" y="367.8" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st1" transform="translate(68.4 372.5)"><tspan x="0" y="0">TX1</tspan></text>
-    <rect class="st11" x="83.4" y="367.8" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(84.6 372.5)"><tspan x="0" y="0">SDA0</tspan></text>
-    <rect class="st15" x="101.4" y="367.8" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(104.4 372.5)"><tspan x="0" y="0">PWM8A</tspan></text>
-    <rect class="st16" x="126.6" y="367.8" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(127.8 372.5)"><tspan x="0" y="0">ADC0</tspan></text>
-  </g>
-  <g>
-    <line class="st9" x1="-3.2" y1="492.6" x2="161" y2="492.6"/>
-    <rect class="st8" x="1.5" y="489.7" width="66.9" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(2.6 494.3)"><tspan x="0" y="0">USB_HOST_DATA_PLUS</tspan></text>
-    <rect class="st12" x="69.8" y="489.5" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(72.8 494.3)"><tspan x="0" y="0">GPIO1</tspan></text>
-    <rect class="st10" x="95" y="489.5" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(96.2 494.3)"><tspan x="0" y="0">CSn0</tspan></text>
-    <rect class="st0" x="113" y="489.5" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st1" transform="translate(116 494.3)"><tspan x="0" y="0">RX0</tspan></text>
-    <rect class="st11" x="131" y="489.5" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(132.2 494.3)"><tspan x="0" y="0">SCL0</tspan></text>
-    <rect class="st15" x="149" y="489.5" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(152 494.3)"><tspan x="0" y="0">PWM0B</tspan></text>
-  </g>
-  <g>
-    <line class="st9" x1="-3.2" y1="499.8" x2="164.6" y2="499.8"/>
-    <rect class="st8" x="1.5" y="496.9" width="70.5" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(2.6 501.5)"><tspan x="0" y="0">USB_HOST_DATA_MINUS</tspan></text>
-    <rect class="st12" x="73.4" y="496.7" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(76.4 501.5)"><tspan x="0" y="0">GPIO2</tspan></text>
-    <rect class="st10" x="98.6" y="496.7" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(99.8 501.5)"><tspan x="0" y="0">SCK0</tspan></text>
-    <rect class="st0" x="116.6" y="496.7" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st1" transform="translate(117.8 501.5)"><tspan x="0" y="0">CTS0</tspan></text>
-    <rect class="st11" x="134.6" y="496.7" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(135.8 501.5)"><tspan x="0" y="0">SDA1</tspan></text>
-    <rect class="st15" x="152.6" y="496.7" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(155.6 501.5)"><tspan x="0" y="0">PWM1A</tspan></text>
-  </g>
-  <g>
-    <line class="st9" x1="-3.2" y1="507" x2="157.4" y2="507"/>
-    <rect class="st8" x="1.5" y="504.1" width="63.3" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(2.6 508.7)"><tspan x="0" y="0">USB_HOST_5V_POWER</tspan></text>
-    <rect class="st12" x="66.2" y="503.9" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(67.4 508.7)"><tspan x="0" y="0">GPIO11</tspan></text>
-    <rect class="st10" x="91.4" y="503.9" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(94.4 508.7)"><tspan x="0" y="0">TX1</tspan></text>
-    <rect class="st0" x="109.4" y="503.9" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st1" transform="translate(110.6 508.7)"><tspan x="0" y="0">RTS1</tspan></text>
-    <rect class="st11" x="127.4" y="503.9" width="16.9" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(128.6 508.7)"><tspan x="0" y="0">SCL1</tspan></text>
-    <rect class="st15" x="145.4" y="503.9" width="24.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st3" transform="translate(148.4 508.7)"><tspan x="0" y="0">PWM5B</tspan></text>
-  </g>
-  <g>
-    <rect class="st14" x=".6" y="634.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 639)"><tspan x="0" y="0">Power</tspan></text>
+    <rect class="st13" x=".6" y="634.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 639)"><tspan x="0" y="0">Power</tspan></text>
     <rect x=".6" y="641.4" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 646.2)"><tspan x="0" y="0">GND</tspan></text>
-    <rect class="st13" x=".6" y="648.6" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 653.3)"><tspan x="0" y="0">Control</tspan></text>
-    <rect class="st8" x=".7" y="655.9" width="5.7" height="5.7" rx="1" ry="1"/>
-    <text class="st5" transform="translate(8.6 660.5)"><tspan x="0" y="0">CircuitPython Name</tspan></text>
-    <rect class="st12" x=".6" y="663" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 667.8)"><tspan x="0" y="0">GPIO</tspan></text>
-    <rect class="st10" x=".6" y="670.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 675)"><tspan x="0" y="0">SPI</tspan></text>
+    <text class="st4" transform="translate(8.6 646.2)"><tspan x="0" y="0">GND</tspan></text>
+    <rect class="st12" x=".6" y="648.6" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 653.3)"><tspan x="0" y="0">Control</tspan></text>
+    <rect class="st7" x=".7" y="655.9" width="5.7" height="5.7" rx="1" ry="1"/>
+    <text class="st4" transform="translate(8.6 660.5)"><tspan x="0" y="0">CircuitPython Name</tspan></text>
+    <rect class="st11" x=".6" y="663" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 667.8)"><tspan x="0" y="0">GPIO</tspan></text>
+    <rect class="st9" x=".6" y="670.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 675)"><tspan x="0" y="0">SPI</tspan></text>
     <rect class="st0" x=".6" y="677.4" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 682.2)"><tspan x="0" y="0">UART</tspan></text>
-    <rect class="st11" x=".6" y="684.6" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 689.3)"><tspan x="0" y="0">I2C</tspan></text>
-    <rect class="st15" x=".6" y="691.8" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 696.5)"><tspan x="0" y="0">PWM</tspan></text>
-    <rect class="st16" x=".6" y="699" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 703.8)"><tspan x="0" y="0">ADC</tspan></text>
-    <rect class="st7" x=".6" y="706.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
-    <text class="st5" transform="translate(8.6 711)"><tspan x="0" y="0">Other</tspan></text>
+    <text class="st4" transform="translate(8.6 682.2)"><tspan x="0" y="0">UART</tspan></text>
+    <rect class="st10" x=".6" y="684.6" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 689.3)"><tspan x="0" y="0">I2C</tspan></text>
+    <rect class="st14" x=".6" y="691.8" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 696.5)"><tspan x="0" y="0">PWM</tspan></text>
+    <rect class="st15" x=".6" y="699" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 703.8)"><tspan x="0" y="0">ADC</tspan></text>
+    <rect class="st6" x=".6" y="706.2" width="6.1" height="6.1" rx="1.1" ry="1.1"/>
+    <text class="st4" transform="translate(8.6 711)"><tspan x="0" y="0">Other</tspan></text>
   </g>
   <g>
-    <text class="st2" transform="translate(-86.4 -40)"><tspan x="0" y="0">Adafruit Fruit Jam</tspan></text>
-    <text class="st4" transform="translate(-133.2 -25)"><tspan x="0" y="0">https://www.adafruit.com/product/6200</tspan></text>
+    <text class="st1" transform="translate(-86.4 -40)"><tspan x="0" y="0">Adafruit Fruit Jam</tspan></text>
+    <text class="st3" transform="translate(-133.2 -25)"><tspan x="0" y="0">https://www.adafruit.com/product/6200</tspan></text>
   </g>
   <g>
-    <text class="st3" transform="translate(0 742.8)"><tspan x="0" y="0">The Raspberry Pi RP2350 is a dual ARM</tspan></text>
-    <text class="st3" transform="translate(0 748.8)"><tspan x="0" y="0">M33 core with 150 MHz clock rate and</tspan></text>
-    <text class="st3" transform="translate(0 754.8)"><tspan x="0" y="0">built in USB. Flash memory is provided</tspan></text>
-    <text class="st3" transform="translate(0 760.8)"><tspan x="0" y="0">by external QSPI chip.</tspan></text>
+    <text class="st2" transform="translate(0 742.8)"><tspan x="0" y="0">The Raspberry Pi RP2350 is a dual ARM</tspan></text>
+    <text class="st2" transform="translate(0 748.8)"><tspan x="0" y="0">M33 core with 150 MHz clock rate and</tspan></text>
+    <text class="st2" transform="translate(0 754.8)"><tspan x="0" y="0">built in USB. Flash memory is provided</tspan></text>
+    <text class="st2" transform="translate(0 760.8)"><tspan x="0" y="0">by external QSPI chip.</tspan></text>
   </g>
   <metadata>
     <sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/">
       <slices/>
-      <sliceSourceBounds x="-133.22" y="-664.88" width="309.85" height="817.61" bottomLeftOrigin="true"/>
+      <sliceSourceBounds x="-133.22" y="-664.88" width="270.04" height="817.61" bottomLeftOrigin="true"/>
     </sfw>
   </metadata>
 </svg>
